@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專案實績 - 睿瀛科技股份有限公司</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+            animation: logoEffect 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
+        }
+
+        @keyframes logoEffect {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
+            }
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.7));
+            }
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
+            }
+        }
+
+        .company-name {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #0088ff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: titleIn 1.5s ease-out 0.5s forwards;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(0, 136, 255, 0.3);
+        }
+
+        .company-name::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: scanEffect 3s linear infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes scanEffect {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 200%;
+            }
+        }
+
+        @keyframes titleIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #00ff88;
+        }
+
+        .projects-container {
+            padding: 120px 5% 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, #0088ff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #00ff88;
+        }
+
+        .project-description {
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tech-tag {
+            background: rgba(0, 136, 255, 0.2);
+            color: #00ff88;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <style>
+        body {
+            opacity: 0;
+            transform: translateY(100vh);
+            animation: slideIn 1s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <header class="header">
+        <div class="logo-container">
+            <img src="RaiWyn Logo.png" alt="RaiWyn Logo" class="logo">
+            <span class="company-name">睿瀛科技股份有限公司</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="#">AI應用</a></li>
+                <li><a href="#">智慧電子鎖</a></li>
+                <li><a href="#">成功案例</a></li>
+                <li><a href="#">關於我們</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="projects-container">
+        <h1 class="section-title">專案實績</h1>
+        <div class="projects-grid">
+            <article class="project-card">
+                <img src="網站首頁動畫-2.png" alt="專案圖片" class="project-image">
+                <div class="project-content">
+                    <h2 class="project-title">智慧製造解決方案</h2>
+                    <p class="project-description">運用先進技術提升製造效率，實現智能化生產流程，協助企業轉型升級。</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">AI</span>
+                        <span class="tech-tag">IoT</span>
+                        <span class="tech-tag">大數據分析</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <img src="網站首頁動畫-3.png" alt="專案圖片" class="project-image">
+                <div class="project-content">
+                    <h2 class="project-title">數位轉型顧問服務</h2>
+                    <p class="project-description">為企業提供全方位的數位轉型策略規劃，從技術評估到實施落地的完整解決方案。</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">數位轉型</span>
+                        <span class="tech-tag">雲端服務</span>
+                        <span class="tech-tag">系統整合</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+</body>
+</html>
