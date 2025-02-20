@@ -23,11 +23,15 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 20px;
+            height: 80px;
+            padding: 0 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             z-index: 1000;
+            background: transparent;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
         }
 
         .logo-container {
@@ -37,10 +41,68 @@
         }
 
         .logo {
-            width: 150px;
+            width: 120px;
             height: auto;
             animation: logoEffect 3s ease-in-out infinite;
             filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                height: 70px;
+            }
+
+            .logo {
+                width: 100px;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav a {
+                font-size: 1em;
+                padding: 6px 12px;
+            }
+        }
+
+        @media (hover: none) {
+            nav a:active {
+                background: rgba(0, 255, 136, 0.2);
+            }
+        }
+
+        @supports (-webkit-touch-callout: none) {
+            .header {
+                padding-top: env(safe-area-inset-top);
+            }
         }
 
         @keyframes logoEffect {
@@ -69,6 +131,8 @@
             animation: titleIn 1.5s ease-out 0.5s forwards;
             font-weight: bold;
             text-shadow: 0 0 15px rgba(0, 136, 255, 0.3);
+            white-space: nowrap;
+            overflow: hidden;
         }
 
         .company-name::after {
@@ -105,8 +169,81 @@
 
         nav ul {
             display: flex;
+            gap: 20px;
             list-style: none;
-            gap: 30px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+            margin-left: auto;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 80px 20px;
+                gap: 20px;
+                width: 100%;
+            }
+
+            nav a {
+                display: block;
+                padding: 10px;
+                text-align: center;
+                font-size: 1.1em;
+            }
         }
 
         nav a {
@@ -231,6 +368,11 @@
             <span class="company-name">睿瀛科技股份有限公司</span>
         </div>
         <nav>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <ul>
                 <li><a href="#">HOME</a></li>
                 <li><a href="#">AI應用</a></li>
@@ -333,6 +475,14 @@
             setTimeout(() => {
                 window.location.href = href;
             }, 1000);
+        });
+
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            menuToggle.classList.toggle('active');
         });
     </script>
 </body>

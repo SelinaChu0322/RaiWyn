@@ -3,19 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>專案實績 - 睿瀛科技股份有限公司</title>
+    <title>成功案例 - 睿瀛科技股份有限公司</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: 'Microsoft JhengHei', Arial, sans-serif;
-            background-color: #000;
+            background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
             color: #fff;
             line-height: 1.6;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 136, 255, 0.05) 0%, rgba(0, 255, 136, 0.05) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        :root {
+            --header-height: 80px;
+            --logo-width: 150px;
+            --font-size-base: 16px;
+            --font-size-h1: 3.5em;
+            --font-size-nav: 1.1em;
         }
 
         .header {
@@ -23,6 +45,124 @@
             top: 0;
             left: 0;
             width: 100%;
+            z-index: 1000;
+            background: transparent;
+            padding: 0.8rem 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .company-name {
+            font-size: 1.8em;
+            background: linear-gradient(45deg, #0088ff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: titleIn 1.5s ease-out 0.5s forwards;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(0, 136, 255, 0.3);
+            margin: 0;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            line-height: 1;
+        }
+
+        nav {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+            margin-left: auto;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+            opacity: 0;
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 80px 20px;
+                gap: 20px;
+            }
+
+            nav a {
+                display: block;
+                padding: 10px;
+                text-align: center;
+                font-size: 1.1em;
+            }
+        }
             padding: 20px;
             display: flex;
             align-items: center;
@@ -34,6 +174,58 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+            animation: logoEffect 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
+        }
+
+        .company-name {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #0088ff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: titleIn 1.5s ease-out 0.5s forwards;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(0, 136, 255, 0.3);
+            margin: 0;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            line-height: 1;
+        }
+
+        nav {
+            margin-left: auto;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: var(--font-size-nav);
+            transition: color 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
         }
 
         .logo {
@@ -129,6 +321,7 @@
 
         nav a:hover {
             color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
         }
 
         .projects-container {
@@ -189,14 +382,106 @@
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
+            margin-top: 15px;
         }
 
         .tech-tag {
-            background: rgba(0, 136, 255, 0.2);
-            color: #00ff88;
-            padding: 5px 10px;
-            border-radius: 15px;
+            background: rgba(0, 136, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
             font-size: 0.9em;
+            color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        /* 響應式設計 */
+        @media screen and (max-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .section-title {
+                font-size: 2.2em;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 80px 20px;
+                gap: 20px;
+            }
+
+            nav a {
+                display: block;
+                padding: 10px;
+                text-align: center;
+                font-size: 1.1em;
+            }
+            .projects-container {
+                padding: 100px 4% 40px;
+            }
+            .section-title {
+                font-size: 2em;
+                margin-bottom: 40px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .project-card {
+                margin: 0 auto;
+                max-width: 350px;
+            }
+            .project-title {
+                font-size: 1.3em;
+            }
+            .project-description {
+                font-size: 0.95em;
+            }
+            nav ul {
+                gap: 10px;
+            }
+            nav a {
+                padding: 8px 12px;
+            }
+        }
+
+        /* 觸控優化 */
+        @media (hover: none) {
+            .project-card {
+                transform: none;
+            }
+            .project-card:active {
+                transform: scale(0.98);
+            }
+            nav a {
+                padding: 10px 15px;
+            }
         }
     </style>
 </head>
@@ -223,6 +508,11 @@
         <div class="logo-container">
             <img src="RaiWyn Logo.png" alt="RaiWyn Logo" class="logo">
             <span class="company-name">睿瀛科技股份有限公司</span>
+        </div>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
         <nav>
             <ul>
@@ -266,5 +556,13 @@
             </article>
         </div>
     </main>
+<script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+
+    menuToggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+    });
+</script>
 </body>
 </html>
