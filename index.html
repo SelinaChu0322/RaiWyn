@@ -11,11 +11,35 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --header-height: 80px;
+            --logo-width: 150px;
+            --font-size-base: 16px;
+            --font-size-h1: 3.5em;
+            --font-size-nav: 1.1em;
+        }
+
         body {
+            margin: 0;
+            padding: 0;
             font-family: 'Microsoft JhengHei', Arial, sans-serif;
-            background-color: #000;
+            background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
             color: #fff;
             line-height: 1.6;
+            position: relative;
+            font-size: var(--font-size-base);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 136, 255, 0.05) 0%, rgba(0, 255, 136, 0.05) 100%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .header {
@@ -23,21 +47,19 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 80px;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 1000;
             background: transparent;
-            -webkit-backdrop-filter: blur(5px);
-            backdrop-filter: blur(5px);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
         }
 
         .logo-container {
             display: flex;
             align-items: center;
             gap: 15px;
+            flex-shrink: 0;
         }
 
         .logo {
@@ -47,7 +69,26 @@
             filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
         }
 
+        .company-name {
+            font-size: var(--font-size-h1);
+            background: linear-gradient(45deg, #0088ff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: titleIn 1.5s ease-out 0.5s forwards;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(0, 136, 255, 0.3);
+            margin: 0;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            line-height: 1;
+        }
+
         nav {
+            margin-left: auto;
             display: flex;
             align-items: center;
         }
@@ -58,29 +99,157 @@
             list-style: none;
             margin: 0;
             padding: 0;
+            align-items: center;
         }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1em;
-            padding: 8px 16px;
-            border-radius: 4px;
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+            margin-left: auto;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: #fff;
             transition: all 0.3s ease;
         }
 
-        nav a:hover {
-            color: #00ff88;
-            background: rgba(0, 255, 136, 0.1);
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
         }
 
-        @media (max-width: 768px) {
-            .header {
-                height: 70px;
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .menu-toggle {
+                display: flex;
             }
 
             .logo {
-                width: 100px;
+                width: 80px;
+                height: auto;
+            }
+
+            .company-name {
+                font-size: 1.5em;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                justify-content: flex-end;
+                overflow-y: auto;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 80px 20px;
+                gap: 20px;
+                width: 100%;
+                margin: 0;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            nav a {
+                display: block;
+                padding: 10px;
+                text-align: center;
+                font-size: 1.1em;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            :root {
+                --font-size-base: 15px;
+                --font-size-h1: 3em;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            :root {
+                --font-size-base: 14px;
+                --font-size-h1: 2.5em;
+                --font-size-nav: 1em;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .logo {
+                width: 80px;
+                height: auto;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                justify-content: flex-end;
+                overflow-y: auto;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 80px 20px;
+                gap: 20px;
+            }
+
+            nav a {
+                display: block;
+                padding: 10px;
+                text-align: center;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            :root {
+                --font-size-base: 13px;
+                --font-size-h1: 2em;
             }
 
             nav ul {
@@ -88,8 +257,7 @@
             }
 
             nav a {
-                font-size: 1em;
-                padding: 6px 12px;
+                padding: 8px 12px;
             }
         }
 
@@ -225,6 +393,7 @@
                 z-index: 1000;
                 display: flex;
                 justify-content: flex-end;
+                overflow: hidden;
             }
 
             nav.active {
@@ -236,6 +405,9 @@
                 padding: 80px 20px;
                 gap: 20px;
                 width: 100%;
+                margin: 0;
+                height: 100%;
+                overflow: hidden;
             }
 
             nav a {
@@ -243,6 +415,10 @@
                 padding: 10px;
                 text-align: center;
                 font-size: 1.1em;
+            }
+
+            .header {
+                overflow: visible;
             }
         }
 
@@ -368,13 +544,8 @@
             <span class="company-name">睿瀛科技股份有限公司</span>
         </div>
         <nav>
-            <div class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
             <ul>
-                <li><a href="#">HOME</a></li>
+                <li><a href="index.html">HOME</a></li>
                 <li><a href="#">AI應用</a></li>
                 <li><a href="#">智慧電子鎖</a></li>
                 <li><a href="projects.html">成功案例</a></li>
@@ -382,6 +553,11 @@
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </header>
 
     <section class="hero">
