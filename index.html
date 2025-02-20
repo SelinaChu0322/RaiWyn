@@ -2,7 +2,9 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>睿瀛科技股份有限公司 - RaiWyn</title>
     <style>
         * {
@@ -133,6 +135,31 @@
             transform: rotate(-45deg) translate(5px, -5px);
         }
 
+        /* iOS 安全區域適配 */
+        @supports (padding: max(0px)) {
+            .header {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-top: max(15px, env(safe-area-inset-top));
+            }
+            nav {
+                padding-right: env(safe-area-inset-right);
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+
+        /* 觸控優化 */
+        @media (hover: none) and (pointer: coarse) {
+            nav a {
+                padding: 12px 20px;
+                margin: 2px 0;
+            }
+            .menu-toggle {
+                padding: 10px;
+                margin: -10px;
+            }
+        }
+
         @media screen and (max-width: 768px) {
             body {
                 overflow-y: auto;
@@ -194,6 +221,31 @@
             :root {
                 --font-size-base: 15px;
                 --font-size-h1: 3em;
+            }
+        }
+
+        /* iOS 安全區域適配 */
+        @supports (padding: max(0px)) {
+            .header {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-top: max(15px, env(safe-area-inset-top));
+            }
+            nav {
+                padding-right: env(safe-area-inset-right);
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+
+        /* 觸控優化 */
+        @media (hover: none) and (pointer: coarse) {
+            nav a {
+                padding: 12px 20px;
+                margin: 2px 0;
+            }
+            .menu-toggle {
+                padding: 10px;
+                margin: -10px;
             }
         }
 
@@ -373,6 +425,31 @@
 
         .menu-toggle.active span:nth-child(3) {
             transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* iOS 安全區域適配 */
+        @supports (padding: max(0px)) {
+            .header {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-top: max(15px, env(safe-area-inset-top));
+            }
+            nav {
+                padding-right: env(safe-area-inset-right);
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+
+        /* 觸控優化 */
+        @media (hover: none) and (pointer: coarse) {
+            nav a {
+                padding: 12px 20px;
+                margin: 2px 0;
+            }
+            .menu-toggle {
+                padding: 10px;
+                margin: -10px;
+            }
         }
 
         @media screen and (max-width: 768px) {

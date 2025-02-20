@@ -2,7 +2,9 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>成功案例 - 睿瀛科技股份有限公司</title>
     <style>
         * {
@@ -47,7 +49,7 @@
             width: 100%;
             z-index: 1000;
             background: transparent;
-            padding: 0.8rem 20px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -56,7 +58,7 @@
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             flex-shrink: 0;
         }
 
@@ -126,9 +128,48 @@
             opacity: 0;
         }
 
+        /* iOS 安全區域適配 */
+        @supports (padding: max(0px)) {
+            .header {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-top: max(15px, env(safe-area-inset-top));
+            }
+            nav {
+                padding-right: env(safe-area-inset-right);
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+
+        /* 觸控優化 */
+        @media (hover: none) and (pointer: coarse) {
+            nav a {
+                padding: 12px 20px;
+                margin: 2px 0;
+            }
+            .menu-toggle {
+                padding: 10px;
+                margin: -10px;
+            }
+        }
+
         @media screen and (max-width: 768px) {
+            body {
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
             .menu-toggle {
                 display: flex;
+            }
+
+            .logo {
+                width: 80px;
+                height: auto;
+            }
+
+            .company-name {
+                font-size: 1.5em;
             }
 
             nav {
@@ -144,6 +185,7 @@
                 z-index: 1000;
                 display: flex;
                 justify-content: flex-end;
+                overflow-y: auto;
             }
 
             nav.active {
@@ -178,7 +220,7 @@
         }
 
         .logo {
-            width: 150px;
+            width: 120px;
             height: auto;
             animation: logoEffect 3s ease-in-out infinite;
             filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
@@ -229,7 +271,7 @@
         }
 
         .logo {
-            width: 150px;
+            width: 120px;
             height: auto;
             animation: logoEffect 3s ease-in-out infinite;
             filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
@@ -404,9 +446,48 @@
             }
         }
 
+        /* iOS 安全區域適配 */
+        @supports (padding: max(0px)) {
+            .header {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-top: max(15px, env(safe-area-inset-top));
+            }
+            nav {
+                padding-right: env(safe-area-inset-right);
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+
+        /* 觸控優化 */
+        @media (hover: none) and (pointer: coarse) {
+            nav a {
+                padding: 12px 20px;
+                margin: 2px 0;
+            }
+            .menu-toggle {
+                padding: 10px;
+                margin: -10px;
+            }
+        }
+
         @media screen and (max-width: 768px) {
+            body {
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
             .menu-toggle {
                 display: flex;
+            }
+
+            .logo {
+                width: 80px;
+                height: auto;
+            }
+
+            .company-name {
+                font-size: 1.5em;
             }
 
             nav {
@@ -422,6 +503,7 @@
                 z-index: 1000;
                 display: flex;
                 justify-content: flex-end;
+                overflow-y: auto;
             }
 
             nav.active {
