@@ -1,4 +1,514 @@
-.subscription-plans {
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>AI應用主產品 - 睿瀛科技</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, rgba(0, 20, 50, 0.95), rgba(0, 40, 30, 0.95));
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 136, 255, 0.05) 0%, rgba(0, 255, 136, 0.05) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 20, 50, 0.95);
+            backdrop-filter: blur(10px);
+            transition: background 0.3s ease;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #66ccff, #00ff88);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
+        }
+
+        .company-name {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #0088ff, #00ff88, #0088ff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: 
+                titleIn 1.5s ease-out 0.5s forwards,
+                shine 8s linear infinite;
+            font-weight: bold;
+            text-shadow: 
+                0 0 15px rgba(0, 136, 255, 0.3),
+                0 0 30px rgba(0, 255, 136, 0.2);
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+        }
+
+        nav {
+            margin-left: auto;
+            height: 120px;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 0 15px;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(90deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 136, 0));
+            line-height: 40px;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            color: #00ff88;
+            background: linear-gradient(90deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 136, 0.05));
+            transform: scale(1.05);
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        .main-content {
+            padding: 120px 5% 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 80px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #66ccff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(102, 204, 255, 0.3);
+        }
+
+        .tech-section h2,
+        .benefits-section h2,
+        .scenarios-section h2,
+        .subscription-section h2 {
+            text-align: center;
+            background: linear-gradient(45deg, #66ccff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(102, 204, 255, 0.3);
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .report-card {
+            background: linear-gradient(135deg, rgba(0, 136, 255, 0.1), rgba(0, 255, 136, 0.1));
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(102, 204, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .report-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 136, 255, 0.05), rgba(0, 255, 136, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .report-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(102, 204, 255, 0.4);
+        }
+
+        .report-card:hover::before {
+            opacity: 1;
+        }
+
+        .report-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #66ccff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(102, 204, 255, 0.3);
+        }
+
+        .report-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .other-products-section h2,
+        .report-section h2 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #66ccff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(102, 204, 255, 0.3);
+        }
+
+        .product-intro {
+            transition: all 0.3s ease;
+            padding: 25px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(102, 204, 255, 0.1);
+        }
+
+        .product-intro:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(102, 204, 255, 0.3);
+        }
+
+        .star-note {
+            display: inline-block;
+            color: #00ff88;
+            font-style: normal;
+            animation: starTwinkle 2s infinite;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+
+        .tech-architecture {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .tech-item {
+            background: rgba(0, 136, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .advantage-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .tech-item {
+            background: rgba(0, 136, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 136, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.1);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .benefit-item {
+            background: linear-gradient(135deg, rgba(0, 136, 255, 0.1), rgba(0, 255, 136, 0.1));
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 136, 255, 0.1), rgba(0, 255, 136, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 136, 0.4);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .benefit-item:hover::before {
+            opacity: 1;
+        }
+
+        .benefit-item h3 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: #66ccff;
+            text-shadow: 0 0 10px rgba(102, 204, 255, 0.3);
+        }
+
+        .benefit-item p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .scenario-item {
+            background: rgba(0, 136, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-item:hover {
+            transform: translateY(-5px);
+            background: rgba(0, 136, 255, 0.15);
+        }
+
+        .subscription-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .plan-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 204, 255, 0.1);
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(102, 204, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .plan-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .plan-card ul li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .plan-card ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+        }
+
+        .other-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background: rgba(0, 136, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            border-color: rgba(0, 255, 136, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.1);
+        }
+
+        h2 {
+            font-size: 2em;
+            margin: 40px 0 20px;
+            background: linear-gradient(45deg, #66ccff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(102, 204, 255, 0.3);
+        }
+
+        h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #66ccff;
+        }
+
+        .advantage-card h3 {
+            color: #66ccff;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-shadow: 0 0 10px rgba(102, 204, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .scenario-item {
+            background: rgba(0, 136, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .subscription-plans {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
@@ -6,40 +516,417 @@
         }
 
         .plan-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 136, 255, 0.1));
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
             padding: 30px;
             text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .plan-card:hover {
+            transform: scale(1.05);
+        }
+
+        .other-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .report-content {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .report-content ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .report-content li {
+            background: linear-gradient(135deg, rgba(0, 136, 255, 0.1), rgba(0, 255, 136, 0.1));
+            border-radius: 10px;
+            padding: 20px;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .plan-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        .report-content li:hover {
+            transform: translateY(-5px);
             border-color: rgba(0, 136, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .plan-card h3 {
-            color: #00ff88;
-            margin-bottom: 20px;
-            font-size: 1.5em;
+        .tech-item h3,
+        .scenario-item h3,
+        .plan-card h3,
+        .report-content h3 {
+            color: #66ccff;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            text-shadow: 0 0 10px rgba(102, 204, 255, 0.3);
+            transition: all 0.3s ease;
         }
 
-        .plan-details p {
-            margin: 10px 0;
+        .tech-item:hover h3,
+        .scenario-item:hover h3,
+        .plan-card:hover h3,
+        .report-content li:hover h3 {
+            color: #99ddff;
+            text-shadow: 0 0 15px rgba(102, 204, 255, 0.5);
         }
 
-        .final-price {
-            color: #00ff88;
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-top: 15px;
+        .tech-item,
+        .scenario-item,
+        .plan-card,
+        .report-content li {
+            background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(153, 221, 255, 0.1));
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 204, 255, 0.1);
+        }
+
+        .tech-item:hover,
+        .scenario-item:hover,
+        .plan-card:hover,
+        .report-content li:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 204, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, rgba(102, 204, 255, 0.15), rgba(153, 221, 255, 0.15));
+        }
+
+        .report-content p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            margin: 0;
         }
 
         .custom-note {
             text-align: center;
             margin-top: 20px;
-            color: rgba(255, 255, 255, 0.7);
+            color: #98FB98;
             font-style: italic;
         }
+
+        .star-note {
+            display: inline-block;
+            color: #98FB98;
+            font-style: normal;
+            animation: starTwinkle 2s infinite;
+            text-shadow: 0 0 10px rgba(152, 251, 152, 0.5);
+        }
+
+        @keyframes starTwinkle {
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.5; transform: scale(1); }
+        }
+
+        @keyframes titleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes shine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 250px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.9);
+                padding: 80px 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="RaiWyn Logo.png" alt="RaiWyn Logo" class="logo">
+            <span class="company-name">睿瀛科技</span>
+        </div>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="#">AI應用</a></li>
+                <li><a href="#">智慧電子鎖</a></li>
+                <li><a href="#">關於我們</a></li>
+            </ul>
+        </nav>
+    </header><BR></BR><BR></BR><BR></BR><BR></BR>
+
+    <main class="main-content">
+        <section class="section">
+            <h1 class="section-title">AI應用主產品</h1>
+            <div class="product-intro">
+                <h3 style="color: #66ccff; text-shadow: 0 0 10px rgba(102, 204, 255, 0.3);">REAS ChatAI</h3>
+                <p>REAS ChatAI 是一款基於生成式 AI 技術的聊天機器人，採用 ChatGPT 作為核心語言模型，並利用 Google Sheets 和 Google Drive 作為資料儲存庫。該產品旨在為企業和個人提供高效、智慧的聊天解決方案，能夠無縫整合到網站和 LINE 平台上，幫助用戶提升客戶服務、自動化流程和資料管理。</p>
+                <p class="custom-note"><span class="star-note">☆</span> 另有客製方案–採購AI Server(可自行訓練語言模型)</p>
+            </div><BR></BR><BR></BR>
+
+            <div class="tech-section">
+                <h1 class="section-title">技術架構</h1>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <h3>LLM大語言模型</h3>
+                        <p>ChatGPT、LLAMA、Tulu、Grok、REASeek</p>
+                    </div>
+                    <div class="tech-item">
+                        <h3>資料庫</h3>
+                        <p>Google Sheets ＋ Google Drive</p>
+                    </div>
+                    <div class="tech-item">
+                        <h3>API接口</h3>
+                        <p>RESTful API、支援JSON格式</p>
+                    </div>
+                    <div class="tech-item">
+                        <h3>平台集成</h3>
+                        <p>Web、LINE、APP、FB、IG、more....</p>
+                    </div>
+                </div>
+            </div><BR></BR><BR></BR>
+
+            <div class="benefits-section">
+                <h1 class="section-title">產品優勢</h1>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <h3>高效智慧</h3>
+                        <p>基於強大的語言模型，能夠處理複雜的對話場景，提供個人化的回應，根據使用者互動的歷史資料進行最佳化。</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h3>易於管理</h3>
+                        <p>使用Google Sheets和Google Drive作為資料庫，資料管理簡單直觀，方便使用者管理和更新資料。</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h3>靈活集成</h3>
+                        <p>提供API接口，輕鬆整合到各種平台中，支援LINE平台集成，方便用戶在LINE上使用聊天機器人。</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h3>成本效益</h3>
+                        <p>訂閱模式靈活，三年訂閱更優惠，減少人力成本。</p>
+                    </div>
+                </div>
+            </div><BR></BR><BR></BR>
+
+            <div class="scenarios-section">
+                <h1 class="section-title">應用場景</h1>
+                <div class="scenarios-grid">
+                    <div class="scenario-item">
+                        <h3>客戶服務</h3>
+                        <p>自動回答關於產品、訂單狀態、退換貨政策等問題，提升服務效率。</p>
+                    </div>
+                    <div class="scenario-item">
+                        <h3>金融服務業</h3>
+                        <p>查詢帳戶餘額、交易紀錄等，提供理財建議，引導使用者完成貸款申請流程，提醒可疑交易。</p>
+                    </div>
+                    <div class="scenario-item">
+                        <h3>醫療保健業</h3>
+                        <p>預約掛號，症狀查詢，用藥提醒，提供健康知識和疾病預防資訊。</p>
+                    </div>
+                    <div class="scenario-item">
+                        <h3>教育訓練業</h3>
+                        <p>課程查詢，作業輔助，考試提醒，招生諮詢。</p>
+                    </div>
+                    <div class="scenario-item">
+                        <h3>旅遊業</h3>
+                        <p>預訂飯店或民宿房間，推薦旅遊路線或景點，航班查詢，收集客人對飯店或旅遊體驗的回饋。</p>
+                    </div>
+                    <div class="scenario-item">
+                        <h3>零售業</h3>
+                        <p>庫存查詢，商場導覽，會員服務，售後服務。</p>
+                    </div>
+                    <div class="scenario-item">
+                        <h3>房地產業</h3>
+                        <p>房源查詢，預約看房，房貸計算，市場資訊。</p>
+                    </div>
+                    <div class="scenario-item">
+                        <h3>製造業</h3>
+                        <p>設備維護，供應鏈查詢，員工培訓，顧客支援。</p>
+                    </div>
+                    <div class="scenario-item">
+                        <h3>政府與公共服務</h3>
+                        <p>政策查詢，服務預約，投訴處理，災害警告。</p>
+                    </div>
+                    <div class="scenario-item">
+                        <h3>媒體與娛樂產業</h3>
+                        <p>內容推薦，活動提醒，粉絲互動，訂閱管理。</p>
+                    </div>
+                </div>
+            </div><BR></BR><BR></BR>
+
+            <div class="subscription-section">
+                <h1 class="section-title">訂閱方案</h1>
+                <div class="subscription-plans">
+                    <div class="plan-card">
+                        <h3>一年方案</h3>
+                        <div class="plan-details">
+                            <p>原價：<span class="original-price">60,000</span> 新台幣</p>
+                            <p>政府補貼：<span class="discount">30,000</span> 新台幣</p>
+                            <p class="final-price">實付金額：30,000 新台幣</p>
+                        </div>
+                    </div>
+                    <div class="plan-card">
+                        <h3>三年方案</h3>
+                        <div class="plan-details">
+                            <p>原價：<span class="original-price">150,000</span> 新台幣</p>
+                            <p>政府補貼：<span class="discount">30,000</span> 新台幣</p>
+                            <p>三年優惠：<span class="discount">30,000</span> 新台幣</p>
+                            <p class="final-price">實付金額：90,000 新台幣</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="custom-note"><span class="star-note">☆</span>非訂閱方案可細談客製方案</p>
+            </div><BR></BR><BR></BR>
+
+            <div class="other-products-section">
+                <h1 class="section-title">其他AI產品</h1>
+                <div class="other-products">
+                    <div class="product-card">
+                        <h3>AIKM LLM</h3>
+                        <p>全方位的大型語言模型解決方案</p>
+                        <div class="product-features">
+                            <p><strong>模型支援：</strong>全模型支持</p>
+                            <p><strong>資料庫：</strong>全格式支援</p>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <h3>AIPM-LLM</h3>
+                        <p>專業的AI專案管理解決方案</p>
+                        <div class="product-features">
+                            <p><strong>模型支援：</strong>ChatGPT</p>
+                            <p><strong>資料庫：</strong>Google Sheet/Google Drive</p>
+                        </div>
+                    </div>
+                </div>
+            </div><BR></BR><BR></BR>
+
+            <div class="report-section">
+                <h1 class="section-title">AI顧問報告</h1>
+                <div class="report-grid">
+                    <div class="report-card">
+                        <h3>引言</h3>
+                        <p>全面評估企業數位轉型需求，提供AI導入建議與策略規劃。</p>
+                    </div>
+                    <div class="report-card">
+                        <h3>客戶業務現況分析</h3>
+                        <p>深入分析企業營運流程、市場定位、競爭優勢及面臨挑戰。</p>
+                    </div>
+                    <div class="report-card">
+                        <h3>AI技術概述</h3>
+                        <p>介紹適用的AI技術，包括機器學習、自然語言處理等核心技術。</p>
+                    </div>
+                    <div class="report-card">
+                        <h3>AI應用機會評估</h3>
+                        <p>識別企業中可導入AI的關鍵環節，評估實施可行性。</p>
+                    </div>
+                    <div class="report-card">
+                        <h3>AI實施策略與規劃</h3>
+                        <p>制定分階段實施計畫，包含時程、資源配置及里程碑。</p>
+                    </div>
+                    <div class="report-card">
+                        <h3>技術架構與資料管理</h3>
+                        <p>規劃AI系統架構，建立資料收集、處理及安全管理機制。</p>
+                    </div>
+                    <div class="report-card">
+                        <h3>風險評估與因應措施</h3>
+                        <p>分析潛在風險，提供預防及緊急應變方案。</p>
+                    </div>
+                    <div class="report-card">
+                        <h3>成本效益分析</h3>
+                        <p>評估實施成本、預期效益及投資回報期。</p>
+                    </div>
+                    <div class="report-card">
+                        <h3>結論與建議</h3>
+                        <p>總結分析結果，提供具體可行的實施建議。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+<script>
+// 返回頂部按鈕的顯示控制
+const backToTop = document.createElement('div');
+backToTop.className = 'back-to-top';
+backToTop.textContent = 'Top';
+document.body.appendChild(backToTop);
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTop.classList.add('visible');
+    } else {
+        backToTop.classList.remove('visible');
+    }
+});
+
+backToTop.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+</script>
+</html>
