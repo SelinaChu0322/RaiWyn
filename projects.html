@@ -101,30 +101,12 @@
             height: var(--header-height);
         }
 
-        .logo {
-            width: 120px;
+        .logo-video {
+            width: 300px;
             height: auto;
-            animation: logoEffect 3s ease-in-out infinite;
-            filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
             margin: auto 0;
         }
-
-        .company-name {
-            font-size: 2em;
-            background: linear-gradient(45deg, #0088ff, #00ff88);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            opacity: 0;
-            transform: scale(0.8);
-            animation: titleIn 1.5s ease-out 0.5s forwards;
-            font-weight: bold;
-            text-shadow: 0 0 15px rgba(0, 136, 255, 0.3);
-            margin: 0;
-            padding: 0;
-            display: inline-flex;
-            align-items: center;
-            line-height: 1;
+            filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
         }
 
         nav {
@@ -773,8 +755,9 @@
 <body>
     <header class="header">
         <div class="logo-container">
-            <img src="RaiWyn Logo.png" alt="RaiWyn Logo" class="logo">
-            <span class="company-name">睿瀛科技</span>
+            <video autoplay loop muted playsinline class="logo-video">
+                <source src="logo-word.mp4" type="video/mp4">
+            </video>
         </div>
         <div class="menu-toggle">
             <span></span>
