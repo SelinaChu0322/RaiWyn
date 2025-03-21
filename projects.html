@@ -102,11 +102,13 @@
         }
 
         .logo-video {
-            width: 300px;
+            width: min(300px, 80vw);
             height: auto;
             margin: auto 0;
             filter: drop-shadow(0 0 8px rgba(0, 136, 255, 0.3)) drop-shadow(0 0 12px rgba(0, 255, 136, 0.2));
             transition: all 0.4s ease;
+            min-width: 150px;
+            max-width: 300px;
         }
             filter: drop-shadow(0 0 12px rgba(0, 136, 255, 0.4)) drop-shadow(0 0 15px rgba(0, 255, 136, 0.3));
             transform: scale(1.02);
@@ -148,7 +150,7 @@
 
         .menu-toggle {
             display: none;
-            width: 30px;
+            width: 50px;
             height: 30px;
             cursor: pointer;
             z-index: 1001;
@@ -1203,4 +1205,19 @@ menuToggle.addEventListener('click', () => {
     menuToggle.classList.toggle('active');
 });
 </script>
+</html>
+
+@media screen and (max-width: 768px) {
+    .logo-video {
+        width: min(250px, 70vw);
+        min-width: 120px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo-video {
+        width: min(200px, 60vw);
+        min-width: 100px;
+    }
+}
 </html>
