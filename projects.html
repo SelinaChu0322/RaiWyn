@@ -5,13 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>AI應用主產品 - 睿瀛科技</title>
+    <title>AI應用主產品</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --header-height: 80px;
+            --logo-width: 150px;
+            --font-size-base: 16px;
+            --font-size-h1: 3.5em;
+            --font-size-nav: 1.1em;
         }
 
         body {
@@ -42,10 +49,12 @@
             top: 0;
             left: 0;
             width: 100%;
+            background: transparent;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 1000;
-            background: rgba(0, 20, 50, 0.95);
-            backdrop-filter: blur(10px);
-            transition: background 0.3s ease;
         }
 
         .back-to-top {
@@ -89,63 +98,58 @@
             align-items: center;
             gap: 15px;
             flex-shrink: 0;
+            height: var(--header-height);
         }
 
         .logo {
             width: 120px;
             height: auto;
+            animation: logoEffect 3s ease-in-out infinite;
             filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
+            margin: auto 0;
         }
 
         .company-name {
-            font-size: 2.5em;
-            background: linear-gradient(45deg, #0088ff, #00ff88, #0088ff);
-            background-size: 200% 200%;
+            font-size: 2em;
+            background: linear-gradient(45deg, #0088ff, #00ff88);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             opacity: 0;
             transform: scale(0.8);
-            animation: 
-                titleIn 1.5s ease-out 0.5s forwards,
-                shine 8s linear infinite;
+            animation: titleIn 1.5s ease-out 0.5s forwards;
             font-weight: bold;
-            text-shadow: 
-                0 0 15px rgba(0, 136, 255, 0.3),
-                0 0 30px rgba(0, 255, 136, 0.2);
-            white-space: nowrap;
-            overflow: hidden;
-            position: relative;
+            text-shadow: 0 0 15px rgba(0, 136, 255, 0.3);
+            margin: 0;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            line-height: 1;
         }
 
         nav {
             margin-left: auto;
-            height: 120px;
             display: flex;
             align-items: center;
         }
 
         nav ul {
             display: flex;
-            gap: 20px;
             list-style: none;
-            margin: 0;
-            padding: 0;
-            height: 100%;
+            gap: 30px;
+            margin-left: auto;
             align-items: center;
         }
 
         nav a {
             color: #fff;
             text-decoration: none;
-            font-size: 1.1em;
-            padding: 0 15px;
+            font-size: var(--font-size-nav);
+            padding: 10px 20px;
             border-radius: 5px;
             position: relative;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             background: linear-gradient(90deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 136, 0));
-            line-height: 40px;
             display: inline-block;
         }
 
@@ -157,6 +161,35 @@
 
         .menu-toggle {
             display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+            margin-left: auto;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            margin: 3px 0;
+            border-radius: 2px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
         }
 
         .main-content {
@@ -670,28 +703,69 @@
             }
         }
 
-        @media screen and (max-width: 768px) {
+        /* iOS 安全區域適配 */
+        @supports (padding: max(0px)) {
+            .header {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-top: max(15px, env(safe-area-inset-top));
+            }
+            nav {
+                padding-right: env(safe-area-inset-right);
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+
+        /* 觸控優化 */
+        @media (hover: none) and (pointer: coarse) {
+            nav a {
+                padding: 12px 20px;
+                margin: 2px 0;
+            }
             .menu-toggle {
-                display: block;
+                padding: 10px;
+                margin: -10px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .menu-toggle {
+                display: flex;
             }
 
             nav {
-                display: none;
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                justify-content: flex-end;
+                overflow-y: auto;
             }
 
             nav.active {
-                display: block;
-                position: fixed;
-                top: 0;
                 right: 0;
-                width: 250px;
-                height: 100vh;
-                background: rgba(0, 0, 0, 0.9);
-                padding: 80px 20px;
             }
 
             nav ul {
                 flex-direction: column;
+                padding: 80px 20px;
+                gap: 20px;
+                width: 100%;
+                margin: 0;
+                height: 100%;
+                overflow: hidden;
             }
         }
     </style>
@@ -715,7 +789,7 @@
                 <li><a href="#">關於我們</a></li>
             </ul>
         </nav>
-    </header><BR></BR><BR></BR><BR></BR><BR></BR>
+    </header><BR></BR><BR></BR>
 
     <main class="main-content">
         <section class="section">
@@ -746,7 +820,28 @@
                         <p>Web、LINE、APP、FB、IG、more....</p>
                     </div>
                 </div>
-            </div><BR></BR><BR></BR>
+                </div>
+            </div>
+
+            <style>
+            .report-container {
+                background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(0, 255, 136, 0.1));
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                padding: 30px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                margin: 20px 0;
+                transition: all 0.3s ease;
+            }
+
+            .report-container:hover {
+                border-color: rgba(102, 204, 255, 0.2);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+                transform: translateY(-2px);
+            }
+            </style><BR></BR><BR></BR>
 
             <div class="benefits-section">
                 <h1 class="section-title">產品優勢</h1>
@@ -768,103 +863,238 @@
                         <p>訂閱模式靈活，三年訂閱更優惠，減少人力成本。</p>
                     </div>
                 </div>
-            </div><BR></BR><BR></BR>
+                </div>
+            </div>
+
+            <style>
+            .report-container {
+                background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(0, 255, 136, 0.1));
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                padding: 30px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                margin: 20px 0;
+                transition: all 0.3s ease;
+            }
+
+            .report-container:hover {
+                border-color: rgba(102, 204, 255, 0.2);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+                transform: translateY(-2px);
+            }
+            </style><BR></BR><BR></BR>
 
             <div class="scenarios-section">
                 <h1 class="section-title">應用場景</h1>
                 <div class="scenarios-grid">
                     <div class="scenario-item">
                         <h3>客戶服務</h3>
-                        <p>自動回答關於產品、訂單狀態、退換貨政策等問題，提升服務效率。</p>
+                        <p>⾃動回應客⼾查詢，提升服務效率。</p>
                     </div>
                     <div class="scenario-item">
-                        <h3>金融服務業</h3>
-                        <p>查詢帳戶餘額、交易紀錄等，提供理財建議，引導使用者完成貸款申請流程，提醒可疑交易。</p>
+                        <h3>數據收集</h3>
+                        <p>通過對話收集⽤⼾數據，儲存在Google Sheets中。</p>
                     </div>
                     <div class="scenario-item">
-                        <h3>醫療保健業</h3>
-                        <p>預約掛號，症狀查詢，用藥提醒，提供健康知識和疾病預防資訊。</p>
+                        <h3>市場推廣</h3>
+                        <p>在LINE等其他平台上進⾏推廣活動，與⽤⼾互動。</p>
                     </div>
                     <div class="scenario-item">
-                        <h3>教育訓練業</h3>
-                        <p>課程查詢，作業輔助，考試提醒，招生諮詢。</p>
-                    </div>
-                    <div class="scenario-item">
-                        <h3>旅遊業</h3>
-                        <p>預訂飯店或民宿房間，推薦旅遊路線或景點，航班查詢，收集客人對飯店或旅遊體驗的回饋。</p>
-                    </div>
-                    <div class="scenario-item">
-                        <h3>零售業</h3>
-                        <p>庫存查詢，商場導覽，會員服務，售後服務。</p>
-                    </div>
-                    <div class="scenario-item">
-                        <h3>房地產業</h3>
-                        <p>房源查詢，預約看房，房貸計算，市場資訊。</p>
-                    </div>
-                    <div class="scenario-item">
-                        <h3>製造業</h3>
-                        <p>設備維護，供應鏈查詢，員工培訓，顧客支援。</p>
-                    </div>
-                    <div class="scenario-item">
-                        <h3>政府與公共服務</h3>
-                        <p>政策查詢，服務預約，投訴處理，災害警告。</p>
-                    </div>
-                    <div class="scenario-item">
-                        <h3>媒體與娛樂產業</h3>
-                        <p>內容推薦，活動提醒，粉絲互動，訂閱管理。</p>
+                        <h3>外部溝通</h3>
+                        <p>⽤於企業內部溝通，⾃動化常⾒問題解答。</p>
                     </div>
                 </div>
-            </div><BR></BR><BR></BR>
+                </div>
+            </div>
 
-            <div class="subscription-section">
-                <h1 class="section-title">訂閱方案</h1>
-                <div class="subscription-plans">
-                    <div class="plan-card">
-                        <h3>一年方案</h3>
-                        <div class="plan-details">
-                            <p>原價：<span class="original-price">60,000</span> 新台幣</p>
-                            <p>政府補貼：<span class="discount">30,000</span> 新台幣</p>
-                            <p class="final-price">實付金額：30,000 新台幣</p>
-                        </div>
-                    </div>
-                    <div class="plan-card">
-                        <h3>三年方案</h3>
-                        <div class="plan-details">
-                            <p>原價：<span class="original-price">150,000</span> 新台幣</p>
-                            <p>政府補貼：<span class="discount">30,000</span> 新台幣</p>
-                            <p>三年優惠：<span class="discount">30,000</span> 新台幣</p>
-                            <p class="final-price">實付金額：90,000 新台幣</p>
-                        </div>
-                    </div>
-                </div>
-                <p class="custom-note"><span class="star-note">☆</span>非訂閱方案可細談客製方案</p>
-            </div><BR></BR><BR></BR>
+            <style>
+            .report-container {
+                background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(0, 255, 136, 0.1));
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                padding: 30px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                margin: 20px 0;
+                transition: all 0.3s ease;
+            }
 
-            <div class="other-products-section">
-                <h1 class="section-title">其他AI產品</h1>
-                <div class="other-products">
-                    <div class="product-card">
-                        <h3>AIKM LLM</h3>
-                        <p>全方位的大型語言模型解決方案</p>
-                        <div class="product-features">
-                            <p><strong>模型支援：</strong>全模型支持</p>
-                            <p><strong>資料庫：</strong>全格式支援</p>
-                        </div>
+            .report-container:hover {
+                border-color: rgba(102, 204, 255, 0.2);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+                transform: translateY(-2px);
+            }
+            </style><BR></BR><BR></BR>
+
+            <div class="industry-section">
+                <h1 class="section-title">各行業別適用場景</h1>
+                <style>
+                    .industry-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                        gap: 25px;
+                        margin-top: 30px;
+                    }
+                    .industry-card {
+                        background: linear-gradient(135deg, rgba(0, 136, 255, 0.1), rgba(0, 255, 136, 0.1));
+                        border-radius: 15px;
+                        padding: 25px;
+                        border: 1px solid rgba(102, 204, 255, 0.2);
+                        transition: all 0.3s ease;
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    .industry-card::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(45deg, rgba(0, 136, 255, 0.05), rgba(0, 255, 136, 0.05));
+                        opacity: 0;
+                        transition: opacity 0.3s ease;
+                    }
+                    .industry-card:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                        border-color: rgba(102, 204, 255, 0.4);
+                    }
+                    .industry-card:hover::before {
+                        opacity: 1;
+                    }
+                    .industry-card h3 {
+                        font-size: 1.4em;
+                        margin-bottom: 15px;
+                        background: linear-gradient(45deg, #66ccff, #00ff88);
+                        -webkit-background-clip: text;
+                        background-clip: text;
+                        color: transparent;
+                        opacity: 0;
+                        transform: scale(0.8);
+                        animation: titleIn 1.5s ease-out 0.5s forwards;
+                        font-weight: bold;
+                        text-shadow: 0 0 15px rgba(0, 136, 255, 0.3);
+                        margin: 0;
+                        padding: 0;
+                        display: inline-flex;
+                        align-items: center;
+                        line-height: 1;
+                    }
+                    .industry-card h4 {
+                        font-size: 1.2em;
+                        color: #66ccff;
+                        margin: 15px 0 10px;
+                    }
+                    .industry-card p {
+                        color: rgba(255, 255, 255, 0.8);
+                        line-height: 1.6;
+                        font-size: 1.1em;
+                        margin-bottom: 10px;
+                    }
+                </style>
+                <div class="industry-grid">
+                    <div class="industry-card">
+                        <h3>電子商務（EC）</h3>
+                        <h4>應用功能</h4>
+                        <p>自動回答客戶關於產品、訂單狀態、退換貨政策的問題；根據客戶的瀏覽和購買歷史，推薦相關產品；提供實時訂單狀態更新；通過LINE或網站推送促銷信息，提升轉化率。</p>
+                        <h4>優點</h4>
+                        <p>減少客服人力成本，提升客戶滿意度；提高銷售轉換率，增加收入。</p>
                     </div>
-                    <div class="product-card">
-                        <h3>AIPM-LLM</h3>
-                        <p>專業的AI專案管理解決方案</p>
-                        <div class="product-features">
-                            <p><strong>模型支援：</strong>ChatGPT</p>
-                            <p><strong>資料庫：</strong>Google Sheet/Google Drive</p>
-                        </div>
+                    <div class="industry-card">
+                        <h3>金融服務（Financial Services）</h3>
+                        <h4>應用功能</h4>
+                        <p>客戶可以查詢賬戶餘額、交易記錄等；根據客戶的財務狀況提供個性化建議（投信投顧、券商）；引導客戶完成貸款申請流程；即時提醒客戶可疑交易。</p>
+                        <h4>優點</h4>
+                        <p>提供24/7服務，提升顧客體驗；自動化處理常見查詢，減少人力成本。</p>
+                    </div>
+                    <div class="industry-card">
+                        <h3>醫療保健（Healthcare）</h3>
+                        <h4>應用功能</h4>
+                        <p>幫助患者預約醫生或檢查時間；根據客戶描述的症狀提供初步建議；提醒患者按時服藥；提供健康知識和疾病預防資訊。</p>
+                        <h4>優點</h4>
+                        <p>減少醫院或診所的行政負擔；改善醫療服務效率，提升病患滿意度。</p>
+                    </div>
+                    <div class="industry-card">
+                        <h3>教育培訓（Education）</h3>
+                        <h4>應用功能</h4>
+                        <p>回答學生或家長關於課程內容、學費、請假相關、課時的問題；提供學習資源或解答簡單問題；提醒學生考試時間和準備事項；自動回答潛在學生關於招生流程的問題。</p>
+                        <h4>優點</h4>
+                        <p>提升學校或教育機構的服務效率；幫助學生或家長更好地管理學習進度。</p>
+                    </div>
+                    <div class="industry-card">
+                        <h3>旅遊與旅館業（Travel）</h3>
+                        <h4>應用功能</h4>
+                        <p>幫助用戶預訂飯店或民宿房間；根據用戶需求推薦旅遊路線或景點；提供航班狀態和登機資訊；收集使用者對飯店民宿或旅遊體驗的回饋。</p>
+                        <h4>優點</h4>
+                        <p>提升顧客體驗，增加顧客忠誠度；自動化處理常見查詢，減少人力成本。</p>
+                    </div>
+                    <div class="industry-card">
+                        <h3>零售業（Retail）</h3>
+                        <h4>應用功能</h4>
+                        <p>用戶可以查詢產品庫存；幫助用戶找到最近的門市位置；提供會員專屬優惠或積分查詢；處理退換貨或維修請求。</p>
+                        <h4>優點</h4>
+                        <p>提升顧客滿意度，增加回頭客；減少門市員工的工作負擔。</p>
+                    </div>
+                    <div class="industry-card">
+                        <h3>房地產（Real Estate）</h3>
+                        <h4>應用功能</h4>
+                        <p>根據用戶需求推薦合適的房源；幫助用戶預約看房時間；提供房貸計算工具，幫助用戶估算還款金額；提供最新的房地產市場趨勢和資訊。</p>
+                        <h4>優點</h4>
+                        <p>提升客戶互動效率，增加成交機會；自動化處理常見查詢，減少中介工作量。</p>
+                    </div>
+                    <div class="industry-card">
+                        <h3>製造業（Manufacturing）</h3>
+                        <h4>應用功能</h4>
+                        <p>提醒使用者進行設備保養或維修；提供供應鏈狀態和物流資訊；提供內部訓練資源或解答員工問題；處理客戶關於產品規格或技術問題的查詢。</p>
+                        <h4>優點</h4>
+                        <p>提升內部溝通效率，減少停機時間；改善客戶服務質量，增加客戶滿意度。</p>
+                    </div>
+                    <div class="industry-card">
+                        <h3>政府與公共服務（Government & Public Services）</h3>
+                        <h4>應用功能</h4>
+                        <p>回答市民關於政策或法規的問題；幫助市民預約公共服務（如辦理證件、繳費等）；收集市民投訴並提供處理進度更新；即時推送災害警告或緊急通知。</p>
+                        <h4>優點</h4>
+                        <p>提升政府服務效率，改善市民體驗；減少人工客服的負擔，降低營運成本。</p>
+                    </div>
+                    <div class="industry-card">
+                        <h3>媒體與娛樂（Media & Entertainment）</h3>
+                        <h4>應用功能</h4>
+                        <p>根據用戶的興趣推薦電影、音樂或文章；提醒用戶即將舉行的活動或節目；與粉絲互動，回答關於明星或節目的目的；幫助用戶管理訂閱服務（如流媒體平台）。</p>
+                        <h4>優點</h4>
+                        <p>提升使用者體驗，增加平台活躍度；提供個人化體驗，增加使用者忠誠度。</p>
                     </div>
                 </div>
-            </div><BR></BR><BR></BR>
+                </div>
+            </div>
+
+            <style>
+            .report-container {
+                background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(0, 255, 136, 0.1));
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                padding: 30px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                margin: 20px 0;
+                transition: all 0.3s ease;
+            }
+
+            .report-container:hover {
+                border-color: rgba(102, 204, 255, 0.2);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+                transform: translateY(-2px);
+            }
+            </style><BR></BR><BR></BR>
 
             <div class="report-section">
                 <h1 class="section-title">AI顧問報告</h1>
-                <div class="report-grid">
+                <div class="report-container">
+                    <div class="report-grid">
                     <div class="report-card">
                         <h3>引言</h3>
                         <p>全面評估企業數位轉型需求，提供AI導入建議與策略規劃。</p>
@@ -902,31 +1132,75 @@
                         <p>總結分析結果，提供具體可行的實施建議。</p>
                     </div>
                 </div>
+                </div>
             </div>
+
+            <style>
+            .report-container {
+                background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(0, 255, 136, 0.1));
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                padding: 30px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                margin: 20px 0;
+                transition: all 0.3s ease;
+            }
+
+            .report-container:hover {
+                border-color: rgba(102, 204, 255, 0.2);
+                box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+                transform: translateY(-2px);
+            }
+            </style>
         </div>
     </main>
 </body>
 </html>
 <script>
-// 返回頂部按鈕的顯示控制
+// 返回頂部按鈕和導航欄的顯示控制
 const backToTop = document.createElement('div');
 backToTop.className = 'back-to-top';
 backToTop.textContent = 'Top';
 document.body.appendChild(backToTop);
 
+const header = document.querySelector('.header');
+let lastScrollTop = 0;
+let isScrolling = false;
+
 window.addEventListener('scroll', () => {
     if (window.scrollY > 300) {
         backToTop.classList.add('visible');
+        if (!isScrolling) {
+            header.style.transform = 'translateY(-100%)';
+            header.style.transition = 'transform 0.3s ease';
+        }
     } else {
         backToTop.classList.remove('visible');
+        header.style.transform = 'translateY(0)';
     }
+    lastScrollTop = window.scrollY;
 });
 
 backToTop.addEventListener('click', () => {
+    isScrolling = true;
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
     });
+    header.style.transform = 'translateY(0)';
+    setTimeout(() => {
+        isScrolling = false;
+    }, 1000);
+});
+// 漢堡選單切換
+const menuToggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('nav');
+
+menuToggle.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    menuToggle.classList.toggle('active');
 });
 </script>
 </html>
