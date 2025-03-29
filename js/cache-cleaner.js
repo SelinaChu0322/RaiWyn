@@ -28,36 +28,12 @@ function clearBrowserCache() {
     window.location.reload(true);
 }
 
-// 添加清除緩存按鈕的功能
+// 清除緩存功能已被移除
+// 當頁面加載完成時不再添加按鈕
+// document.addEventListener('DOMContentLoaded', addClearCacheButton);
+
+// 確保不會有任何清除緩存按鈕被添加
 function addClearCacheButton() {
-    const button = document.createElement('button');
-    button.textContent = '清除緩存';
-    button.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        padding: 10px 20px;
-        background: linear-gradient(45deg, #0088ff, #00ff88);
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-    `;
-
-    button.addEventListener('mouseover', () => {
-        button.style.transform = 'scale(1.05)';
-    });
-
-    button.addEventListener('mouseout', () => {
-        button.style.transform = 'scale(1)';
-    });
-
-    button.addEventListener('click', clearBrowserCache);
-    document.body.appendChild(button);
+    // 此函數已被禁用，不執行任何操作
+    return;
 }
-
-// 當頁面加載完成時添加按鈕
-document.addEventListener('DOMContentLoaded', addClearCacheButton);
