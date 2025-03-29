@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>PYKEY® 行動電子鑰匙 - RaiWyn</title>
+    <link rel="icon" type="image/png" href="RaiWyn Logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --header-height: 80px;
+            --logo-width: 150px;
+            --font-size-base: 16px;
+            --font-size-h1: 3.5em;
+            --font-size-nav: 1.1em;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, rgba(0, 20, 50, 0.95), rgba(0, 40, 30, 0.95));
+            color: #fff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 136, 255, 0.05) 0%, rgba(0, 255, 136, 0.05) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: transparent;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #66ccff, #00ff88);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-shrink: 0;
+            height: var(--header-height);
+        }
+
+        .logo-video {
+            width: min(300px, 80vw);
+            height: auto;
+            margin: auto 0;
+            filter: drop-shadow(0 0 8px rgba(0, 136, 255, 0.3)) drop-shadow(0 0 12px rgba(0, 255, 136, 0.2));
+            transition: all 0.4s ease;
+            min-width: 150px;
+            max-width: 300px;
+            cursor: pointer;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: block;
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            z-index: 1001;
+            margin-left: auto;
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .menu-toggle img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+        }
+
+        .menu-toggle span {
+            display: none;
+        }
+
+        nav {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin-left: auto;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: var(--font-size-nav);
+            padding: 10px 20px;
+            border-radius: 5px;
+            position: relative;
+            transition: all 0.3s ease;
+            background: linear-gradient(90deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 136, 0));
+            display: inline-block;
+        }
+
+        nav a:hover {
+            color: #00ff88;
+            background: linear-gradient(90deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 136, 0.05));
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 0;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(0, 20, 50, 0.95), rgba(0, 40, 30, 0.95));
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-nav {
+            background: transparent;
+            padding: 20px 0;
+            position: sticky;
+            top: var(--header-height);
+            z-index: 100;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-nav.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .product-nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .product-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #fff;
+            transition: transform 0.3s ease;
+            padding: 10px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(0, 255, 136, 0.1));
+        }
+
+        .product-nav-item:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(102, 204, 255, 0.2), rgba(0, 255, 136, 0.2));
+        }
+
+        .product-nav-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .product-nav-item span {
+            font-size: 1em;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 768px) {
+            .product-nav-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 10px;
+            }
+
+            .product-nav-item img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .product-nav-item span {
+                font-size: 0.9em;
+            }
+        }
+
+        .product-header {
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(0, 255, 136, 0.1));
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-header h1 {
+            font-size: 2.5em;
+            color: #66ccff;
+            margin-bottom: 20px;
+        }
+
+        .product-header p {
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        #pylocx, #pl71xx, #pl73xx, #pl8029 {
+            background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(0, 255, 136, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #pylocx h1, #pl71xx h1, #pl73xx h1, #pl8029 h1 {
+            font-size: 2.5em;
+            color: #66ccff;
+            margin-bottom: 20px;
+        }
+
+        #pylocx p, #pl71xx p, #pl73xx p, #pl8029 p {
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .product-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(0, 255, 136, 0.1));
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-image {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(0, 255, 136, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .thumbnail {
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(0, 255, 136, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+            border-color: rgba(102, 204, 255, 0.5);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .product-image {
+            background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(0, 255, 136, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .features-section {
+            background: linear-gradient(135deg, rgba(102, 204, 255, 0.1), rgba(0, 255, 136, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .features-section h2 {
+            color: #66ccff;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .feature-card {
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+
+        .feature-card h3 {
+            color: #66ccff;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .specs-table th, .specs-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .specs-table th {
+            background: rgba(102, 204, 255, 0.1);
+            color: #66ccff;
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: flex !important;
+                position: relative;
+                z-index: 1002;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.85);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                padding-top: 80px;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .container {
+                padding: 10px;
+                margin-top: calc(var(--header-height) + 20px);
+            }
+
+            .product-header h1 {
+                font-size: 2em;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .logo-video {
+                min-width: 120px;
+            }
+
+            nav a {
+                font-size: 1em;
+                padding: 8px 16px;
+            }
+
+            .product-header h1 {
+                font-size: 1.8em;
+            }
+
+            .product-header p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <img src="logo-word.gif" alt="RaiWyn Logo" class="logo-video" style="width: 300px;">
+            </a>
+        </div>
+        <div class="menu-toggle">
+            <img src="Menu.png" alt="Menu">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">首頁</a></li>
+                <li><a href="projects.html">AI應用</a></li>
+                <li><a href="#">關於我們</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="product-nav">
+        <div class="product-nav-grid">
+            <a href="#pykey" class="product-nav-item">
+                <img src="PYKEY/PL1011.webp" alt="行動電子鑰匙">
+                <span>行動電子鑰匙</span>
+            </a>
+            <a href="#pylocx" class="product-nav-item">
+                <img src="PYLOCX/PL61XX.webp" alt="小型歐式旋鈕鎖芯">
+                <span>小型歐式旋鈕鎖芯</span>
+            </a>
+            <a href="#pl71xx" class="product-nav-item">
+                <img src="PL71XX/PL71XX.webp" alt="旋轉桿鎖">
+                <span>旋轉桿鎖</span>
+            </a>
+            <a href="#pl73xx" class="product-nav-item">
+                <img src="PL73XX/PL73XX.webp" alt="掛鎖">
+                <span>掛鎖</span>
+            </a>
+            <a href="#pl8029" class="product-nav-item">
+                <img src="PL8029/PL8029.webp" alt="運輸箱">
+                <span>運輸箱</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="pykey" class="product-header">
+            <h1>PYKEY® 行動電子鑰匙</h1>
+            <p>Article No. PL1011</p>
+            <p>PYKEY® 用於輸入 PYCODE®。 PYKEY® 可確保多達 700 個開口供電，並可透過 USB 充電。</p>
+        </div>
+
+        <div class="product-preview">
+            <div class="main-image">
+                <img src="PYKEY/PL1011.webp" alt="PYKEY 正面圖" id="mainImage">
+            </div>
+            <div class="thumbnail-grid">
+                <div class="thumbnail" onclick="changeImage('PYKEY/PL1011.webp')">
+                    <img src="PYKEY/PL1011.webp" alt="PYKEY 正面圖">
+                </div>
+                <div class="thumbnail" onclick="changeImage('PYKEY/PL1011-side.webp')">
+                    <img src="PYKEY/PL1011-side.webp" alt="PYKEY 側面圖">
+                </div>
+                <div class="thumbnail" onclick="changeImage('PYKEY/PL1011-Back.webp')">
+                    <img src="PYKEY/PL1011-Back.webp" alt="PYKEY 背面圖">
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>產品特色</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>特性</h3>
+                    <ul>
+                        <li>開啟方式為一次性密碼／固定PIN碼</li>
+                        <li>無電流設備；PYKEY為鎖採用固定電源供電</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>功能</h3>
+                    <p>輸入密碼後，PYKEY® 被放置在相應的接觸點或設備上。傳輸密碼並為設備供電，以便在必要時開啟</p>
+                </div>
+            </div>
+            </div>
+
+        <div class="features-section">
+            <h2>技術數據</h2>
+            <table class="specs-table">
+                <tr>
+                    <th>類別</th>
+                    <th>規格</th>
+                </tr>
+                <tr>
+                    <td>溫度範圍</td>
+                    <td>0°C - +50°C</td>
+                </tr>
+                <tr>
+                    <td>鎖定功能</td>
+                    <td>電子器備</td>
+                </tr>
+                <tr>
+                    <td>鎖定類型</td>
+                    <td>密碼輸入</td>
+                </tr>
+                <tr>
+                    <td>使用方式</td>
+                    <td>按密碼開啟</td>
+                </tr>
+                <tr>
+                    <td>充電技術</td>
+                    <td>鋰離子電池</td>
+                </tr>
+                <tr>
+                    <td>安全等級</td>
+                    <td>適用於 VdS 等級 2 和 3 的系統</td>
+                </tr>
+                <tr>
+                    <td>韌體</td>
+                    <td>4.5.1.10</td>
+                </tr>
+                <tr>
+                    <td>材料</td>
+                    <td>塑料</td>
+                </tr>
+                <tr>
+                    <td>表面</td>
+                    <td>粗糙</td>
+                </tr>
+                <tr>
+                    <td>顏色</td>
+                    <td>深藍色</td>
+                </tr>
+                <tr>
+                    <td>尺寸 (長x寬x高)</td>
+                    <td>65.2 x 46.1 x 20.1 毫米</td>
+                </tr>
+                <tr>
+                    <td>標準</td>
+                    <td>VdS 2.344:2.014-07, VdS 2.369:2.022-09,<br>EN 1.300:2.013-11, VdS 2.110:2.017-09,<br>VdS 2.203:2.001-03, VdS 2.119:2.003-12,<br>VdS 2.271:2.007-12</td>
+                </tr>
+                <tr>
+                    <td>國際防護等級 (IP)</td>
+                    <td>IP53</td>
+                </tr>
+                <tr>
+                    <td>特點</td>
+                    <td>電池充滿電後可進行 ~700 次連接件操作</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="pylocx" class="product-header">
+            <h1>PYLOCX® 小型歐式旋鈕鎖芯</h1>
+            <p>Article No. PL61XX</p>
+            <p>PYLOCX® 小型歐式旋鈕鎖芯是一種安全的半圓柱鎖芯，可以安裝在各種鎖具中。</p>
+        </div>
+
+        <div class="product-preview">
+            <div class="main-image">
+                <img src="PYLOCX/PL61XX.webp" alt="PYLOCX 正面圖" id="mainImage2">
+            </div>
+            <div class="thumbnail-grid">
+                <div class="thumbnail" onclick="changeImage2('PYLOCX/PL61XX.webp')">
+                    <img src="PYLOCX/PL61XX.webp" alt="PYLOCX 正面圖">
+                </div>
+                <div class="thumbnail" onclick="changeImage2('PYLOCX/PL61XX-side.webp')">
+                    <img src="PYLOCX/PL61XX-side.webp" alt="PYLOCX 側面圖">
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>產品特色</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>特性</h3>
+                    <ul>
+                        <li>內徑 30mm/外徑 30mm 至內徑 60mm/外徑 60mm</li>
+                        <li>可選配擴充功能</li>
+                        <li>歐式圓柱鎖</li>
+                        <li>溫度範圍 -40℃ - +60°C</li>
+                        <li>無電流設備；通過一次性密碼或固定 PIN碼供電開啟</li>
+                        <li>可讀開啟日誌多達 10,000 條</li>
+                        <li>通過VdS電壓認證</li>
+                        <li>防護等級為 IP68，適合室內和室外使用</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>功能</h3>
+                    <p>輸入密碼後，將PYKEY® 放置在設備的接觸點上。發送密碼並向設備供電。拉出旋鈕後，轉動即可打開。關閉時，外旋鈕可自由轉動</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+        <div class="features-section">
+            <h2>技術數據</h2>
+            <table class="specs-table">
+            <tr>
+                <th>類別</th>
+                <th>規格</th>
+            </tr>
+            <tr>
+                <td>溫度範圍</td>
+                <td>-40°C - +60°C</td>
+            </tr>
+            <tr>
+                <td>門厚度</td>
+                <td>旋鈕側（內側）：30-60 毫米；接觸點側（外側）：30-60 毫米</td>
+            </tr>
+            <tr>
+                <td>鎖定功能</td>
+                <td>電子設備</td>
+            </tr>
+            <tr>
+                <td>鎖定裝置</td>
+                <td>PYKEY</td>
+            </tr>
+            <tr>
+                <td>鎖定類型</td>
+                <td>手動開關</td>
+            </tr>
+            <tr>
+                <td>使用方式</td>
+                <td>歐式把手旋柄鎖芯</td>
+            </tr>
+            <tr>
+                <td>材料</td>
+                <td>黃銅</td>
+            </tr>
+            <tr>
+                <td>表面</td>
+                <td>鍍鎳</td>
+            </tr>
+            <tr>
+                <td>顏色</td>
+                <td>銀色</td>
+            </tr>
+            <tr>
+                <td>固定類型</td>
+                <td>用於帶歐式插芯單元的插芯鎖</td>
+            </tr>
+            <tr>
+                <td>國際防護等級 (IP)</td>
+                <td>IP68</td>
+            </tr>
+            <tr>
+                <td>特點</td>
+                <td>可選配 7.2 毫米加長桿</td>
+            </tr>
+        </table>
+        </div>
+
+        <div id="pl73xx" class="product-header">
+            <h1>PYLOCX® 掛鎖</h1>
+            <p>Article No. PL73XX</p>
+            <p>通用掛鎖，堅固不鏽鋼材質，提供多種卸扣尺寸選擇。</p>
+        </div>
+
+        <div class="product-preview">
+            <div class="main-image">
+                <img src="PL73XX/PL73XX-lyingDown.png" alt="PYLOCX 掛鎖側躺圖" id="mainImage4">
+            </div>
+            <div class="thumbnail-grid">
+                <div class="thumbnail" onclick="changeImage4('PL73XX/PL73XX-lyingDown.png')">
+                    <img src="PL73XX/PL73XX-lyingDown.png" alt="PYLOCX 掛鎖側躺圖">
+                </div>
+                <div class="thumbnail" onclick="changeImage4('PL73XX/PL73XX.webp')">
+                    <img src="PL73XX/PL73XX.webp" alt="PYLOCX 掛鎖正面圖">
+                </div>
+                <div class="thumbnail" onclick="changeImage4('PL73XX/PL73XX-open.webp')">
+                    <img src="PL73XX/PL73XX-open.webp" alt="PYLOCX 掛鎖開啟圖">
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>產品特色</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>特性</h3>
+                    <ul>
+                        <li>通用掛鎖</li>
+                        <li>堅固不鏽鋼</li>
+                        <li>卸扣材質為不鏽鋼或鉬</li>
+                        <li>卸扣高度 25mm、50mm、75mm</li>
+                        <li>卸扣厚度8mm、11mm</li>
+                        <li>防水</li>
+                        <li>通過一次性密碼及PIN碼開啟</li>
+                        <li>可提供帶有隱藏式鎖扣的高安全版本</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>功能</h3>
+                    <p>輸入密碼後，將PYKEY® 被放置在設備的接觸點上。發送密碼並向設備供電。即可打開掛鎖</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>技術數據</h2>
+            <table class="specs-table">
+            <tr>
+                <th>類別</th>
+                <th>規格</th>
+            </tr>
+            <tr>
+                <td>國際防護等級 (IP)</td>
+                <td>IP68</td>
+            </tr>
+            <tr>
+                <td>溫度範圍</td>
+                <td>-40°C - +60°C</td>
+            </tr>
+            <tr>
+                <td>鎖定功能</td>
+                <td>電子設備</td>
+            </tr>
+            <tr>
+                <td>鎖定裝置</td>
+                <td>PYKEY</td>
+            </tr>
+            <tr>
+                <td>鎖定類型</td>
+                <td>手動關閉</td>
+            </tr>
+            <tr>
+                <td>使用範圍</td>
+                <td>電子掛鎖</td>
+            </tr>
+            <tr>
+                <td>材料</td>
+                <td>不鏽鋼</td>
+            </tr>
+            <tr>
+                <td>表面</td>
+                <td>拉絲</td>
+            </tr>
+            <tr>
+                <td>顏色</td>
+                <td>銀色</td>
+            </tr>
+            <tr>
+                <td>尺寸 (長x寬x高)</td>
+                <td>弓形直徑 8 毫米 / 11 毫米，弓形高度 25 毫米 / 50 毫米 / 75 毫米</td>
+            </tr>
+            <tr>
+                <td>標準</td>
+                <td>EN16.864</td>
+            </tr>
+        </table>
+        </div>
+
+        <div id="pl71xx" class="product-header">
+            <h1>PYLOCX® 旋轉桿鎖</h1>
+            <p>Article No. PL71XX</p>
+            <p>帶有整合式 PYLOCX® 安全半圓柱鎖芯的旋轉桿。</p>
+        </div>
+
+        <div class="product-preview">
+            <div class="main-image">
+                <img src="PL71XX/PL71XX.webp" alt="PYLOCX 旋轉桿鎖正面圖" id="mainImage3">
+            </div>
+            <div class="thumbnail-grid">
+                <div class="thumbnail" onclick="changeImage3('PL71XX/PL71XX.webp')">
+                    <img src="PL71XX/PL71XX.webp" alt="PYLOCX 旋轉桿鎖正面圖">
+                </div>
+                <div class="thumbnail" onclick="changeImage3('PL71XX/PL71XX-front.webp')">
+                    <img src="PL71XX/PL71XX-front.webp" alt="PYLOCX 旋轉桿鎖前視圖">
+                </div>
+                <div class="thumbnail" onclick="changeImage3('PL71XX/PL71XX-side.webp')">
+                    <img src="PL71XX/PL71XX-side.webp" alt="PYLOCX 旋轉桿鎖側面圖">
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>產品特色</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>特性</h3>
+                    <ul>
+                        <li>帶有實心不銹鋼把手的電子鎖芯</li>
+                        <li>由鋅合金壓鑄成的防風雨旋轉手柄</li>
+                        <li>防盜等級：RC2</li>
+                        <li>適用於所有孔徑</li>
+                        <li>適用於室內和室外 (IP68)</li>
+                        <li>可替換現有的旋轉手柄可（改裝型）</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>功能</h3>
+                    <p>釋放出旋轉桿的電源和資料傳輸是通過 PYKEYS 進行的。通過密碼驗證後，電子半圓柱被釋放，並且可以透過轉動方便的操作旋鈕來打開旋轉桿。 旋轉45° 可連旋轉桿後面的連接元件，您可以選擇鎖定或解鎖。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>技術數據</h2>
+            <table class="specs-table">
+            <tr>
+                <th>類別</th>
+                <th>規格</th>
+            </tr>
+            <tr>
+                <td>溫度範圍</td>
+                <td>-40°C - +60°C</td>
+            </tr>
+            <tr>
+                <td>鎖定功能</td>
+                <td>電子設備</td>
+            </tr>
+            <tr>
+                <td>鎖定裝置</td>
+                <td>PYKEY</td>
+            </tr>
+            <tr>
+                <td>鎖定類型</td>
+                <td>自鎖</td>
+            </tr>
+            <tr>
+                <td>使用範圍</td>
+                <td>電源箱、配電箱、暖通空調（HVAC）、電信、運輸</td>
+            </tr>
+            <tr>
+                <td>材料</td>
+                <td>孔克克 5</td>
+            </tr>
+            <tr>
+                <td>顏色</td>
+                <td>黑色</td>
+            </tr>
+            <tr>
+                <td>固定類型</td>
+                <td>螺紋連接</td>
+            </tr>
+            <tr>
+                <td>國際防護等級 (IP)</td>
+                <td>IP65</td>
+            </tr>
+        </table>
+        </div>
+
+        <div id="pl8029" class="product-header">
+            <h1>PYBOX® 29L 運輸箱</h1>
+            <p>Article No. PL8029</p>
+        </div>
+
+        <div class="product-preview">
+            <div class="main-image">
+                <img src="PL8029/PL8029.webp" alt="PYBOX 運輸箱正面圖" id="mainImage5">
+            </div>
+            <div class="thumbnail-grid">
+                <div class="thumbnail" onclick="changeImage5('PL8029/PL8029.webp')">
+                    <img src="PL8029/PL8029.webp" alt="PYBOX 運輸箱正面圖">
+                </div>
+                <div class="thumbnail" onclick="changeImage5('PL8029/PL8029-back.webp')">
+                    <img src="PL8029/PL8029-back.webp" alt="PYBOX 運輸箱背面圖">
+                </div>
+                <div class="thumbnail" onclick="changeImage5('PL8029/PL8029-otherSide.webp')">
+                    <img src="PL8029/PL8029-otherSide.webp" alt="PYBOX 運輸箱側面圖">
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>產品特色</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>特性</h3>
+                    <ul>
+                        <li>通用運輸箱</li>
+                        <li>適用於安全供應鏈</li>
+                        <li>通過BSI認證</li>
+                        <li>通過VdS認證</li>
+                        <li>整合 PYLOCX® 系統 VdS 3 級</li>
+                        <li>透過一次性密碼或 PIN碼開啟</li>
+                        <li>專為無電流動力操作設計</li>
+                        <li>可讀開啟紀綠多達 10,000 條</li>
+                        <li>尺寸為 29 公升</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2>技術數據</h2>
+            <table class="specs-table">
+            <tr>
+                <th>類別</th>
+                <th>規格</th>
+            </tr>
+            <tr>
+                <td>溫度範圍</td>
+                <td>-25°C - +50°C</td>
+            </tr>
+            <tr>
+                <td>鎖定功能</td>
+                <td>電子器備</td>
+            </tr>
+            <tr>
+                <td>鎖定裝置</td>
+                <td>PYKEY</td>
+            </tr>
+            <tr>
+                <td>鎖定類型</td>
+                <td>手動關閉</td>
+            </tr>
+            <tr>
+                <td>負載能力</td>
+                <td>40</td>
+            </tr>
+            <tr>
+                <td>重量 (千克)</td>
+                <td>13.8</td>
+            </tr>
+            <tr>
+                <td>使用範圍</td>
+                <td>高度安全的運輸箱</td>
+            </tr>
+            <tr>
+                <td>材料</td>
+                <td>鋁</td>
+            </tr>
+            <tr>
+                <td>表面</td>
+                <td>閃亮</td>
+            </tr>
+            <tr>
+                <td>顏色</td>
+                <td>銀色</td>
+            </tr>
+            <tr>
+                <td>尺寸 (長x寬x高)</td>
+                <td>588 x 388 x 180 毫米</td>
+            </tr>
+            <tr>
+                <td>國際防護等級 (IP)</td>
+                <td>IP54</td>
+            </tr>
+            <tr>
+                <td>特點</td>
+                <td>整合型 PYLOCX 高安全鎖系統</td>
+            </tr>
+        </table>
+        </div>
+
+    </div>
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('.header');
+            const productNav = document.querySelector('.product-nav');
+            const backToTop = document.createElement('div');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav');
+            backToTop.className = 'back-to-top';
+            backToTop.textContent = 'Top';
+            document.body.appendChild(backToTop);
+        
+            let lastScrollTop = 0;
+            let isScrolling = false;
+
+            // 優化漢堡選單的點擊事件處理
+            if (menuToggle && nav) {
+                menuToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    nav.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+
+                // 點擊導航選單內部時不關閉選單
+                nav.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+
+                // 點擊其他區域時關閉選單
+                document.addEventListener('click', () => {
+                    if (nav.classList.contains('active')) {
+                        nav.classList.remove('active');
+                        menuToggle.classList.remove('active');
+                    }
+                });
+            }
+
+        backToTop.addEventListener('click', () => {
+            isScrolling = true;
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            header.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                isScrolling = false;
+            }, 1000);
+        });
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const scrollDelta = currentScrollY - lastScrollTop;
+            
+            if (currentScrollY === 0) {
+                // 在置頂頁面時，顯示導航欄和產品導航區域
+                header.style.transform = 'translateY(0)';
+                productNav.style.opacity = '1';
+                productNav.style.pointerEvents = 'auto';
+            } else if (!isScrolling && Math.abs(scrollDelta) > 5) {
+                // 不在置頂頁面時，隱藏導航欄和產品導航區域
+                productNav.style.opacity = '0';
+                productNav.style.pointerEvents = 'none';
+                header.style.transform = 'translateY(-100%)';
+                header.style.transition = 'transform 0.3s ease';
+                productNav.style.transition = 'opacity 0.3s ease';
+            }
+            
+            lastScrollTop = currentScrollY;
+
+            if (currentScrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+            
+            // 當停止滾動時，只有在不是置頂頁面時才顯示導航欄
+            clearTimeout(window.scrollTimeout);
+            window.scrollTimeout = setTimeout(() => {
+                if (!isScrolling && currentScrollY > 0) {
+                    header.style.transform = 'translateY(0)';
+                }
+            }, 1500); // 1.5秒後顯示
+        });
+
+        function changeImage(src) {
+            const mainImage = document.getElementById('mainImage');
+            if (mainImage) {
+                mainImage.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    mainImage.src = src;
+                    mainImage.style.transform = 'scale(1)';
+                }, 150);
+            }
+        }
+
+        function changeImage2(src) {
+            const mainImage = document.getElementById('mainImage2');
+            if (mainImage) {
+                mainImage.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    mainImage.src = src;
+                    mainImage.style.transform = 'scale(1)';
+                }, 150);
+            }
+        }
+
+        function changeImage3(src) {
+            const mainImage = document.getElementById('mainImage3');
+            if (mainImage) {
+                mainImage.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    mainImage.src = src;
+                    mainImage.style.transform = 'scale(1)';
+                }, 150);
+            }
+        }
+
+        function changeImage4(src) {
+            const mainImage = document.getElementById('mainImage4');
+            if (mainImage) {
+                mainImage.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    mainImage.src = src;
+                    mainImage.style.transform = 'scale(1)';
+                }, 150);
+            }
+        }
+
+        function changeImage5(src) {
+            const mainImage = document.getElementById('mainImage5');
+            if (mainImage) {
+                mainImage.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    mainImage.src = src;
+                    mainImage.style.transform = 'scale(1)';
+                }, 150);
+            }
+        }
+
+            // 綁定圖片預覽功能的點擊事件
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    const imgSrc = this.querySelector('img').src;
+                    const mainImageId = this.closest('.product-preview').querySelector('.main-image img').id;
+                    if (mainImageId === 'mainImage') {
+                        changeImage(imgSrc);
+                    } else if (mainImageId === 'mainImage2') {
+                        changeImage2(imgSrc);
+                    } else if (mainImageId === 'mainImage3') {
+                        changeImage3(imgSrc);
+                    } else if (mainImageId === 'mainImage4') {
+                        changeImage4(imgSrc);
+                    } else if (mainImageId === 'mainImage5') {
+                        changeImage5(imgSrc);
+                    }
+                });
+            });
+
+        });
+
+        function changeImage2(src) {
+            const mainImage = document.getElementById('mainImage2');
+            if (mainImage) {
+                mainImage.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    mainImage.src = src;
+                    mainImage.style.transform = 'scale(1)';
+                }, 150);
+            }
+        }
+
+        function changeImage3(src) {
+            const mainImage = document.getElementById('mainImage3');
+            if (mainImage) {
+                mainImage.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    mainImage.src = src;
+                    mainImage.style.transform = 'scale(1)';
+                }, 150);
+            }
+        }
+
+        function changeImage4(src) {
+            const mainImage = document.getElementById('mainImage4');
+            if (mainImage) {
+                mainImage.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    mainImage.src = src;
+                    mainImage.style.transform = 'scale(1)';
+                }, 150);
+            }
+        }
+
+        function changeImage5(src) {
+            const mainImage = document.getElementById('mainImage5');
+            if (mainImage) {
+                mainImage.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    mainImage.src = src;
+                    mainImage.style.transform = 'scale(1)';
+                }, 150);
+            }
+        }
+
+        backToTop.addEventListener('click', () => {
+            isScrolling = true;
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            header.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                isScrolling = false;
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
