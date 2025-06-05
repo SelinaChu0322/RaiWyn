@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>睿灜科技股份有限公司 - RaiWyn</title>
+    <script src="js/cache-cleaner.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --header-height: 80px;
+            --logo-width: 150px;
+            --font-size-base: 16px;
+            --font-size-h1: 3.5em;
+            --font-size-nav: 1.1em;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+            color: #fff;
+            line-height: 1.6;
+            position: relative;
+            font-size: var(--font-size-base);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 136, 255, 0.05) 0%, rgba(0, 255, 136, 0.05) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: transparent;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            width: 120px;
+            height: auto;
+            animation: logoEffect 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
+        }
+
+        .company-name {
+            font-size: var(--font-size-h1);
+            background: linear-gradient(45deg, #0088ff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: titleIn 1.5s ease-out 0.5s forwards;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(0, 136, 255, 0.3);
+            margin: 0;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            line-height: 1;
+        }
+
+        nav {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin-left: auto;
+            align-items: center;
+        }
+
+
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+            margin-left: auto;
+            margin-top: -15px;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            margin: 3px 0;
+            border-radius: 2px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* iOS 安全區域適配 */
+        @supports (padding: max(0px)) {
+            .header {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-top: max(15px, env(safe-area-inset-top));
+            }
+            nav {
+                padding-right: env(safe-area-inset-right);
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+
+        /* 觸控優化 */
+        @media (hover: none) and (pointer: coarse) {
+            nav a {
+                padding: 12px 20px;
+                margin: 2px 0;
+            }
+            .menu-toggle {
+                padding: 10px;
+                margin: -10px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .menu-toggle {
+                display: flex !important;
+                position: relative;
+                z-index: 1002;
+            }
+
+            .logo {
+                width: 80px;
+                height: auto;
+            }
+
+            .company-name {
+                font-size: 1.5em;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.85);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                padding-top: 80px;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+
+            nav a {
+                display: block;
+                width: 100%;
+                padding: 15px 0;
+                margin: 5px 0;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            :root {
+                --font-size-base: 15px;
+                --font-size-h1: 3em;
+            }
+        }
+
+        /* iOS 安全區域適配 */
+        @supports (padding: max(0px)) {
+            .header {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-top: max(15px, env(safe-area-inset-top));
+            }
+            nav {
+                padding-right: env(safe-area-inset-right);
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+
+        /* 觸控優化 */
+        @media (hover: none) and (pointer: coarse) {
+            nav a {
+                padding: 12px 20px;
+                margin: 2px 0;
+            }
+            .menu-toggle {
+                padding: 10px;
+                margin: -10px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            :root {
+                --font-size-base: 14px;
+                --font-size-h1: 2.5em;
+                --font-size-nav: 1em;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .logo {
+                width: 80px;
+                height: auto;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                justify-content: flex-end;
+                overflow-y: auto;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 80px 20px;
+                gap: 20px;
+            }
+
+            nav a {
+                display: block;
+                padding: 10px;
+                text-align: center;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            :root {
+                --font-size-base: 13px;
+                --font-size-h1: 2em;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav a {
+                padding: 8px 12px;
+            }
+        }
+
+        @media (hover: none) {
+            nav a:active {
+                background: rgba(0, 255, 136, 0.2);
+            }
+        }
+
+        @supports (-webkit-touch-callout: none) {
+            .header {
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+
+        @keyframes logoEffect {
+            0% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
+            }
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.7));
+            }
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
+            }
+        }
+
+        .company-name {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #0088ff, #00ff88, #0088ff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: 
+                titleIn 1.5s ease-out 0.5s forwards,
+                shine 8s linear infinite;
+            font-weight: bold;
+            text-shadow: 
+                0 0 15px rgba(0, 136, 255, 0.3),
+                0 0 30px rgba(0, 255, 136, 0.2);
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .company-name::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            animation: scanEffect 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes shine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes scanEffect {
+            0% { left: -100%; }
+            100% { left: 300%; }
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 50px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+            margin-left: auto;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* iOS 安全區域適配 */
+        @supports (padding: max(0px)) {
+            .header {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-top: max(15px, env(safe-area-inset-top));
+            }
+            nav {
+                padding-right: env(safe-area-inset-right);
+                padding-top: env(safe-area-inset-top);
+            }
+        }
+
+        /* 觸控優化 */
+        @media (hover: none) and (pointer: coarse) {
+            nav a {
+                padding: 12px 20px;
+                margin: 2px 0;
+            }
+            .menu-toggle {
+                padding: 10px;
+                margin: -10px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                justify-content: flex-end;
+                overflow: hidden;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 80px 20px;
+                gap: 20px;
+                width: 100%;
+                margin: 0;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            .language-select {
+                margin: 20px auto;
+                width: 80%;
+            }
+
+            .language-select select {
+                width: 100%;
+                text-align: center;
+                padding: 8px 30px 8px 15px;
+            }
+
+            nav a {
+                display: block;
+                padding: 10px;
+                text-align: center;
+                font-size: 1.1em;
+            }
+
+            .header {
+                overflow: visible;
+            }
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: linear-gradient(90deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 136, 0));
+            width: 100%;
+            display: block;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            animation: scanEffect 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            pointer-events: none;
+        }
+
+        nav a:hover {
+            color: #00ff88;
+        }
+
+        @keyframes scanEffect {
+            0% { left: -100%; }
+            100% { left: 400%; }
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        .hero-content {
+            z-index: 2;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: heroContentIn 1.5s ease-out forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        @keyframes heroContentIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin: 30px 0;
+            background: linear-gradient(45deg, #0088ff, #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: titleIn 1.5s ease-out 0.5s forwards;
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: descriptionIn 1.5s ease-out 1s forwards;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        @keyframes titleIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: descriptionIn 1.5s ease-out 1s forwards;
+        }
+
+        @keyframes descriptionIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="RaiWyn Logo.png" alt="RaiWyn Logo" class="logo">
+            <span class="company-name">睿灜科技</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="projects.html">AI應用</a></li>
+                <li><a href="pykey.html">智慧電子鎖</a></li>
+                <li><a href="#">關於我們</a></li>
+                </ul>
+
+            </nav>
+        <div class="menu-toggle">
+            <img src="Menu.png" alt="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <section class="hero">
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source src="Compressed with FlexClip.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            
+            <h1>創新科技 引領未來</h1>
+            <p>睿瀛科技致力於為您提供安全、便捷的解決方案，推動智能化生活</p>
+           
+            <div class="scroll-down">
+                <a href="projects.html" class="scroll-arrow">
+                    <i class="arrow"></i>
+                    <i class="arrow"></i>
+                    <i class="arrow"></i>
+                </a>
+            </div>    
+           </div>
+    </section>
+    <style>
+        .scroll-down {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            height: 80px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .scroll-arrow {
+            display: block;
+            width: 30px;
+            height: 30px;
+            position: relative;
+        }
+
+        .arrow {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-left: 2px solid rgba(0, 255, 136, 0.8);
+            border-bottom: 2px solid rgba(0, 255, 136, 0.8);
+            transform: rotate(-45deg);
+            animation: arrowWave 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            opacity: 0;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .arrow:nth-child(1) {
+            animation-delay: 0s;
+            top: 0;
+        }
+
+        .arrow:nth-child(2) {
+            animation-delay: 0.15s;
+            top: 8px;
+        }
+
+        .arrow:nth-child(3) {
+            animation-delay: 0.3s;
+            top: 16px;
+        }
+
+        @keyframes arrowWave {
+            0% {
+                opacity: 0;
+                transform: rotate(-45deg) translate(0, 0);
+            }
+            50% {
+                opacity: 1;
+                transform: rotate(-45deg) translate(-5px, 5px);
+            }
+            100% {
+                opacity: 0;
+                transform: rotate(-45deg) translate(-10px, 10px);
+            }
+        }
+    </style>
+    <script>
+        document.querySelector('.scroll-arrow').addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            document.querySelector('.hero').style.transform = 'translateY(-100vh)';
+            document.querySelector('.hero').style.transition = 'transform 1s ease-in-out';
+            setTimeout(() => {
+                window.location.href = href;
+            }, 1000);
+        });
+
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
