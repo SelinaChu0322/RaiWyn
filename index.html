@@ -479,16 +479,23 @@
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
         
-        // 修改表單的action屬性，使用Formspree服務
-        contactForm.setAttribute('action', 'https://formspree.io/f/selinachu0322@gmail.com');
+        // 修改表單的action屬性，使用FormSubmit服務
+        contactForm.setAttribute('action', 'https://formsubmit.co/selinachu0322@gmail.com');
         contactForm.setAttribute('method', 'POST');
         
-        // 添加必要的Formspree配置
-        const formspreeConfig = document.createElement('input');
-        formspreeConfig.type = 'hidden';
-        formspreeConfig.name = '_subject';
-        formspreeConfig.value = 'New Contact Form Submission'; // 設置郵件主題
-        contactForm.appendChild(formspreeConfig);
+        // 添加必要的FormSubmit配置
+        const subjectConfig = document.createElement('input');
+        subjectConfig.type = 'hidden';
+        subjectConfig.name = '_subject';
+        subjectConfig.value = 'New Contact Form Submission'; // 設置郵件主題
+        contactForm.appendChild(subjectConfig);
+        
+        // 添加驗證碼配置
+        const captchaConfig = document.createElement('input');
+        captchaConfig.type = 'hidden';
+        captchaConfig.name = '_captcha';
+        captchaConfig.value = 'false'; // 關閉驗證碼
+        contactForm.appendChild(captchaConfig);
         
         // 添加重定向配置
         const redirectConfig = document.createElement('input');
