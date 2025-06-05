@@ -393,7 +393,12 @@
 
         <div class="contact-form">
             <h2>Send Us a Message</h2>
-            <form id="contactForm">
+            <form id="contactForm" action="https://formsubmit.co/selinachu0322@gmail.com" method="POST">
+                <!-- FormSubmit配置 -->
+                <input type="hidden" name="_subject" value="New Contact Form Submission">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://intime.myportfolio.com/contact">
+                
                 <div class="form-group">
                     <label for="name">Name <span class="required">*</span></label>
                     <input type="text" id="name" name="name" required>
@@ -478,31 +483,6 @@
         const contactForm = document.getElementById('contactForm');
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
-        
-        // 修改表單的action屬性，使用FormSubmit服務
-        contactForm.setAttribute('action', 'https://formsubmit.co/selinachu0322@gmail.com');
-        contactForm.setAttribute('method', 'POST');
-        
-        // 添加必要的FormSubmit配置
-        const subjectConfig = document.createElement('input');
-        subjectConfig.type = 'hidden';
-        subjectConfig.name = '_subject';
-        subjectConfig.value = 'New Contact Form Submission'; // 設置郵件主題
-        contactForm.appendChild(subjectConfig);
-        
-        // 添加驗證碼配置
-        const captchaConfig = document.createElement('input');
-        captchaConfig.type = 'hidden';
-        captchaConfig.name = '_captcha';
-        captchaConfig.value = 'false'; // 關閉驗證碼
-        contactForm.appendChild(captchaConfig);
-        
-        // 添加重定向配置
-        const redirectConfig = document.createElement('input');
-        redirectConfig.type = 'hidden';
-        redirectConfig.name = '_next';
-        redirectConfig.value = window.location.href; // 提交後重定向回當前頁面
-        contactForm.appendChild(redirectConfig);
         
         // 添加表單提交事件監聽器，用於顯示成功訊息
         contactForm.addEventListener('submit', function(e) {
