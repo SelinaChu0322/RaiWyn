@@ -508,20 +508,23 @@
 
             `;
             
-            // Create a mailto link
-            const mailtoLink = `mailto:richard.yang@raiwyn.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-            
-            // Open the email client
-            window.location.href = mailtoLink;
-            
-            // Show success message
+            // Show success message first
             successMessage.style.display = 'block';
             errorMessage.style.display = 'none';
             
             // Reset form
             contactForm.reset();
             
-            // Hide success message after 5 seconds
+            // Create a mailto link
+            const mailtoLink = `mailto:richard.yang@raiwyn.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // Delay opening the email client to allow user to see the success message
+            setTimeout(() => {
+                // Open the email client
+                window.location.href = mailtoLink;
+            }, 2000);
+            
+            // Hide success message after user sees it
             setTimeout(() => {
                 successMessage.style.display = 'none';
             }, 5000);
