@@ -479,59 +479,50 @@
         const successMessage = document.getElementById('successMessage');
         const errorMessage = document.getElementById('errorMessage');
         
+        // 修改表單的action屬性，使用FormSubmit服務
+        contactForm.setAttribute('action', 'https://formsubmit.co/selinachu0322@gmail.com');
+        contactForm.setAttribute('method', 'POST');
+        
+        // 添加必要的FormSubmit配置
+        const formSubmitConfig = document.createElement('input');
+        formSubmitConfig.type = 'hidden';
+        formSubmitConfig.name = '_captcha';
+        formSubmitConfig.value = 'false'; // 禁用驗證碼
+        contactForm.appendChild(formSubmitConfig);
+        
+        const redirectConfig = document.createElement('input');
+        redirectConfig.type = 'hidden';
+        redirectConfig.name = '_next';
+        redirectConfig.value = window.location.href; // 提交後重定向回當前頁面
+        contactForm.appendChild(redirectConfig);
+        
+        // 添加表單提交事件監聽器，用於顯示成功訊息
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+            // 不阻止表單提交，讓FormSubmit處理
+            // 但我們可以在提交前顯示成功訊息
             
-            // Get form data
-            const formData = new FormData(contactForm);
-            const formDataObj = {};
-            formData.forEach((value, key) => {
-                formDataObj[key] = value;
-            });
-            
-            // Here you would typically send the data to a server
-            // For this example, we'll simulate a successful submission
-            
-            // Email content construction
-            const emailSubject = `Contact Form: ${formDataObj.subject}`;
-            const emailBody = `
-                Name: ${formDataObj.name}
-
-
-                Email: ${formDataObj.email}
-
-
-                Phone: ${formDataObj.phone || 'Not provided'}
-
-
-                Subject: ${formDataObj.subject}
-
-
-                Message: ${formDataObj.message}
-
-
-            `;
-            
-            // Show success message first
+            // 顯示成功訊息
             successMessage.style.display = 'block';
             errorMessage.style.display = 'none';
             
-            // Reset form
-            contactForm.reset();
-            
-            // Create a mailto link
-            const mailtoLink = `mailto:selinachu0322@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-            
-            // Delay opening the email client to allow user to see the success message
+            // 5秒後隱藏成功訊息（如果用戶還在頁面上）
             setTimeout(() => {
-                // Open the email client
-                window.location.href = mailtoLink;
-            }, 2000);
-            
-            // Hide success message after user sees it
-            setTimeout(() => {
-                successMessage.style.display = 'none';
+                if (successMessage) {
+                    successMessage.style.display = 'none';
+                }
             }, 5000);
+            
+            // 不需要手動重置表單，因為頁面會重定向
+        });
+        
+        // 檢查URL參數，如果是從FormSubmit重定向回來的，顯示成功訊息
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.location.search.includes('_form_submit=success')) {
+                successMessage.style.display = 'block';
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            }
         });
     </script>
 </body>
