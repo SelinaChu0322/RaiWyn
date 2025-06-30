@@ -1,27 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Contact Us - InTime</title>
-    <link rel="icon" type="image/png" href="InTime Logo-Straight.png">
-    <link rel="apple-touch-icon" href="InTime Logo-Straight.png">
-    <link rel="shortcut icon" type="image/png" href="InTime Logo-Straight.png">
-    <meta name="msapplication-TileImage" content="InTime Logo-Straight.png">
-    <meta name="msapplication-TileColor" content="#000000">
+    <title>睿灜科技股份有限公司 - RaiWyn</title>
+    <link rel="icon" type="image/png" href="RaiWyn Logo.png">
     <script src="js/cache-cleaner.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth;
         }
 
         :root {
-            --header-height: 30px;
+            --header-height: 80px;
             --logo-width: 150px;
             --font-size-base: 16px;
             --font-size-h1: 3.5em;
@@ -30,56 +27,16 @@
 
         body {
             margin: 0;
-            font-family: 'Noto Sans', Arial, sans-serif;
-            background: linear-gradient(90deg, #1a1a1a, #2c3e50);
+            padding: 0;
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            background: #000;
             color: #fff;
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
             line-height: 1.6;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(100, 100, 100, 0.05) 0%, rgba(50, 70, 90, 0.05) 100%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #4a4a4a, #ffd700);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            font-size: var(--font-size-base);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
         }
 
         .header {
@@ -87,439 +44,351 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: var(--header-height);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 20px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
             z-index: 1000;
-            background: transparent;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
         }
-        
-        .header.hidden {
-            transform: translateY(-100%);
-        }
-        
-        .header .logo-container {
+
+        .logo-container {
             display: flex;
             align-items: center;
-            height: auto;
+            gap: 15px;
+            flex-shrink: 0;
         }
-        
-        .header .logo {
-            width: 40px;
+
+        .logo {
+            width: 120px;
             height: auto;
+            filter: drop-shadow(0 0 10px rgba(0, 136, 255, 0.5));
         }
-        /* Navigation styles */
+
         nav {
-            width: 100%;
+            margin-left: auto;
+            display: flex;
+            align-items: center;
         }
-        
+
         nav ul {
             display: flex;
             list-style: none;
-            gap: 20px;
-            justify-content: flex-end;
+            gap: 30px;
+            margin-left: auto;
+            align-items: center;
         }
-        
+
         nav a {
             color: #fff;
             text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
             font-size: var(--font-size-nav);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
+            border-radius: 5px;
+            position: relative;
+            transition: all 0.3s ease;
+            background: linear-gradient(90deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 136, 0));
+            display: inline-block;
         }
-        
+
         nav a:hover {
-            color: #ffd700;
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transform: translateY(-2px);
+            color: #00ff88;
+            background: linear-gradient(90deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 136, 0.05));
+            transform: scale(1.05);
         }
-        
-        /* Logo container styles */
-        .logo-container {
+
+        .menu-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            z-index: 1001;
+            margin-left: auto;
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .menu-toggle img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .content-container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .content-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%);
+            z-index: -1;
+        }
+
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 8rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0, 136, 255, 0.8), 0 0 30px rgba(0, 255, 136, 0.6);
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: fadeInDown 1.5s ease-out 0.5s forwards, glowing 3s ease-in-out infinite alternate;
+        }
+
+        .logos-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 40px;
+            gap: 80px;
+            margin-top: 30px;
         }
-        
-        /* Logo glow effect */
-        .logo-container .logo {
-            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
-            animation: logoGlow 3s ease-in-out infinite alternate;
+
+        .logo-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
             transition: all 0.5s ease;
+            opacity: 1;
+            transform: scale(1);
         }
-        
-        .logo-container .logo:hover {
-            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7));
-            transform: scale(1.03);
+
+        .logo-item:hover {
+            transform: scale(1.2);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img {
+            width: 234px;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7));
+            transition: all 0.5s ease;
+            animation: logoGlow 3s ease-in-out infinite alternate;
+            opacity: 1;
+            display: block;
+            visibility: visible;
+        }
+
+        .logo-item:hover .logo-img {
+            filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.9)) drop-shadow(0 0 50px rgba(0, 136, 255, 0.8));
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+            opacity: 1;
+            display: block;
+            visibility: visible;
         }
         
         @keyframes logoGlow {
             0% {
-                filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
+                filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7));
+            }
+            50% {
+                filter: drop-shadow(0 0 25px rgba(0, 136, 255, 0.8));
             }
             100% {
-                filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+                filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.7));
             }
         }
-        
-        /* Contact container styles */
-        .contact-container {
-            display: flex;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
-        .contact-info {
-            flex: 1;
-            padding: 30px;
-            min-width: 300px;
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
-        
-        .contact-info h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #ffd700, #ff8c00);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+
+        @keyframes glowing {
+            0% {
+                text-shadow: 0 0 20px rgba(0, 136, 255, 0.8), 0 0 30px rgba(0, 255, 136, 0.6);
+            }
+            50% {
+                text-shadow: 0 0 25px rgba(0, 255, 136, 0.8), 0 0 35px rgba(0, 136, 255, 0.6);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(0, 136, 255, 0.8), 0 0 30px rgba(0, 255, 136, 0.6);
+            }
         }
-        
-        .contact-info p {
-            margin-bottom: 30px;
-            font-size: 1.1em;
-            line-height: 1.6;
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
         }
-        
-        .qr-codes {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .qr-code {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            transition: all 0.3s ease;
-        }
-        
-        .qr-code:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .qr-code img {
-            width: 150px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-        
-        .qr-code img:hover {
-            transform: scale(1.05);
-        }
-        
-        .qr-code p {
-            margin-top: 15px;
-            font-size: 0.9em;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        /* Contact form styles */
-        .contact-form {
-            flex: 1;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            min-width: 300px;
-        }
-        
-        .contact-form h2 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            color: #ffd700;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .required {
-            color: #ff6b6b;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-            color: #fff;
-            font-size: 1em;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #ffd700;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-        }
-        
-        button[type="submit"] {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(45deg, #ffd700, #ff8c00);
-            border: none;
-            border-radius: 5px;
-            color: #000;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 30px;
-        }
-        
-        button[type="submit"]:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
-        }
-        
-        .success-message,
-        .error-message {
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            display: none;
-        }
-        
-        .success-message {
-            background: rgba(39, 174, 96, 0.2);
-            border: 1px solid rgba(39, 174, 96, 0.5);
-            color: #2ecc71;
-        }
-        
-        .error-message {
-            background: rgba(231, 76, 60, 0.2);
-            border: 1px solid rgba(231, 76, 60, 0.5);
-            color: #e74c3c;
-        }
-        
-        /* Footer styles */
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            background: rgba(0, 0, 0, 0.5);
-            margin-top: 50px;
-        }
-        
-        /* Responsive styles */
-        @media (max-width: 768px) {
-            .contact-container {
+
+        /* 響應式設計 */
+        @media screen and (max-width: 768px) {
+            .main-title {
+                font-size: 5rem;
+            }
+
+            .logos-container {
                 flex-direction: column;
+                gap: 40px;
             }
-            
-            .contact-info,
-            .contact-form {
-                padding: 20px;
+
+            .logo-img {
+                width: 150px;
             }
-            
-            .qr-codes {
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.85);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                transition: right 0.3s ease;
+                z-index: 1000;
+                display: flex;
+                flex-direction: column;
                 justify-content: center;
+                align-items: flex-start;
+                padding-top: 80px;
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+
+            nav a {
+                display: block;
+                width: 100%;
+                padding: 15px 0;
+                margin: 5px 0;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .main-title {
+                font-size: 3.5rem;
+            }
+
+            .logo-img {
+                width: 120px;
+            }
+        }
+
+        /* iOS 安全區域適配 */
+        @supports (padding: max(0px)) {
+            .header {
+                padding-left: max(20px, env(safe-area-inset-left));
+                padding-right: max(20px, env(safe-area-inset-right));
+                padding-top: max(15px, env(safe-area-inset-top));
+            }
+            nav {
+                padding-right: env(safe-area-inset-right);
+                padding-top: env(safe-area-inset-top);
             }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <nav>
-            <ul>
-                <li><a href="https://intime.myportfolio.com/">Home</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <div class="logo-container" style="margin-top: 100px;">
-        <img src="InTime LOGO.png" alt="InTime Logo" class="logo" style="width: 300px;">  <!-- 原尺寸是200px，增大50%变為300px -->
-    </div>
+    <!-- 移除了頂部導航欄和logo -->
 
-    <div class="contact-container">
-        <div class="contact-info">
-            <h1>Contact Us</h1>
-            <p>We'd love to hear from you. Please fill out the form or contact us using the information below:</p>
-            
+    <video class="video-background" autoplay loop muted playsinline>
+        <source src="Compressed with FlexClip.mp4" type="video/mp4">
+    </video>
 
-            
-            <div class="qr-codes">
-                <div class="qr-code">
-                    <img src="Email-Richard.png" alt="Email QR Code">
-                    <p>Scan to Email Us</p>
-                </div>
-                <div class="qr-code">
-                    <img src="InTime official account.png" alt="InTime Zalo QR Code">
-                    <p>Join InTime's Zalo official account</p>
-                </div>
-            </div>
+    <div class="content-container">
+        <h1 class="main-title">AI + AIOT</h1>
+        <div class="logos-container">
+            <a href="projects.html" class="logo-item">
+                <img src="RaiWyn cn logo.png" alt="RaiWyn Logo" class="logo-img">
+            </a>
+            <a href="https://intime.myportfolio.com/" target="_blank" class="logo-item">
+                <img src="InTime vn Logo.png" alt="InTime Logo" class="logo-img">
+            </a>
         </div>
-
-        <div class="contact-form">
-            <h2>Send Us a Message</h2>
-            <form id="contactForm" action="https://formsubmit.co/richard.yang@raiwyn.com" method="POST">
-                <!-- FormSubmit配置 -->
-                <input type="hidden" name="_subject" value="New Contact Form Submission">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://intime.myportfolio.com/contact">
-                
-                <div class="form-group">
-                    <label for="name">Name <span class="required">*</span></label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="tel" id="phone" name="phone">
-                </div>
-                
-                <div class="form-group">
-                    <label for="subject">Subject <span class="required">*</span></label>
-                    <input type="text" id="subject" name="subject" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Message <span class="required">*</span></label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                
-                <button type="submit">Send Message</button>
-                
-                <div class="success-message" id="successMessage">
-                    Thank you for your message! We will get back to you soon.
-                </div>
-                
-                <div class="error-message" id="errorMessage">
-                    There was an error sending your message. Please try again later.
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy;InTime Technology Co., Ltd. All rights reserved.</p>
-    </footer>
-
-    <div class="back-to-top" id="backToTop">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="18 15 12 9 6 15"></polyline>
-        </svg>
     </div>
 
     <script>
-        // Back to top button functionality
-        const backToTopButton = document.getElementById('backToTop');
-        const header = document.querySelector('.header');
-        let lastScrollY = window.pageYOffset;
-        
-        window.addEventListener('scroll', () => {
-            const currentScrollY = window.pageYOffset;
-            
-            // Back to top button visibility
-            if (currentScrollY > 300) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
-            
-            // Header visibility
-            if (currentScrollY > lastScrollY && currentScrollY > 50) {
-                // Scrolling down - hide header
-                header.classList.add('hidden');
-            } else if (currentScrollY < lastScrollY || currentScrollY <= 0) {
-                // Scrolling up or at top - show header
-                header.classList.remove('hidden');
-            }
-            
-            lastScrollY = currentScrollY;
-        });
-        
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });}
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav');
 
-        // Form submission
-        const contactForm = document.getElementById('contactForm');
-        const successMessage = document.getElementById('successMessage');
-        const errorMessage = document.getElementById('errorMessage');
-        
-        // 添加表單提交事件監聽器，用於顯示成功訊息
-        contactForm.addEventListener('submit', function(e) {
-            // 不阻止表單提交，讓FormSubmit處理
-            // 但我們可以在提交前顯示成功訊息
-            
-            // 顯示成功訊息
-            successMessage.style.display = 'block';
-            errorMessage.style.display = 'none';
-            
-            // 5秒後隱藏成功訊息（如果用戶還在頁面上）
-            setTimeout(() => {
-                if (successMessage) {
-                    successMessage.style.display = 'none';
-                }
-            }, 5000);
-            
-            // 不需要手動重置表單，因為頁面會重定向
-        });
-        
-        // 檢查URL參數，如果是從FormSubmit重定向回來的，顯示成功訊息
-        window.addEventListener('DOMContentLoaded', () => {
-            if (window.location.search.includes('_form_submit=success')) {
-                successMessage.style.display = 'block';
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                }, 5000);
-            }
+            menuToggle.addEventListener('click', function() {
+                nav.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+
+            // 確保視頻背景正確加載
+            const video = document.querySelector('.video-background');
+            video.play().catch(error => {
+                console.log('自動播放被阻止:', error);
+                // 可以在這裡添加一個播放按鈕作為備用
+            });
+
+
         });
     </script>
 </body>
