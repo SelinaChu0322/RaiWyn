@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#05c796",
+              "background-light": "#f5f8f8",
+              "background-dark": "#0f231e",
+            },
+            fontFamily: {
+              display: ["Space Grotesk"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- 修改 header 部分 -->
+<!-- 修改 header 部分的導航和語言選單 -->
+<header class="sticky top-0 z-50 w-full bg-background-light/80 backdrop-blur-sm dark:bg-background-dark/80">
+  <div class="mx-auto flex max-w-7xl items-center justify-between">
+    <!-- LOGO 靠右，移除特效只保留響應式設計 -->
+    <div class="flex items-center justify-end">
+      <img src="./InTime vn Logo.png" alt="InTime Logo" 
+           class="h-12 sm:h-16 md:h-20 lg:h-[6rem] 
+                  transition-all duration-300">
+    </div>
+
+    <!-- 語言切換按鈕部分保持不變 -->
+    <div class="flex items-center">
+      <div class="flex space-x-4">
+        <button onclick="changeLanguage('en')" class="flex items-center gap-2 p-1 rounded transition-all duration-300 hover:scale-110" id="enBtn">
+          <img src="./EN.PNG" alt="English" class="h-8 w-8 md:h-10 md:w-10 lg:h-[50px] lg:w-[50px]">
+          <span class="text-xs md:text-sm lg:text-base">EN</span>
+        </button>
+        <button onclick="changeLanguage('vi')" class="flex items-center gap-2 p-1 rounded transition-all duration-300 hover:scale-110" id="viBtn">
+          <img src="./VN.png" alt="Vietnamese" class="h-8 w-8 md:h-10 md:w-10 lg:h-[50px] lg:w-[50px]">
+          <span class="text-xs md:text-sm lg:text-base">VN</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- 修改 hero section，添加懸浮按鈕 -->
+<!-- 修改 hero section 背景圖片 -->
+<!-- 修改背景圖片位置 -->
+<section class="relative h-[80vh] w-full">
+  <main class="flex-1">
+    <section class="relative h-[70vh] min-h-[480px]">
+      <div class="absolute inset-0 bg-cover bg-center" style='background-image: url("./robot.png");'></div>
+      
+      <!-- 其餘部分保持不變 -->
+      <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-background-dark/30 to-transparent"></div>
+      <div class="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-center justify-center px-4 text-white sm:px-6 lg:px-8">
+        <h1 class="mb-4 text-4xl font-bold text-center md:text-5xl lg:text-6xl">Revolutionize Customer Engagement with AI Chatbots</h1>
+        <p class="mb-8 max-w-2xl text-lg text-center text-gray-200">Our AI-powered chatbots provide seamless, personalized customer experiences, driving satisfaction and efficiency.</p>
+        
+        <!-- 修改懸浮按鈕的響應式設計 -->
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mt-4">
+          <a href="#" class="px-3 py-2 sm:px-6 sm:py-3 text-sm sm:text-base text-white bg-primary/30 backdrop-blur-sm rounded-lg hover:bg-primary/40 transition-all duration-300 hover:-translate-y-1 whitespace-nowrap">About Us</a>
+          <a href="#" class="px-3 py-2 sm:px-6 sm:py-3 text-sm sm:text-base text-white bg-primary/30 backdrop-blur-sm rounded-lg hover:bg-primary/40 transition-all duration-300 hover:-translate-y-1 whitespace-nowrap">Solutions</a>
+          <a href="#" class="px-3 py-2 sm:px-6 sm:py-3 text-sm sm:text-base text-white bg-primary/30 backdrop-blur-sm rounded-lg hover:bg-primary/40 transition-all duration-300 hover:-translate-y-1 whitespace-nowrap">Showcase</a>
+          <a href="#" class="px-3 py-2 sm:px-6 sm:py-3 text-sm sm:text-base text-white bg-primary/30 backdrop-blur-sm rounded-lg hover:bg-primary/40 transition-all duration-300 hover:-translate-y-1 whitespace-nowrap">Pricing</a>
+        </div>
+      </div>
+    </section>
+</main>
+</section>
+
+<!-- 移除重複的文字區塊 -->
+<!-- 底部 CTA 區塊改為純文字 -->
+<section class="py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div class="text-center">
+  
+  <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">Key Features</h2>
+  <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">Our AI chatbots are equipped with advanced features to enhance customer interactions and streamline operations.</p>
+  </div>
+  <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+  <div class="flex flex-col items-center rounded-lg border border-gray-200/50 bg-background-light p-6 text-center shadow-lg transition-all hover:shadow-primary/20 dark:border-gray-700/50 dark:bg-background-dark dark:shadow-primary/10">
+  <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+  <span class="material-symbols-outlined text-3xl">chat</span>
+  </div>
+  <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white">Natural Language Processing</h3>
+  <p class="text-sm text-gray-600 dark:text-gray-400">Understand and respond to customer queries with human-like accuracy.</p>
+  </div>
+  <div class="flex flex-col items-center rounded-lg border border-gray-200/50 bg-background-light p-6 text-center shadow-lg transition-all hover:shadow-primary/20 dark:border-gray-700/50 dark:bg-background-dark dark:shadow-primary/10">
+  <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+  <span class="material-symbols-outlined text-3xl">settings_applications</span>
+  </div>
+  <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white">Seamless Integration</h3>
+  <p class="text-sm text-gray-600 dark:text-gray-400">Integrate with existing systems and platforms for a unified experience.</p>
+  </div>
+  <div class="flex flex-col items-center rounded-lg border border-gray-200/50 bg-background-light p-6 text-center shadow-lg transition-all hover:shadow-primary/20 dark:border-gray-700/50 dark:bg-background-dark dark:shadow-primary/10">
+  <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+  <span class="material-symbols-outlined text-3xl">groups</span>
+  </div>
+  <h3 class="mb-2 text-lg font-bold text-gray-900 dark:text-white">Scalable Solutions</h3>
+  <p class="text-sm text-gray-600 dark:text-gray-400">Handle increasing customer interactions without compromising performance.</p>
+  </div>
+  </div>
+  </div>
+  </section>
+  <section class="bg-background-light py-16 dark:bg-background-dark/50 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div class="text-center">
+  <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">Use Cases</h2>
+  <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">Explore how our AI chatbots can be applied across various industries and scenarios.</p>
+  </div>
+  <div class="mt-12 grid gap-8 md:grid-cols-3">
+  <div class="overflow-hidden rounded-lg bg-background-light shadow-lg dark:bg-background-dark">
+  <div class="h-48 w-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDysSTzCnka3QuEjZLnBqwpjkVEt1Oud-pnlCSYCFIX4P4O3ksYkoUD00onnUsmL5Vx8vlsW91ffsmbLK_gfgJPK828C-mzALoNaWq2LJ2HImWy2bTF_o-Xrh8IY05bYWvljkvsMHIqJ4VbXkh5M0EUTrMVJ7VVXcUaTMRTNEDaNqt8iMx4tq9zN3Ib3jtXfzNoa8U9LHf7-pIK2m6UHX7ShExHYMI7iJvF2DDvyQ0vcBrpPBnjG6XAMvEPXJKtVNEJTT_MTDyHuA");'></div>
+  <div class="p-6">
+  <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Customer Support</h3>
+  <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Provide instant support, answer FAQs, and resolve issues efficiently.</p>
+  </div>
+  </div>
+  <div class="overflow-hidden rounded-lg bg-background-light shadow-lg dark:bg-background-dark">
+  <div class="h-48 w-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB1mFqs9QXo11tFsqwBX3FASht3JT1IK3V7Of88xLSiGgYLqbWK0VvjDkaj18VotwKOZ2r5sON8cR78T7eVntlHYoHywe1Fp6qgo3dFMrkkRdWT085ADnHO1F50AqEARBZppRkd65VnibSr0ytpI5Pr6KxNjl9qqgCOPXJnShSakHhqcdu1dcCyDf1fgGbtM-4pRojogR4VgRU5X7TaP9UvjoUpjT0DHkZORi08-qSD9_xUMHaOmGmk6LfgAn1o0TnVjdX3Jg6TMQ");'></div>
+  <div class="p-6">
+  <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Lead Generation</h3>
+  <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Qualify leads, gather information, and schedule appointments automatically.</p>
+  </div>
+  </div>
+  <div class="overflow-hidden rounded-lg bg-background-light shadow-lg dark:bg-background-dark">
+  <div class="h-48 w-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGFroduB6lD3NIU_x_ZEXVwflcVz7Q5eNMkLLKvFamnrU1WBezVhwuGPOGpEe3hFKtI75b0bgXqGPeB7sB9vSU69GRpkVru1NmXRytfFNoBYsRmaJ9X5E8SDpO167mnGBWevhx-_hStgor2YA635lvJB2Ssixt9q4eXgYxzVv2ZtUSEmulMSnzfl4UyGIQyX67BqLYNQsiD7_crMveK0BjmOSTjkiZPbGPh9hQcBYWVd90yUJgJUvLXVAuUBEBjJeKUX2BA3o3lQ");'></div>
+  <div class="p-6">
+  <h3 class="text-lg font-semibold text-gray-900 dark:text-white">E-commerce</h3>
+  <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Assist customers with product selection, order tracking, and personalized recommendations.</p>
+  </div>
+  </div>
+  </div>
+  </div>
+  </section>
+  <section class="py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <h2 class="mb-12 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">Client Testimonials</h2>
+  <div class="grid gap-8 lg:grid-cols-3">
+  <div class="flex flex-col items-center rounded-lg bg-background-light p-6 text-center dark:bg-background-dark/50">
+  <div class="mb-4 h-24 w-24 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC7usMdB_U53eFIgAwp4EM9ZL3sfz8vBl2mBn6tdaqchIMjdbC2SWAflUYVvaBjdYO8S_gfOTsFG-bwGfZukDqqIZRuNAR3agIfxNwW5WgDg5_vfRsMsIDNWadrIsKopfWn4kYEH1jsXb9ayG1eUovCzFgNqReOgp9TI-WP9_8z9PbHLvaWQmI8QGh5c8L5fs3HwxQIHUMCPwQpQQ9kburT7oC5-BAh8en5W5SGmbAMVsIGV1iuGxK_Nk-bu38Tc29FuU1Fh92iCA");'></div>
+  <blockquote class="italic text-gray-600 dark:text-gray-300">Our customer satisfaction scores have increased by 25% since implementing the AI chatbot.</blockquote>
+  <p class="mt-4 font-semibold text-gray-900 dark:text-white">Sarah Chen</p>
+  <p class="text-sm text-gray-500 dark:text-gray-400">Customer Service Manager</p>
+  </div>
+  <div class="flex flex-col items-center rounded-lg bg-background-light p-6 text-center dark:bg-background-dark/50">
+  <div class="mb-4 h-24 w-24 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBjs3RaRGUaLyV8jSgd1cAnBAIkKsT-oR_yV2TrLZcqDBFkvTd-3KntMC54lPeL2PLzywlwd5T_YctsfclMyNJHMR3t1k2i-QBDt4mYCNHLRN4NbCtqyhOorFDcVP2CxTT_f6cF3aEkeXHELyRWbHINdPl2J9dnCksNBBjB_nAP0PE_l4oBwzZCg2k3yxYWFWL6IxKBUiv1QYQ_FQ9N8whSPKBaXtVKAcalf1vuM31D8IfJV7Xos9JxDiwVmGlpcriE8LgeTnuFJg");'></div>
+  <blockquote class="italic text-gray-600 dark:text-gray-300">The chatbot has significantly reduced our support ticket volume, allowing our team to focus on complex issues.</blockquote>
+  <p class="mt-4 font-semibold text-gray-900 dark:text-white">David Lee</p>
+  <p class="text-sm text-gray-500 dark:text-gray-400">Operations Director</p>
+  </div>
+  <div class="flex flex-col items-center rounded-lg bg-background-light p-6 text-center dark:bg-background-dark/50">
+  <div class="mb-4 h-24 w-24 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAygDfDV_p5wZ9GTpHwGwSPMYVaoWToXkTMmLaUClUxnpl6m4iPEdi9vePhSJa7AkRY1kFwsl9IFUtTHaIQa0UAEjocA494t3ga4SaQgli8M9kSnpkHPLF4YY22nROIa40U8mreq3Dztoe1AENEei_2i1zfxCf6tVXOMdFgekL_0yOLNjp3XOeoGWFP9UNqt1BKRX9BdRJBN4kPte-5qrajMRIt_4ePQHKSDzTsGAxuomI8Drgwfk7-N01QzCocxssQYCypWEtrZQ");'></div>
+  <blockquote class="italic text-gray-600 dark:text-gray-300">We've seen a noticeable improvement in lead generation and conversion rates.</blockquote>
+  <p class="mt-4 font-semibold text-gray-900 dark:text-white">Emily Wong</p>
+  <p class="text-sm text-gray-500 dark:text-gray-400">Marketing Lead</p>
+  </div>
+  </div>
+  </div>
+  </section>
+  <section class="bg-primary/10 py-16 dark:bg-primary/20 sm:py-24">
+  <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+  <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">Ready to Transform Your Customer Engagement?</h2>
+  <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">Experience the power of AI chatbots firsthand. Request a demo today and see how our solutions can benefit your business.</p>
+  <div class="mt-8">
+  <button class="rounded-lg bg-primary px-8 py-3 text-base font-bold text-white transition-transform hover:scale-105">Request a Demo</button>
+  </div>
+  </div>
+  </section>
+  </main>
+  <footer class="bg-background-light dark:bg-background-dark/50">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+  <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
+  <div class="flex justify-center gap-6 md:order-2">
+      <!-- Facebook 圖標 -->
+      <a class="text-gray-400 hover:text-primary dark:text-gray-500 dark:hover:text-primary flex items-center gap-2" href="#">
+        <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        <span>FB</span>
+      </a>
+      <!-- Instagram 圖標 -->
+      <a class="text-gray-400 hover:text-primary dark:text-gray-500 dark:hover:text-primary flex items-center gap-2" href="#">
+        <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.4 5.6 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.6 18.4 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8a1.25 1.25 0 0 1-1.25-1.25a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3"/>
+        </svg>
+        <span>IG</span>
+      </a>
+
+    </div>
+    <div class="flex flex-wrap justify-center gap-6 md:order-1">
+      <a class="text-sm text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary flex items-center gap-2 flex-shrink-0" href="mailto:richard.l.c.yang@gmail.com">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+        richard.l.c.yang@gmail.com
+      </a>
+      <a class="text-sm text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary flex items-center gap-2 flex-shrink-0" href="tel:+84-978-469-953">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        +84 978469953
+      </a>
+      <a class="group text-sm text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary flex items-center gap-2 flex-shrink-0" href="http://zalo.me/2273987067330697149?src=qr&amp;f=2&amp;utm_src=zoa-cms" target="_blank">
+        <div class="flex items-center justify-center h-10 w-10 rounded-lg transition-colors duration-300 group-hover:bg-primary/80">
+          <img src="./Zalo.png" alt="Zalo" class="h-9 w-9">
+        </div>
+        <span class="group-hover:text-primary transition-colors duration-300">InTime official account</span>
+      </a>
+    </div>
+    </div>
+    <div class="mt-8 text-center text-sm text-gray-400 md:mt-6">
+      <p>© 2025 InTime Co. All rights reserved.</p>
+    </div>
+  </div>
+  </footer>
+  </div>
+  
+  <!-- TOP 按鈕 -->
+  <button id="topButton" 
+          class="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 
+                 bg-primary text-white 
+                 w-12 h-12 sm:w-14 sm:h-14
+                 flex items-center justify-center
+                 rounded-full shadow-lg 
+                 opacity-0 invisible 
+                 transition-all duration-300 
+                 hover:bg-primary/80 hover:scale-110 hover:shadow-primary/30
+                 z-50">
+    <span class="text-sm sm:text-base font-semibold">TOP</span>
+  </button>
+
+  <!-- JavaScript 引入 -->
+  <script src="./js/translations.js"></script>
+  <script src="./js/main.js"></script>
+  </body>
+</html>
+<button id="topButton" 
+          class="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 
+                 bg-primary text-white 
+                 px-4 py-2 sm:px-6 sm:py-3 
+                 rounded-full shadow-lg 
+                 opacity-0 invisible 
+                 transition-all duration-300 
+                 hover:bg-primary/80 hover:scale-110 
+                 z-50">
+    <span class="text-sm sm:text-base font-semibold">TOP</span>
+  </button>
+  </footer>
+  </div>
+  
+  </body></html>
+  
+  <!-- 原有的 JavaScript 代碼保持不變 -->
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.classList.toggle('translate-x-full');
+  }
+</script>
+
+<!-- 添加語言切換的 JavaScript -->
+<script>
+  let currentLang = 'en'; // 預設英文
+  const enBtn = document.getElementById('enBtn');
+  const viBtn = document.getElementById('viBtn');
+
+  function updateLanguageButtons() {
+    enBtn.style.backgroundColor = currentLang === 'en' ? 'rgba(250, 204, 21, 0.2)' : 'transparent';
+    viBtn.style.backgroundColor = currentLang === 'vi' ? 'rgba(250, 204, 21, 0.2)' : 'transparent';
+  }
+
+  function changeLanguage(lang) {
+    currentLang = lang;
+    updateLanguageButtons();
+    
+    if (lang === 'vi') {
+      translateToVietnamese();
+    } else {
+      translateToEnglish();
+    }
+  }
+
+  // 初始化按鈕狀態
+  updateLanguageButtons();
+</script>
+
+<!-- 更新翻譯相關的 JavaScript -->
+<script>
+  const translations = {
+    vi: {
+      // 標題和副標題
+      'Revolutionize Customer Engagement with AI Chatbots': 'Cách Mạng Hóa Tương Tác Khách Hàng với Chatbot AI',
+      'Our AI-powered chatbots provide seamless, personalized customer experiences': 'Chatbot AI của chúng tôi cung cấp trải nghiệm khách hàng liền mạch và cá nhân hóa',
+      
+      // 導航按鈕
+      'About Us': 'Về Chúng Tôi',
+      'Solutions': 'Giải Pháp',
+      'Showcase': 'Trưng Bày',
+      'Pricing': 'Báo Giá',
+      
+      // 功能區塊
+      'Key Features': 'Tính Năng Chính',
+      'Natural Language Processing': 'Xử Lý Ngôn Ngữ Tự Nhiên',
+      'Seamless Integration': 'Tích Hợp Liền Mạch',
+      'Scalable Solutions': 'Giải Pháp Có Thể Mở Rộng',
+      
+      // 使用案例
+      'Use Cases': 'Trường Hợp Sử Dụng',
+      'Customer Support': 'Hỗ Trợ Khách Hàng',
+      'Lead Generation': 'Tạo Khách Hàng Tiềm Năng',
+      'E-commerce': 'Thương Mại Điện Tử'
+    }
+  };
+
+  function translateToVietnamese() {
+    // 獲取所有需要翻譯的元素
+    document.querySelectorAll('[data-translate]').forEach(element => {
+      const key = element.getAttribute('data-translate');
+      if (translations.vi[key]) {
+        element.textContent = translations.vi[key];
+      }
+    });
+
+    // 直接翻譯特定元素
+    const elements = document.querySelectorAll('h1, h2, h3, p, a, button');
+    elements.forEach(element => {
+      const originalText = element.textContent.trim();
+      if (translations.vi[originalText]) {
+        element.textContent = translations.vi[originalText];
+      }
+    });
+  }
+
+  function translateToEnglish() {
+    // 重新加載頁面恢復英文
+    location.reload();
+  }
+</script>
+
+<!-- 其他原有的 script 保持不变 -->
