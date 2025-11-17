@@ -197,18 +197,26 @@ function updateLanguageButtonStyles(lang) {
     if (lang === 'en') {
       enBtn.classList.add('selected');
       enBtn.classList.remove('hover:bg-yellow-200/20');
+      enBtn.classList.remove('hover:scale-110');
+      enBtn.classList.add('bg-yellow-200/20');
     } else {
       enBtn.classList.remove('selected');
       enBtn.classList.add('hover:bg-yellow-200/20');
+      enBtn.classList.add('hover:scale-110');
+      enBtn.classList.remove('bg-yellow-200/20');
     }
   }
   if (viBtn) {
     if (lang === 'vi') {
       viBtn.classList.add('selected');
       viBtn.classList.remove('hover:bg-yellow-200/20');
+      viBtn.classList.remove('hover:scale-110');
+      viBtn.classList.add('bg-yellow-200/20');
     } else {
       viBtn.classList.remove('selected');
       viBtn.classList.add('hover:bg-yellow-200/20');
+      viBtn.classList.add('hover:scale-110');
+      viBtn.classList.remove('bg-yellow-200/20');
     }
   }
 }

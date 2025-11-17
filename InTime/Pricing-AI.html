@@ -43,6 +43,11 @@
             border-radius: 0.75rem; /* rounded-xl */
             position: relative;
             overflow: hidden;
+        }
+        .selected {
+            background-color: rgba(254, 240, 138, 0.2); /* Tailwind yellow-200 with 20% opacity */
+            border-radius: 0.25rem; /* Tailwind rounded */
+        }
             padding: 1px; /* To make room for the inner content */
         }
         .gradient-border::before {
@@ -108,16 +113,16 @@
 
         /* Hover effect for all buttons */
         .plan-button:not(.selected):hover {
-            background-color: rgba(255, 255, 153, 0.1); /* 非選定狀態下的懸停效果 */
+            /* background-color: rgba(255, 255, 153, 0.1); /* 非選定狀態下的懸停效果 */ */
         }
 
         /* Selected button style */
         .plan-button.selected {
-            background-color: rgba(255, 255, 153, 0.3); /* 半透明淡黃色 */
-            border: 1px solid rgba(255, 255, 153, 0.5); /* 淺黃色邊框 */
+            /* background-color: rgba(255, 255, 153, 0.3); /* 半透明淡黃色 */ */
+            border: 1px solid transparent; /* 淺黃色邊框 */
         }
         .plan-button.selected:hover {
-            background-color: rgba(255, 255, 153, 0.4); /* 選取狀態下懸停時略深的黃色 */
+            /* background-color: rgba(255, 255, 153, 0.4); /* 選取狀態下懸停時略深的黃色 */ */
         }
         .gradient-border {
             border: 1px solid transparent;
@@ -191,18 +196,18 @@
                                 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
                                 pointer-events-none group-hover:pointer-events-auto">
                         <a href="./Pricing-AI.html" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
-                                                  transition-all duration-200
-                                                  hover:bg-primary hover:text-white
-                                                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
-                                                  active:scale-[0.98]">
-                            AI
+                                    transition-all duration-200
+                                    hover:bg-primary hover:text-white
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                    active:scale-[0.98]">
+                            <strong>AI</strong>
                         </a>
                         <a href="./Pricing.html" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
-                                       transition-all duration-200
-                                       hover:bg-primary hover:text-white
-                                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
-                                       active:scale-[0.98]">
-                            IOT
+                                    transition-all duration-200
+                                    hover:bg-primary hover:text-white
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                    active:scale-[0.98]">
+                            <strong>IOT</strong>
                         </a>
                     </div>
                 </div>
@@ -220,18 +225,18 @@
                                 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
                                 pointer-events-none group-hover:pointer-events-auto">
                         <a href="./index.html#ai-feature" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
-                                                  transition-all duration-200
-                                                  hover:bg-primary hover:text-white
-                                                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
-                                                  active:scale-[0.98]">
-                            AI
+                                    transition-all duration-200
+                                    hover:bg-primary hover:text-white
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                    active:scale-[0.98]">
+                            <strong>AI</strong>
                         </a>
                         <a href="./index.html#iot-feature" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
-                                                   transition-all duration-200
-                                                   hover:bg-primary hover:text-white
-                                                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
-                                                   active:scale-[0.98]">
-                            IOT
+                                    transition-all duration-200
+                                    hover:bg-primary hover:text-white
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                    active:scale-[0.98]">
+                            <strong>IOT</strong>
                         </a>
                     </div>
                 </div>
@@ -248,16 +253,19 @@
                                 opacity-0 invisible translate-y-2 transition-all duration-200
                                 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
                                 pointer-events-none group-hover:pointer-events-auto">
-                        <a href="./Pricing-AI.html" class="block px-4 py-2 rounded-md text-primary
-                                                  transition-all duration-200 pointer-events-none">
-                            AI
+                        <a href="./Pricing-AI.html" class="block px-4 py-2 rounded-md text-primary pointer-events-none font-bold
+                                    transition-all duration-200
+                                    hover:bg-primary hover:text-white
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                    active:scale-[0.98]">
+                            <strong>AI</strong>
                         </a>
                         <a href="./Pricing.html" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
-                                                   transition-all duration-200
-                                                   hover:bg-primary hover:text-white
-                                                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
-                                                   active:scale-[0.98]">
-                            IOT
+                                    transition-all duration-200
+                                    hover:bg-primary hover:text-white
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                    active:scale-[0.98]">
+                            <strong>IOT</strong>
                         </a>
                     </div>
                 </div>
@@ -273,7 +281,7 @@
             <div class="flex items-center">
                 <div class="flex space-x-4">
                     <button class="flex items-center gap-2 p-1 rounded transition-all duration-300 hover:scale-110 hover:bg-yellow-200/20 plan-button" id="enBtn" onclick="changeLanguage('en')">
-                        <img src="./EN.PNG" alt="English" class="h-8 w-8 md:h-10 md:w-10 lg:h-[50px] lg:w-[50px]">
+                        <img src="EN.png" alt="English" class="h-8 w-8 md:h-10 md:w-10 lg:h-[50px] lg:w-[50px]">
                         <span class="text-xs md:text-sm lg:text-base">EN</span>
                     </button>
                     <button class="flex items-center gap-2 p-1 rounded transition-all duration-300 hover:scale-110 hover:bg-yellow-200/20 plan-button" id="viBtn" onclick="changeLanguage('vi')">
@@ -296,47 +304,83 @@
             </button>
         </div>
         <nav class="flex flex-col items-center space-y-6 py-8">
-            <a class="text-2xl font-bold text-gray-200 hover:text-primary" href="index.html" data-i18n="Home">Home</a>
-            <a class="text-2xl font-bold text-gray-200 hover:text-primary" href="#" data-i18n="About Us">About Us</a>
+            <a class="text-2xl font-bold text-gray-200 hover:text-primary" href="index.html">Home</a>
+            <a class="text-2xl font-bold text-gray-200 hover:text-primary" href="#">About Us</a>
             
             <!-- Solutions Dropdown for Mobile -->
             <div class="relative">
-                <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-200 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" data-i18n="Solutions" aria-expanded="false" aria-controls="mobile-solutions-submenu">
+                <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-200 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" aria-expanded="false" aria-controls="mobile-solutions-submenu">
                     Solutions
                     <svg class="h-6 w-6 transform transition-transform duration-200" data-icon="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </a>
                 <div class="overflow-hidden transition-all duration-300 ease-in-out" id="mobile-solutions-submenu" style="max-height: 0px;">
                     <div class="flex flex-col items-center space-y-4 mt-4">
-                        <a href="./Pricing-AI.html" class="text-xl text-gray-300 hover:text-primary" data-i18n="AI">AI</a>
-                        <a href="./Pricing.html" class="text-xl text-gray-300 hover:text-primary" data-i18n="IOT">IOT</a>
+                        <a href="./Pricing-AI.html" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
+                                    transition-all duration-200
+                                    hover:bg-primary hover:text-white
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                    active:scale-[0.98]">
+                            <strong>AI</strong>
+                        </a>
+                        <a href="./Pricing.html" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
+                                    transition-all duration-200
+                                    hover:bg-primary hover:text-white
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                    active:scale-[0.98]">
+                            <strong>IOT</strong>
+                        </a>
                     </div>
                 </div>
             </div>
 
             <!-- Showcase Dropdown for Mobile -->
             <div class="relative">
-                <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-200 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" data-i18n="Showcase" aria-expanded="false" aria-controls="mobile-showcase-submenu">
+                <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-200 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" aria-expanded="false" aria-controls="mobile-showcase-submenu">
                     Showcase
                     <svg class="h-6 w-6 transform transition-transform duration-200" data-icon="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </a>
                 <div class="overflow-hidden transition-all duration-300 ease-in-out" id="mobile-showcase-submenu" style="max-height: 0px;">
                     <div class="flex flex-col items-center space-y-4 mt-4">
-                        <a href="./index.html#ai-feature" class="text-xl text-gray-300 hover:text-primary" data-i18n="AI">AI</a>
-                        <a href="./index.html#iot-feature" class="text-xl text-gray-300 hover:text-primary" data-i18n="IOT">IOT</a>
+                        <a href="./index.html#ai-feature" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
+                                    transition-all duration-200
+                                    hover:bg-primary hover:text-white
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                    active:scale-[0.98]">
+                            <strong>AI</strong>
+                        </a>
+                        <a href="./index.html#iot-feature" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
+                                    transition-all duration-200
+                                    hover:bg-primary hover:text-white
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                    active:scale-[0.98]">
+                            <strong>IOT</strong>
+                        </a>
                     </div>
                 </div>
             </div>
 
             <!-- Pricing Dropdown for Mobile -->
             <div class="relative">
-                <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-200 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" data-i18n="Pricing" aria-expanded="false" aria-controls="mobile-pricing-submenu">
+                <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-200 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" aria-expanded="false" aria-controls="mobile-pricing-submenu">
                     Pricing
                     <svg class="h-6 w-6 transform transition-transform duration-200" data-icon="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </a>
                 <div class="overflow-hidden transition-all duration-300 ease-in-out" id="mobile-pricing-submenu" style="max-height: 0px;">
                     <div class="flex flex-col items-center space-y-4 mt-4">
-                        <a href="./Pricing-AI.html" class="text-xl text-primary pointer-events-none" data-i18n="AI">AI</a>
-                        <a href="./Pricing.html" class="text-xl text-gray-300 hover:text-primary" data-i18n="IOT">IOT</a>
+                        <a href="./Pricing-AI.html" class="block px-4 py-2 rounded-md text-primary pointer-events-none font-bold
+                                    transition-all duration-200
+                                    hover:bg-primary hover:text-white
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                    active:scale-[0.98]">
+                            <strong>AI</strong>
+                        </a>
+                        <a href="./Pricing.html" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
+                                    transition-all duration-200
+                                    hover:bg-primary hover:text-white
+                                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                    active:scale-[0.98]">
+                            <strong>IOT</strong>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -585,27 +629,49 @@
     </button>
 
     <!-- 引入 JavaScript 檔案 -->
-    <script src="./js/translations.js"></script>
-    <script src="./js/main.js"></script>
+    <script>
+        // 語言切換功能
+        function changeLanguage(lang) {
+            localStorage.setItem('selectedLanguage', lang);
+            applyTranslations(lang);
+        }
+
+        // 應用翻譯
+        function applyTranslations(lang) {
+            if (lang === 'vi') {
+                translateToVietnamese();
+            } else {
+                translateToEnglish();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const mostPopularPlan = document.querySelector('.glow-popular');
+            if (mostPopularPlan) {
+                const parentCard = mostPopularPlan.closest('.gradient-border');
+                if (parentCard) {
+                    parentCard.classList.add('selected-plan');
+                }
+            }
+
+            // 頁面加載時應用上次選擇的語言或默認英文
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+            applyTranslations(savedLanguage);
+            updateLanguageButtonStyles(savedLanguage);
+        });
+    </script>
     <script>
         function changeLanguage(lang) {
-            const enButton = document.getElementById('enBtn');
-            const viButton = document.getElementById('viBtn');
-
-            if (lang === 'en') {
-                enButton.classList.add('selected');
-                viButton.classList.remove('selected');
-            } else if (lang === 'vi') {
-                viButton.classList.add('selected');
-                enButton.classList.remove('selected');
-            }
+            // 這裡不需要額外處理 class，因為 translations.js 中的 updateLanguageButtonStyles 會處理
+            // 確保 translations.js 中的 updateLanguageButtonStyles 函數被調用
+            // 並且更新 localStorage 中的語言設置
+            localStorage.setItem('lang', lang);
+            updateLanguageButtonStyles(lang);
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             const enButton = document.getElementById('enBtn');
-            if (enButton) {
-                enButton.classList.add('selected');
-            }
+
 
             // Add event listeners to the language buttons
             document.getElementById('enBtn').addEventListener('click', function() {
@@ -614,6 +680,10 @@
             document.getElementById('viBtn').addEventListener('click', function() {
                 changeLanguage('vi');
             });
+
+            // 初始化語言按鈕樣式
+            const currentLang = localStorage.getItem('lang') || 'en';
+            updateLanguageButtonStyles(currentLang);
 
             // --- 新增：價格區塊點擊發光效果 ---
             const pricingCards = document.querySelectorAll('.gradient-border');
