@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InTime</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .circle-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vmin;
+            height: 80vmin;
+            z-index: 2;
+        }
+
+        .circle {
+            width: 100%;
+            height: 100%;
+            border: 3px solid #FFFFFF;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .btn-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vmin;
+            height: 80vmin;
+            z-index: 3;
+        }
+
+        <style>
+            .floating-btn {
+                position: fixed;
+                padding: 15px 30px;
+                background-color: rgba(135, 206, 250, 0.2);
+                color: #FFE168;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-radius: 15px;
+                cursor: pointer;
+                font-weight: 700;
+                font-size: 16px;
+                white-space: nowrap;
+                backdrop-filter: blur(5px);
+                z-index: 10;
+            }
+
+            #about-us {
+                top: 5%;
+                left: 5%;
+            }
+
+            #solution {
+                top: 5%;
+                right: 5%;
+            }
+
+            #pricing {
+                bottom: 5%;
+                left: 5%;
+            }
+
+            #industries {
+                bottom: 5%;
+                right: 5%;
+            }
+
+            @media (max-width: 768px) {
+                .floating-btn {
+                    padding: 12px 24px;
+                    font-size: 14px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .floating-btn {
+                    padding: 10px 20px;
+                    font-size: 12px;
+                }
+            }
+        </style>
+        .floating-btn:hover {
+            transform: scale(1.1);
+            background-color: rgba(135, 206, 250, 0.3);
+        }
+
+        #about-us {
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg) translateX(40vmin) rotate(45deg);
+        }
+
+        #solution {
+            top: 50%;
+            right: 0;
+            transform: translate(50%, -50%) rotate(45deg) translateX(40vmin) rotate(-45deg);
+        }
+
+        #pricing {
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 50%) rotate(45deg) translateX(40vmin) rotate(-45deg);
+        }
+
+        #industries {
+            top: 50%;
+            left: 0;
+            transform: translate(-50%, -50%) rotate(-45deg) translateX(40vmin) rotate(45deg);
+        }
+
+        @media (max-width: 768px) {
+            .circle-container,
+            .btn-container {
+                width: 70vmin;
+                height: 70vmin;
+            }
+
+            .floating-btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+
+            #about-us { transform: translate(-50%, -50%) rotate(-45deg) translateX(35vmin) rotate(45deg); }
+            #solution { transform: translate(50%, -50%) rotate(45deg) translateX(35vmin) rotate(-45deg); }
+            #pricing { transform: translate(-50%, 50%) rotate(45deg) translateX(35vmin) rotate(-45deg); }
+            #industries { transform: translate(-50%, -50%) rotate(-45deg) translateX(35vmin) rotate(45deg); }
+        }
+
+        @media (max-width: 480px) {
+            .circle-container,
+            .btn-container {
+                width: 60vmin;
+                height: 60vmin;
+            }
+
+            .floating-btn {
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+
+            #about-us { transform: translate(-50%, -50%) rotate(-45deg) translateX(30vmin) rotate(45deg); }
+            #solution { transform: translate(50%, -50%) rotate(45deg) translateX(30vmin) rotate(-45deg); }
+            #pricing { transform: translate(-50%, 50%) rotate(45deg) translateX(30vmin) rotate(-45deg); }
+            #industries { transform: translate(-50%, -50%) rotate(-45deg) translateX(30vmin) rotate(45deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay loop muted playsinline>
+            <source src="InTime.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="circle-container">
+        <div class="circle"></div>
+    </div>
+
+    <div class="btn-container">
+        <button class="floating-btn" id="about-us">About Us</button>
+        <button class="floating-btn" id="solution">Solution</button>
+        <button class="floating-btn" id="pricing">Pricing</button>
+        <button class="floating-btn" id="industries">Industries</button>
+    </div>
+</body>
+</html>

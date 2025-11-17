@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Pricing - InTime AI Chatbot Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#05c796",
+              "background-light": "#f5f8f8",
+              "background-dark": "#0f231e",
+            },
+            fontFamily: {
+              display: ["Space Grotesk"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+        /* Custom styles for the dark, futuristic look */
+        body {
+            /* 移除此行，讓 Tailwind CSS 類別 bg-background-light dark:bg-background-dark 生效 */
+            /* font-family: 'Inter', sans-serif; */ /* 移除或註釋掉這行 */
+        }
+        .card-bg {
+            /* Subtle dark card background */
+            background-color: #161b22;
+        }
+        .gradient-border {
+            /* Inspired by the subtle gradients/borders on the reference site */
+            border-radius: 0.75rem; /* rounded-xl */
+            position: relative;
+            overflow: hidden;
+            padding: 1px; /* To make room for the inner content */
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 0;
+            margin: -1px; /* Expand the gradient to cover the full card area */
+            background: linear-gradient(135deg, #0f3d6b, #1e90ff, #38bdf8); /* Blue gradient */
+            opacity: 0; /* 預設為透明 */
+            transition: opacity 0.3s ease; /* 添加過渡效果 */
+            border-radius: inherit;
+        }
+        .gradient-border.selected-plan::before {
+            opacity: 0.4; /* 僅在卡片被選中時顯示藍色漸變邊框 */
+        }
+        .gradient-border-content {
+            position: relative;
+            z-index: 10;
+            background-color: #161b22;
+            border-radius: inherit;
+        }
+        /* Style for the checkmark */
+        .feature-item::before {
+            content: "✔";
+            color: #38bdf8; /* Tailwind blue-400 equivalent */
+            margin-right: 0.5rem;
+        }
+
+
+    }
+  ]
+}
+
+        /* Glowing effect for Most Popular tag */
+        .glow-popular {
+            box-shadow: 0 0 8px rgba(255, 105, 180, 0.8), 0 0 15px rgba(255, 105, 180, 0.6), 0 0 20px rgba(255, 105, 180, 0.4);
+            animation: glow 1.5s infinite alternate;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 移除 .glow-popular::before 規則，因為它產生了白光旋轉特效 */
+        /* 移除 @keyframes twinkle 規則，因為它定義了白光旋轉動畫 */
+
+        @keyframes glow {
+            /* 調整發光效果，使其更明顯 */
+            from { box-shadow: 0 0 15px rgba(255, 105, 180, 0.9), 0 0 25px rgba(255, 105, 180, 0.7), 0 0 35px rgba(255, 105, 180, 0.5); }
+            to { box-shadow: 0 0 20px rgba(255, 105, 180, 1), 0 0 30px rgba(255, 105, 180, 0.9), 0 0 45px rgba(255, 105, 180, 0.7); }
+        }
+
+        /* Default button style */
+        .plan-button {
+            background-color: transparent;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease; /* Smooth transition for button background */
+        }
+
+        /* Hover effect for all buttons */
+        .plan-button:not(.selected):hover {
+            background-color: rgba(255, 255, 153, 0.1); /* 非選定狀態下的懸停效果 */
+        }
+
+        /* Selected button style */
+        .plan-button.selected {
+            background-color: rgba(255, 255, 153, 0.3); /* 半透明淡黃色 */
+            border: 1px solid rgba(255, 255, 153, 0.5); /* 淺黃色邊框 */
+        }
+        .plan-button.selected:hover {
+            background-color: rgba(255, 255, 153, 0.4); /* 選取狀態下懸停時略深的黃色 */
+        }
+        .gradient-border {
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .gradient-border.selected-plan {
+            border: 2px solid #38bdf8; /* 加粗的藍色邊框 */
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.8), 0 0 15px rgba(56, 189, 248, 0.6); /* 藍色發光效果增強 */
+            z-index: 20;
+            animation: pulse-blue 1.5s infinite alternate; /* 添加動態發光動畫 */
+        }
+
+        @keyframes pulse-blue {
+            from { box-shadow: 0 0 15px rgba(56, 189, 248, 0.7), 0 0 25px rgba(56, 189, 248, 0.5); }
+            to { box-shadow: 0 0 25px rgba(56, 189, 248, 1), 0 0 40px rgba(56, 189, 248, 0.8); }
+        }
+        .gradient-border-content.selected-inner-content {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mostPopularPlan = document.querySelector('.glow-popular');
+            if (mostPopularPlan) {
+                const parentCard = mostPopularPlan.closest('.gradient-border');
+                if (parentCard) {
+                    parentCard.classList.add('selected-plan');
+                }
+            }
+        });
+    </script>
+
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+    <script src="./js/translations.js"></script>
+    <script src="./js/main.js"></script>
+    <header class="sticky top-0 z-50 w-full bg-background-light/80 backdrop-blur-sm dark:bg-background-dark/80">
+        <div class="mx-auto flex max-w-7xl items-center justify-between">
+            <!-- LOGO 靠右，移除特效只保留響應式設計 -->
+            <div class="flex items-center justify-end">
+                <img src="./InTime vn Logo.png" alt="InTime Logo" 
+                     class="h-12 sm:h-16 md:h-20 lg:h-[6rem] transition-all duration-300">
+            </div>
+
+            <!-- 新增：導覽欄（含下拉選單） -->
+            <nav class="hidden md:flex items-center gap-6 mx-auto">
+                <!-- Home：保留文字顏色，移除背景與圓角框 -->
+                <a href="index.html"
+                   class="text-2xl font-bold text-gray-700 dark:text-gray-300 px-3 py-1 rounded transition-all duration-200
+                          hover:text-primary hover:bg-primary/10 hover:ring-2 hover:ring-primary/50 hover:shadow-lg hover:shadow-primary/20">
+                    Home
+                </a>
+
+                <!-- About Us：移入有變色與懸浮框 -->
+                <a href="#"
+                   class="text-2xl font-bold text-gray-700 dark:text-gray-300 px-3 py-1 rounded transition-all duration-200
+                          hover:text-primary hover:bg-primary/10 hover:ring-2 hover:ring-primary/50 hover:shadow-lg hover:shadow-primary/20">
+                    About Us
+                </a>
+
+                <!-- Solutions：頂層不可點；移入有懸浮框；子選單貼齊頂層，顯示時可互動 -->
+                <div class="relative group">
+                    <a href="#" aria-disabled="true" onclick="return false;"
+                       class="text-2xl font-bold text-gray-700 dark:text-gray-300 px-3 py-1 rounded cursor-default
+                              transition-all duration-200 hover:text-primary hover:bg-primary/10 hover:ring-2 hover:ring-primary/50 hover:shadow-lg hover:shadow-primary/20">
+                        Solutions
+                    </a>
+                    <div class="absolute left-0 top-full w-48 rounded-lg border border-gray-200/50 dark:border-gray-700/50
+                                bg-background-light dark:bg-background-dark shadow-lg z-40
+                                opacity-0 invisible translate-y-2 transition-all duration-200
+                                group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
+                                pointer-events-none group-hover:pointer-events-auto">
+                        <a href="./Pricing-AI.html" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
+                                                  transition-all duration-200
+                                                  hover:bg-primary hover:text-white
+                                                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                                  active:scale-[0.98]">
+                            AI
+                        </a>
+                        <a href="./Pricing.html" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
+                                       transition-all duration-200
+                                       hover:bg-primary hover:text-white
+                                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                       active:scale-[0.98]">
+                            IOT
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Showcase：同 Solutions -->
+                <div class="relative group">
+                    <a href="#" aria-disabled="true" onclick="return false;"
+                       class="text-2xl font-bold text-gray-700 dark:text-gray-300 px-3 py-1 rounded cursor-default
+                              transition-all duration-200 hover:text-primary hover:bg-primary/10 hover:ring-2 hover:ring-primary/50 hover:shadow-lg hover:shadow-primary/20">
+                        Showcase
+                    </a>
+                    <div class="absolute left-0 top-full w-48 rounded-lg border border-gray-200/50 dark:border-gray-700/50
+                                bg-background-light dark:bg-background-dark shadow-lg z-40
+                                opacity-0 invisible translate-y-2 transition-all duration-200
+                                group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
+                                pointer-events-none group-hover:pointer-events-auto">
+                        <a href="./index.html#ai-feature" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
+                                                  transition-all duration-200
+                                                  hover:bg-primary hover:text-white
+                                                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                                  active:scale-[0.98]">
+                            AI
+                        </a>
+                        <a href="./index.html#iot-feature" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
+                                                   transition-all duration-200
+                                                   hover:bg-primary hover:text-white
+                                                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                                   active:scale-[0.98]">
+                            IOT
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pricing：同 Solutions -->
+                <div class="relative group">
+                    <a href="#" aria-disabled="true" onclick="return false;"
+                       class="text-2xl font-bold text-gray-700 dark:text-gray-300 px-3 py-1 rounded cursor-default
+                              transition-all duration-200 hover:text-primary hover:bg-primary/10 hover:ring-2 hover:ring-primary/50 hover:shadow-lg hover:shadow-primary/20">
+                        Pricing
+                    </a>
+                    <div class="absolute left-0 top-full w-48 rounded-lg border border-gray-200/50 dark:border-gray-700/50
+                                bg-background-light dark:bg-background-dark shadow-lg z-40
+                                opacity-0 invisible translate-y-2 transition-all duration-200
+                                group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
+                                pointer-events-none group-hover:pointer-events-auto">
+                        <a href="./Pricing-AI.html" class="block px-4 py-2 rounded-md text-primary
+                                                  transition-all duration-200 pointer-events-none">
+                            AI
+                        </a>
+                        <a href="./Pricing.html" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300
+                                                   transition-all duration-200
+                                                   hover:bg-primary hover:text-white
+                                                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70
+                                                   active:scale-[0.98]">
+                            IOT
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- 漢堡選單：小螢幕顯示 -->
+            <button class="md:hidden p-2 rounded hover:bg-primary/10" onclick="toggleMobileMenu()" aria-label="Open menu">
+                <!-- 請確保 'Menu.png' 圖片檔案存在於正確的路徑 './Menu.png' -->
+                <img src="../Menu.png" alt="Menu" class="h-8 w-8">
+            </button>
+
+            <!-- 語言切換按鈕部分保持不變 -->
+            <div class="flex items-center">
+                <div class="flex space-x-4">
+                    <button class="flex items-center gap-2 p-1 rounded transition-all duration-300 hover:scale-110 hover:bg-yellow-200/20 plan-button" id="enBtn" onclick="changeLanguage('en')">
+                        <img src="./EN.PNG" alt="English" class="h-8 w-8 md:h-10 md:w-10 lg:h-[50px] lg:w-[50px]">
+                        <span class="text-xs md:text-sm lg:text-base">EN</span>
+                    </button>
+                    <button class="flex items-center gap-2 p-1 rounded transition-all duration-300 hover:scale-110 hover:bg-yellow-200/20 plan-button" id="viBtn" onclick="changeLanguage('vi')">
+                        <img src="./VN.png" alt="Vietnamese" class="h-8 w-8 md:h-10 md:w-10 lg:h-[50px] lg:w-[50px]">
+                        <span class="text-xs md:text-sm lg:text-base">VN</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu (Hamburger) -->
+    <!-- Mobile Menu Panel -->
+    <div id="mobileMenu" class="fixed top-0 right-0 h-full w-64 bg-background-light dark:bg-background-dark shadow-xl transform translate-x-full transition-transform duration-300 z-50 md:hidden overflow-y-auto">
+        <div class="flex justify-end p-4">
+            <button class="p-2 rounded hover:bg-primary/10" onclick="toggleMobileMenu()" aria-label="Close menu">
+                <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <nav class="flex flex-col items-center space-y-6 py-8">
+            <a class="text-2xl font-bold text-gray-200 hover:text-primary" href="index.html" data-i18n="Home">Home</a>
+            <a class="text-2xl font-bold text-gray-200 hover:text-primary" href="#" data-i18n="About Us">About Us</a>
+            
+            <!-- Solutions Dropdown for Mobile -->
+            <div class="relative">
+                <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-200 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" data-i18n="Solutions" aria-expanded="false" aria-controls="mobile-solutions-submenu">
+                    Solutions
+                    <svg class="h-6 w-6 transform transition-transform duration-200" data-icon="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </a>
+                <div class="overflow-hidden transition-all duration-300 ease-in-out" id="mobile-solutions-submenu" style="max-height: 0px;">
+                    <div class="flex flex-col items-center space-y-4 mt-4">
+                        <a href="./Pricing-AI.html" class="text-xl text-gray-300 hover:text-primary" data-i18n="AI">AI</a>
+                        <a href="./Pricing.html" class="text-xl text-gray-300 hover:text-primary" data-i18n="IOT">IOT</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Showcase Dropdown for Mobile -->
+            <div class="relative">
+                <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-200 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" data-i18n="Showcase" aria-expanded="false" aria-controls="mobile-showcase-submenu">
+                    Showcase
+                    <svg class="h-6 w-6 transform transition-transform duration-200" data-icon="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </a>
+                <div class="overflow-hidden transition-all duration-300 ease-in-out" id="mobile-showcase-submenu" style="max-height: 0px;">
+                    <div class="flex flex-col items-center space-y-4 mt-4">
+                        <a href="./index.html#ai-feature" class="text-xl text-gray-300 hover:text-primary" data-i18n="AI">AI</a>
+                        <a href="./index.html#iot-feature" class="text-xl text-gray-300 hover:text-primary" data-i18n="IOT">IOT</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing Dropdown for Mobile -->
+            <div class="relative">
+                <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-200 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" data-i18n="Pricing" aria-expanded="false" aria-controls="mobile-pricing-submenu">
+                    Pricing
+                    <svg class="h-6 w-6 transform transition-transform duration-200" data-icon="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </a>
+                <div class="overflow-hidden transition-all duration-300 ease-in-out" id="mobile-pricing-submenu" style="max-height: 0px;">
+                    <div class="flex flex-col items-center space-y-4 mt-4">
+                        <a href="./Pricing-AI.html" class="text-xl text-primary pointer-events-none" data-i18n="AI">AI</a>
+                        <a href="./Pricing.html" class="text-xl text-gray-300 hover:text-primary" data-i18n="IOT">IOT</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <main class="flex-grow">
+        
+        <div class="container mx-auto px-4 py-16 sm:py-24">
+            <!-- Header -->
+            <header class="text-center mb-16">
+                <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-200" data-i18n="AI Chatbot Pricing Plans">
+                    AI Chatbot Pricing Plans
+                </h1>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto" data-i18n="Choose the plan that best suits your business needs and instantly unlock omnichannel AI chatbot capabilities.">
+                    Choose the plan that best suits your business needs and instantly unlock omnichannel AI chatbot capabilities.
+                </p>
+            </header>
+    
+            <!-- Pricing Grid (Mobile: Stacked, Desktop: 4 Columns) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    
+                <!-- Plan 1: Basic -->
+                <a href="#" class="gradient-border block transition duration-300 hover:scale-[1.01] hover:shadow-blue-500/50 group">
+                    <div class="gradient-border-content p-6 flex flex-col h-full rounded-xl shadow-2xl">
+                        <div class="mb-6">
+                            <h2 class="text-2xl font-bold text-gray-200 mb-1" data-i18n="Basic">Basic</h2>
+                            <p class="text-sm text-gray-400" data-i18n="Ideal for small business launch">Ideal for small business launch</p>
+                        </div>
+                        <div class="text-center mb-8">
+                            <span class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">199,000</span>
+                            <span class="text-base sm:text-lg text-gray-400" data-i18n=" VND / month"> VND / month</span>
+                        </div>
+    
+                        <div class="space-y-4 flex-grow">
+                            <!-- Main Features -->
+                            <h3 class="text-lg font-semibold text-blue-400 border-b border-gray-700 pb-2 mb-3" data-i18n="Key Features">Key Features</h3>
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li class="feature-item" data-i18n="Supports LINE / FB / IG">Supports LINE / FB / IG</li>
+                                <li class="feature-item" data-i18n="1,000 message replies per month">1,000 message replies per month</li>
+                                <li class="feature-item" data-i18n="Includes Zalo">Includes Zalo</li>
+                            </ul>
+                            
+                            <!-- Limits -->
+                            <h3 class="text-lg font-semibold text-blue-400 border-b border-gray-700 pb-2 mt-6 mb-3" data-i18n="Platform/Data Limits">Platform/Data Limits</h3>
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li><strong class="text-gray-200" data-i18n="Platform Parameters:">Platform Parameters:</strong> 1 platform parameter</li>
+                                <li><strong class="text-gray-200" data-i18n="Response Settings:">Response Settings:</strong> 1 response setting</li>
+                                <li><strong class="text-gray-200" data-i18n="Data Sources:">Data Sources:</strong> 1 data source</li>
+                                <li><strong class="text-gray-200" data-i18n="Total Local File Size:">Total Local File Size:</strong> 2MB</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Replaced button with styled div for click indicator -->
+                        <div class="mt-8 block text-center py-3 plan-button rounded-lg transition duration-300" data-plan="basic" data-i18n="Order Now">
+                            Order Now
+                        </div>
+                    </div>
+                </a>
+    
+                <!-- Plan 2: Advanced -->
+                <a href="#" class="gradient-border block transition duration-300 hover:scale-[1.01] hover:shadow-blue-500/50 group">
+                    <div class="gradient-border-content p-6 flex flex-col h-full rounded-xl shadow-2xl">
+                        <div class="mb-6">
+                            <h2 class="text-2xl font-bold text-gray-200 mb-1" data-i18n="Advanced">Advanced</h2>
+                            <p class="text-sm text-gray-400" data-i18n="Suitable for growing small to medium businesses">Suitable for growing small to medium businesses</p>
+                        </div>
+                        <div class="text-center mb-8">
+                            <span class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">499,000</span>
+                            <span class="text-base sm:text-lg text-gray-400" data-i18n=" VND / month"> VND / month</span>
+                        </div>
+    
+                        <div class="space-y-4 flex-grow">
+                            <!-- Main Features -->
+                            <h3 class="text-lg font-semibold text-blue-400 border-b border-gray-700 pb-2 mb-3" data-i18n="Key Features">Key Features</h3>
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li class="feature-item" data-i18n="Includes all Basic features">Includes all Basic features</li>
+                                <li class="feature-item" data-i18n="Data source support: Google Drive">Data source support: Google Drive</li>
+                                <li class="feature-item" data-i18n="Database integration">Tích hợp cơ sở dữ liệu</li>
+                            </ul>
+                            
+                            <!-- Limits -->
+                            <h3 class="text-lg font-semibold text-blue-400 border-b border-gray-700 pb-2 mt-6 mb-3" data-i18n="Platform/Data Limits">Platform/Data Limits</h3>
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li><strong class="text-gray-200" data-i18n="Platform Parameters:">Platform Parameters:</strong> 5 platform parameters</li>
+                                <li><strong class="text-gray-200" data-i18n="Response Settings:">Response Settings:</strong> 15 response settings</li>
+                                <li><strong class="text-gray-200" data-i18n="Data Sources:">Data Sources:</strong> 5 data sources</li>
+                                <li><strong class="text-gray-200" data-i18n="Single Local File Upload:">Single Local File Upload:</strong> 10MB</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Replaced button with styled div for click indicator -->
+                        <div class="mt-8 block text-center py-3 plan-button rounded-lg transition duration-300" data-plan="advanced" data-i18n="Order Now">
+                            Order Now
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Plan 3: Premium (Highlighted) -->
+                <!-- 移除 selected-plan 類別，並調整 h2 標籤的 data-i18n 結構 -->
+                <a href="#" class="gradient-border block transition duration-300 hover:scale-[1.01] hover:shadow-blue-500/50 group">
+                    <div class="gradient-border-content p-6 flex flex-col h-full rounded-xl shadow-2xl">
+                        <div class="mb-6">
+                            <!-- 將 data-i18n="Premium" 移到內部 span -->
+                            <h2 class="text-2xl font-bold text-gray-200 mb-1">
+                                <span data-i18n="Premium">Premium</span>
+                                <span class="inline-block bg-pink-400/20 text-pink-200 text-xs font-bold px-3 py-1 rounded-full ml-2 glow-popular" data-i18n="Most Popular">Most Popular</span>
+                            </h2>
+                            <p class="text-sm text-gray-400" data-i18n="Designed for businesses requiring advanced integration">Designed for businesses requiring advanced integration</p>
+                        </div>
+                        <div class="text-center mb-8">
+                            <span class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">1,499,000</span>
+                            <span class="text-base sm:text-lg text-gray-400" data-i18n=" VND / month"> VND / month</span>
+                        </div>
+    
+                        <div class="space-y-4 flex-grow">
+                            <!-- Main Features -->
+                            <h3 class="text-lg font-semibold text-blue-400 border-b border-gray-700 pb-2 mb-3" data-i18n="Key Features">Key Features</h3>
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li class="feature-item" data-i18n="Includes all Advanced features">Includes all Advanced features</li>
+                                <li class="feature-item" data-i18n="Supports API / WebChat / Teams / Zalo">Supports API / WebChat / Teams / Zalo</li>
+                                <li class="feature-item" data-i18n="Data source support: API / AI Database / Data extraction">Data source support: API / AI Database / Data extraction</li>
+                                <li class="feature-item" data-i18n="Unlimited monthly conversations">Unlimited monthly conversations</li>
+                            </ul>
+                            
+                            <!-- Limits -->
+                            <h3 class="text-lg font-semibold text-blue-400 border-b border-gray-700 pb-2 mt-6 mb-3" data-i18n="Platform/Data Limits">Platform/Data Limits</h3>
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li><strong class="text-gray-200" data-i18n="Platform Parameters:">Platform Parameters:</strong> 15 platform parameters</li>
+                                <li><strong class="text-gray-200" data-i18n="Response Settings:">Response Settings:</strong> 100 response settings</li>
+                                <li><strong class="text-gray-200" data-i18n="Data Sources:">Data Sources:</strong> 30 data sources</li>
+                                <li><strong class="text-gray-200" data-i18n="Single Local File Upload:">Single Local File Upload:</strong> 50MB</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Replaced button with styled div for click indicator -->
+                        <div class="mt-8 block text-center py-3 plan-button rounded-lg transition duration-300" data-plan="premium" data-i18n="Order Now">
+                            Order Now
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Plan 4: Enterprise Custom -->
+                <a href="#" class="gradient-border block transition duration-300 hover:scale-[1.01] hover:shadow-blue-500/50 group">
+                    <div class="gradient-border-content p-6 flex flex-col h-full rounded-xl shadow-2xl">
+                        <div class="mb-6">
+                            <h2 class="text-2xl font-bold text-gray-200 mb-1" data-i18n="Enterprise Custom">Enterprise Custom</h2>
+                            <p class="text-sm text-gray-400" data-i18n="Tailored solutions for large enterprises">Tailored solutions for large enterprises</p>
+                        </div>
+                        <div class="text-center mb-8">
+                            <span class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white" data-i18n="Custom">Custom</span>
+                            <span class="text-base sm:text-lg text-gray-400" data-i18n=" / quote"> / quote</span>
+                        </div>
+
+                        <div class="space-y-4 flex-grow">
+                            <!-- Main Features -->
+                            <h3 class="text-lg font-semibold text-blue-400 border-b border-gray-700 pb-2 mb-3" data-i18n="Key Features">Key Features</h3>
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li class="feature-item" data-i18n="Includes all Premium features">Includes all Premium features</li>
+                                <li class="feature-item" data-i18n="Custom Logo & Domain">Custom Logo & Domain</li>
+                                <li class="feature-item" data-i18n="API / SDK integration">API / SDK integration</li>
+                                <li class="feature-item" data-i18n="Private cloud deployment">Private cloud deployment</li>
+                                <li class="feature-item" data-i18n="Internal knowledge document integration">Internal knowledge document integration</li>
+                                <li class="feature-item" data-i18n="Model fine-tuning & Customer success consultant">Model fine-tuning & Customer success consultant</li>
+                                <li class="feature-item" data-i18n="Supports Home Assistant integration">Supports Home Assistant integration</li>
+                            </ul>
+
+                            <!-- Limits -->
+                            <h3 class="text-lg font-semibold text-blue-400 border-b border-gray-700 pb-2 mt-6 mb-3" data-i18n="Platform/Data Limits">Platform/Data Limits</h3>
+                            <ul class="text-sm text-gray-300 space-y-2">
+                                <li><strong class="text-gray-200" data-i18n="Platform Parameters:">Platform Parameters:</strong> <span data-i18n="Unlimited">Unlimited</span></li>
+                                <li><strong class="text-gray-200" data-i18n="Response Settings:">Response Settings:</strong> <span data-i18n="Unlimited">Unlimited</span></li>
+                                <li><strong class="text-gray-200" data-i18n="Data Sources:">Data Sources:</strong> <span data-i18n="Unlimited">Unlimited</span></li>
+                                <li><strong class="text-gray-200" data-i18n="Single Local File Upload:">Single Local File Upload:</strong> <span data-i18n="Unlimited">Unlimited</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Replaced button with styled div for click indicator -->
+                        <div class="mt-8 block text-center py-3 plan-button rounded-lg transition duration-300" data-plan="enterprise" data-i18n="Contact Sales">
+                            Contact Sales
+                        </div>
+                    </div>
+                </a>
+    
+            </div>
+     </main>
+
+    <footer class="bg-background-light dark:bg-background-dark/50 py-12">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
+          <!-- Social Media (md:order-2) -->
+          <div class="flex justify-center gap-6 md:order-2">
+            <a class="text-gray-400 hover:text-primary dark:text-gray-500 dark:hover:text-primary flex items-center gap-2" href="#">
+              <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.271 0-4.192 2.159-4.192 4.192v2.808z"/>
+              </svg>
+              <span data-i18n="FB">FB</span>
+            </a>
+            <a class="text-gray-400 hover:text-primary dark:text-gray-500 dark:hover:text-primary flex items-center gap-2" href="#">
+              <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.012-3.584.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.073 4.948.073 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              <span data-i18n="IG">IG</span>
+            </a>
+          </div>
+
+          <!-- Contact Info (md:order-1) -->
+          <div class="flex flex-wrap justify-center gap-6 md:order-1">
+            <a class="text-sm text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary flex items-center gap-2 flex-shrink-0" href="mailto:richard.l.c.yang@gmail.com">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+              richard.l.c.yang@gmail.com
+            </a>
+            <a class="text-sm text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary flex items-center gap-2 flex-shrink-0" href="tel:+84-978-469-953">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              +84 978469953
+            </a>
+            <!-- 移除 Facebook 連結 -->
+            <a class="group text-sm text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary flex items-center gap-2 flex-shrink-0" href="http://zalo.me/2273987067330697149?src=qr&amp;f=2&amp;utm_src=zoa-cms" target="_blank">
+              <div class="flex items-center justify-center h-10 w-10 rounded-lg transition-colors duration-300 group-hover:bg-primary/20">
+                <img src="./Zalo.png" alt="Zalo" class="h-9 w-9">
+              </div>
+              <span class="group-hover:text-primary transition-colors duration-300" data-i18n="InTime official account">InTime official account</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 text-center text-sm text-gray-600 dark:text-gray-400">
+          <p data-i18n="© 2025 InTime Co. All rights reserved.">© 2025 InTime Co. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- TOP 按鈕 -->
+    <button id="topButton"
+            class="fixed bottom-4 right-4 sm:bottom-8 sm:right-8
+                   bg-primary text-white
+                   w-12 h-12 sm:w-14 sm:h-14
+                   flex items-center justify-center
+                   rounded-full shadow-lg
+                   opacity-0 invisible
+                   transition-all duration-300
+                   hover:bg-primary/80 hover:scale-110 hover:shadow-primary/30
+                   z-50">
+        <span class="text-sm sm:text-base font-semibold">TOP</span>
+    </button>
+
+    <!-- 引入 JavaScript 檔案 -->
+    <script src="./js/translations.js"></script>
+    <script src="./js/main.js"></script>
+    <script>
+        function changeLanguage(lang) {
+            const enButton = document.getElementById('enBtn');
+            const viButton = document.getElementById('viBtn');
+
+            if (lang === 'en') {
+                enButton.classList.add('selected');
+                viButton.classList.remove('selected');
+            } else if (lang === 'vi') {
+                viButton.classList.add('selected');
+                enButton.classList.remove('selected');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const enButton = document.getElementById('enBtn');
+            if (enButton) {
+                enButton.classList.add('selected');
+            }
+
+            // Add event listeners to the language buttons
+            document.getElementById('enBtn').addEventListener('click', function() {
+                changeLanguage('en');
+            });
+            document.getElementById('viBtn').addEventListener('click', function() {
+                changeLanguage('vi');
+            });
+
+            // --- 新增：價格區塊點擊發光效果 ---
+            const pricingCards = document.querySelectorAll('.gradient-border');
+
+            pricingCards.forEach(card => {
+                card.addEventListener('click', function(event) {
+                    // 阻止默認的連結行為，以避免頁面跳轉到頂部
+                    event.preventDefault();
+
+                    // 移除所有其他卡片的 'selected-plan' 類別
+                    pricingCards.forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('selected-plan');
+                        }
+                    });
+
+                    // 切換被點擊卡片的 'selected-plan' 類別
+                    card.classList.toggle('selected-plan');
+                });
+            });
+            // --- 結束新增 ---
+        });
+    </script>
+</body>
+</html>

@@ -53,18 +53,189 @@ const translations = {
   }
 };
 
-// 翻譯函數
-function translateToVietnamese() {
-  const elements = document.querySelectorAll('h1, h2, h3, p, a, button, span:not(.material-symbols-outlined), blockquote');
-  
-  elements.forEach(element => {
-    const originalText = element.textContent.trim();
-    if (translations.vi[originalText]) {
-      element.textContent = translations.vi[originalText];
+// 將 Pricing 頁面的文案合併到已存在的 translations.vi，避免重複宣告常數
+Object.assign(translations.vi, {
+  // Pricing 頁面標題與描述
+  'AI Chatbot Pricing Plans': 'Gói Giá AI Chatbot',
+  'Choose the plan that best suits your business needs and instantly unlock omnichannel AI chatbot capabilities.':
+    'Chọn gói phù hợp nhất với nhu cầu doanh nghiệp của bạn và kích hoạt ngay khả năng chatbot AI đa kênh.',
+
+  // Plans
+  'Basic': 'Cơ Bản',
+  'Ideal for small business launch': 'Phù hợp cho doanh nghiệp nhỏ khởi đầu',
+  'Advanced': 'Nâng Cao',
+  'Suitable for growing small to medium businesses': 'Phù hợp cho doanh nghiệp nhỏ đến vừa đang phát triển',
+  'Premium': 'Cao Cấp',
+  'Most Popular': 'Phổ Biến Nhất',
+  'Designed for businesses requiring advanced integration': 'Dành cho doanh nghiệp cần tích hợp nâng cao',
+  'Enterprise Custom': 'Doanh Nghiệp Tùy Chỉnh',
+  'Tailored solutions for large enterprises': 'Giải pháp tùy chỉnh cho doanh nghiệp lớn',
+  'Custom': 'Tùy chỉnh',
+  ' / quote': ' / báo giá',
+
+  // Features
+  'Key Features': 'Tính Năng Chính',
+  'Supports LINE / FB / IG': 'Hỗ trợ LINE / FB / IG',
+  '1,000 message replies per month': '1.000 phản hồi tin nhắn mỗi tháng',
+  'Includes Zalo': 'Bao gồm Zalo',
+  'Includes all Basic features': 'Bao gồm tất cả tính năng của Cơ Bản',
+  'Data source support: Google Drive': 'Hỗ trợ nguồn dữ liệu: Google Drive',
+  'Database integration': 'Tích hợp cơ sở dữ liệu',
+  'Includes all Advanced features': 'Bao gồm tất cả tính năng của Nâng Cao',
+  'Supports API / WebChat / Teams / Zalo': 'Hỗ trợ API / WebChat / Teams / Zalo',
+  'Data source support: API / AI Database / Data extraction': 'Hỗ trợ nguồn dữ liệu: API / CSDL AI / Trích xuất dữ liệu',
+  'Unlimited monthly conversations': 'Hội thoại hàng tháng không giới hạn',
+  'Includes all Premium features': 'Bao gồm tất cả tính năng của Cao Cấp',
+  'Custom Logo & Domain': 'Logo & tên miền tùy chỉnh',
+  'API / SDK integration': 'Tích hợp API / SDK',
+  'Private cloud deployment': 'Triển khai đám mây riêng',
+  'Internal knowledge document integration': 'Tích hợp tài liệu kiến thức nội bộ',
+  'Model fine-tuning & Customer success consultant': 'Tinh chỉnh mô hình & tư vấn thành công khách hàng',
+  'Supports Home Assistant integration': 'Hỗ trợ tích hợp Home Assistant',
+
+  // Limits
+  'Platform/Data Limits': 'Giới Hạn Nền Tảng/Dữ Liệu',
+  'Platform Parameters:': 'Tham số Nền tảng:',
+  'Response Settings:': 'Thiết lập Phản hồi:',
+  'Data Sources:': 'Nguồn Dữ liệu:',
+  'Total Local File Size:': 'Tổng dung lượng tệp cục bộ:',
+  'Single Local File Upload:': 'Tải lên tệp cục bộ đơn lẻ:',
+  'Unlimited': 'Không giới hạn',
+
+  // Unit
+  ' VND / month': ' VND / tháng',
+
+  // Buttons / CTA
+  'Order Now': 'Đặt Hàng Ngay',
+  'Contact Sales': 'Liên hệ Kinh doanh',
+
+  // Navigation (Pricing 頁面使用)
+  'Home': 'Trang Chủ',
+  'About Us': 'Về Chúng Tôi',
+  'Solutions': 'Giải Pháp',
+  'Showcase': 'Trưng Bày',
+  'Pricing': 'Giá cả', // 確保有這一行
+  'AI': 'AI', // 確保有這一行
+  'IOT': 'IoT', // 確保有這一行
+
+  // Footer
+  'InTime official account': 'Tài khoản chính thức InTime',
+  '© 2025 InTime Co. All rights reserved.': '© 2025 InTime Co. Bảo lưu mọi quyền.',
+  'TOP': 'LÊN'
+});
+
+Object.assign(translations.vi, {
+  // 新 IoT 區塊文案
+  'Lightweight Transformation, Smart Upgrades': 'Chuyển đổi nhẹ nhàng, nâng cấp thông minh',
+  'Customized IoT integration service requiring no changes to existing operations or equipment replacement. Rapidly connect devices to the cloud for real-time monitoring and operational efficiency optimization.':
+    'Dịch vụ tích hợp IoT tùy chỉnh không cần thay đổi quy trình hiện có hay thay thế thiết bị. Kết nối thiết bị lên đám mây nhanh chóng để giám sát thời gian thực và tối ưu hiệu quả vận hành.'
+});
+
+// 使用 WeakMap 保存每個文字節點的原始英文字串，避免破壞 DOM 結構
+const originalTextMap = new WeakMap();
+
+// 僅替換純文字節點，保留子元素與樣式
+function replaceTextNodes(element, dict) {
+  const i18nKey = element.dataset.i18n;
+  if (i18nKey && dict[i18nKey]) {
+    if (!originalTextMap.has(element)) {
+      originalTextMap.set(element, element.innerHTML);
     }
-  });
+    element.innerHTML = dict[i18nKey];
+  } else {
+    element.childNodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const original = node.textContent;
+        const trimmed = original.trim();
+        if (!originalTextMap.has(node)) {
+          originalTextMap.set(node, original);
+        }
+        if (dict[trimmed]) {
+          const leading = original.match(/^\s*/)?.[0] ?? '';
+          const trailing = original.match(/\s*$/)?.[0] ?? '';
+          node.textContent = leading + dict[trimmed] + trailing;
+        }
+      }
+    });
+  }
 }
 
-function translateToEnglish() {
-  location.reload();
+// 翻譯函數（VN）
+function translateToVietnamese() {
+  const elements = document.querySelectorAll(
+    '[data-i18n], h1, h2, h3, p, li, span:not(.material-symbols-outlined), blockquote, .plan-button'
+  );
+  elements.forEach(el => replaceTextNodes(el, translations.vi));
+  updateLanguageButtonStyles('vi');
 }
+
+// 還原英文（EN）
+function translateToEnglish() {
+  const elements = document.querySelectorAll(
+    '[data-i18n], h1, h2, h3, p, li, span:not(.material-symbols-outlined), blockquote, .plan-button'
+  );
+  elements.forEach(el => {
+    if (originalTextMap.has(el)) {
+      el.innerHTML = originalTextMap.get(el);
+    } else {
+      el.childNodes.forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE && originalTextMap.has(node)) {
+          node.textContent = originalTextMap.get(node);
+        }
+      });
+    }
+  });
+  updateLanguageButtonStyles('en');
+}
+
+// 更新語言按鈕樣式
+function updateLanguageButtonStyles(lang) {
+  const enBtn = document.getElementById('enBtn');
+  const viBtn = document.getElementById('viBtn');
+
+  if (enBtn) {
+    if (lang === 'en') {
+      enBtn.classList.add('selected');
+      enBtn.classList.remove('hover:bg-yellow-200/20');
+    } else {
+      enBtn.classList.remove('selected');
+      enBtn.classList.add('hover:bg-yellow-200/20');
+    }
+  }
+  if (viBtn) {
+    if (lang === 'vi') {
+      viBtn.classList.add('selected');
+      viBtn.classList.remove('hover:bg-yellow-200/20');
+    } else {
+      viBtn.classList.remove('selected');
+      viBtn.classList.add('hover:bg-yellow-200/20');
+    }
+  }
+}
+
+// 頁面加載時初始化語言和按鈕樣式
+document.addEventListener('DOMContentLoaded', () => {
+  const currentLang = localStorage.getItem('lang') || 'en';
+  if (currentLang === 'vi') {
+    translateToVietnamese();
+  } else {
+    translateToEnglish();
+  }
+
+  const enBtn = document.getElementById('enBtn');
+  const viBtn = document.getElementById('viBtn');
+
+  if (enBtn) {
+    enBtn.addEventListener('click', () => {
+      localStorage.setItem('lang', 'en');
+      translateToEnglish();
+    });
+  }
+
+  if (viBtn) {
+    viBtn.addEventListener('click', () => {
+      localStorage.setItem('lang', 'vi');
+      translateToVietnamese();
+    });
+  }
+});

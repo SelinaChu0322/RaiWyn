@@ -1,47 +1,64 @@
-// 語言切換功能
-let currentLang = 'en';
-const enBtn = document.getElementById('enBtn');
-const viBtn = document.getElementById('viBtn');
+function toggleMobileMenu() {
+    const panel = document.getElementById('mobileMenu');
+    if (!panel) return;
+    const willOpen = panel.classList.contains('translate-x-full');
+    panel.classList.toggle('translate-x-full');
 
-function updateLanguageButtons() {
-  enBtn.style.backgroundColor = currentLang === 'en' ? 'rgba(250, 204, 21, 0.2)' : 'transparent';
-  viBtn.style.backgroundColor = currentLang === 'vi' ? 'rgba(250, 204, 21, 0.2)' : 'transparent';
+    // 關閉時，重置所有子選單為收起狀態
+    if (!willOpen) {
+        document.querySelectorAll('#mobileMenu [id$="-submenu"]').forEach(p => {
+            p.style.maxHeight = '0px';
+            const btn = document.querySelector('[aria-controls="' + p.id + '"]');
+            if (btn) {
+                btn.setAttribute('aria-expanded', 'false');
+                const icon = btn.querySelector('[data-icon="chevron"]');
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            }
+        });
+    }
 }
 
-function changeLanguage(lang) {
-  currentLang = lang;
-  updateLanguageButtons();
-  
-  if (lang === 'vi') {
-    translateToVietnamese();
-  } else {
-    translateToEnglish();
-  }
+function toggleMobileDropdown(element) {
+    const dropdown = element.nextElementSibling;
+    const isExpanded = element.getAttribute('aria-expanded') === 'true';
+    element.setAttribute('aria-expanded', String(!isExpanded));
+    dropdown.style.maxHeight = isExpanded ? '0px' : dropdown.scrollHeight + 'px';
+    const icon = element.querySelector('[data-icon="chevron"]');
+    if (icon) icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
 }
 
-// 初始化
-document.addEventListener('DOMContentLoaded', () => {
-  updateLanguageButtons();
-});
+// TOP 按鈕顯示/隱藏邏輯
+document.addEventListener('DOMContentLoaded', function() {
+    const topButton = document.getElementById('topButton');
 
-// TOP 按鈕功能
-const topButton = document.getElementById('topButton');
+    // 檢查按鈕是否存在
+    if (!topButton) {
+        console.warn('TOP button with id "topButton" not found.');
+        return;
+    }
 
-// 監聽滾動事件
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 200) {
-    topButton.classList.remove('opacity-0', 'invisible');
-    topButton.classList.add('opacity-100', 'visible');
-  } else {
-    topButton.classList.add('opacity-0', 'invisible');
-    topButton.classList.remove('opacity-100', 'visible');
-  }
-});
+    // 滾動事件監聽器
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 200) { // 當滾動超過 200px 時顯示按鈕
+            topButton.classList.remove('opacity-0', 'invisible');
+            topButton.classList.add('opacity-100', 'visible');
+        } else {
+            topButton.classList.remove('opacity-100', 'visible');
+            topButton.classList.add('opacity-0', 'invisible');
+        }
+    });
 
-// 點擊返回頂部
-topButton.addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
+    // 點擊按鈕滾動到頂部
+    topButton.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 初始化時檢查滾動位置，確保頁面加載時按鈕狀態正確
+    if (window.scrollY > 200) {
+        topButton.classList.remove('opacity-0', 'invisible');
+        topButton.classList.add('opacity-100', 'visible');
+    } else {
+        topButton.classList.remove('opacity-100', 'visible');
+        topButton.classList.add('opacity-0', 'invisible');
+    }
 });
