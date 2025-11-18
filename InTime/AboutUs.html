@@ -73,13 +73,13 @@
     <nav class="hidden md:flex items-center gap-6 mx-auto">
       <!-- Home：保留文字顏色，移除背景與圓角框 -->
       <a href="index.html"
-         class="text-2xl font-bold text-primary px-3 py-1 rounded cursor-default">
+         class="text-2xl font-bold text-gray-700 dark:text-gray-300 hover:text-primary">
         Home
       </a>
 
       <!-- About Us：移入有變色與懸浮框 -->
-      <a href="AboutUs.html"
-         class="text-2xl font-bold text-gray-700 dark:text-gray-300 hover:text-primary">
+      <a href="#" aria-disabled="true" onclick="return false;"
+         class="text-2xl font-bold text-primary px-3 py-1 rounded cursor-default">
         About Us
       </a>
 
@@ -189,107 +189,60 @@
         </button>
       </div>
     </div>
-  </div>
-</header>
-<!-- 修改 hero section，添加懸浮按鈕 -->
-<!-- 修改 hero section 背景圖片 -->
-<!-- 修改背景圖片位置 -->
-<section class="relative h-[80vh] w-full">
+  </header>
+
   <main class="flex-1">
-    <section class="relative h-[70vh] min-h-[480px]">
-      <div class="absolute inset-0 bg-cover bg-center" style='background-image: url("./robot.png");'></div>
-      <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-background-dark/30 to-transparent"></div>
-      <div class="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-center justify-center px-4 text-white sm:px-6 lg:px-8">
-        <!-- 將 Hero 標題加上 id 與 data-translate，保留 InTime 的淡黃色 -->
-        <h1 id="hero-title" data-translate="hero_title"
-            class="mb-4 text-4xl font-bold text-center md:text-5xl lg:text-6xl">
-          <!-- 將兩行改為 block，第二行用 margin-top 精準控制間距 -->
-          <span class="block">From sensing to decision-making</span>
-          <span class="block mt-3">
-            <span class="text-yellow-200">InTime</span> brings the future into the now.
-          </span>
-        </h1>
-        <!-- 移除：Hero 按鈕列（About Us / Solutions / Showcase / Pricing） -->
-        <!-- <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mt-4">...</div> -->
+    <!-- 第一塊：跳轉按鈕 -->
+    <section class="sticky top-20 z-30 py-12 sm:py-16 bg-background-light dark:bg-background-dark/80 backdrop-blur-sm">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#about-intime" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary/80 hover:bg-primary/90 transition-colors duration-300 shadow-lg">
+            About InTime
+          </a>
+          <a href="#company-event" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-primary/10 hover:bg-primary/30 transition-colors duration-300 shadow-lg">
+            Company Event
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 第二塊：About Us -->
+    <section id="about-intime" class="relative w-full py-12 sm:py-16 bg-background-dark/80">
+      <div class="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-4 sm:px-6 lg:px-8">
+        <!-- 左側文字 -->
+        <div class="relative z-10 text-white">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-yellow-200 glow-text fade-in-up">
+            About InTime
+          </h2>
+          <p class="mt-6 text-lg sm:text-xl leading-relaxed">
+            Founded in 2024, InTime specializes in AI, IoT, and smart lock technologies, offering integrated solutions that combine software, hardware, and cloud systems. Our team of experts delivers reliable and innovative designs from firmware and communication protocols to product integration and user experience.
+          </p>
+          <p class="mt-4 text-lg sm:text-xl leading-relaxed">
+            We focus on developing intelligent smart lock systems and connected platforms that enhance convenience, safety, and efficiency. Partnering with industry leaders, InTime continues to create competitive, data-driven solutions that support automation and digital transformation for a smarter future.
+          </p>
+        </div>
+        <!-- 右側圖片 -->
+        <div class="relative flex justify-center">
+          <img src="./About Us.gif" alt="About Us" class="w-full max-w-[900px] h-auto lg:max-h-[560px] object-contain rounded-lg shadow-xl" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 第三塊：Event -->
+    <section id="company-event" class="relative w-full py-12 sm:py-16 bg-background-light dark:bg-background-dark">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-yellow-200 glow-text fade-in-up mb-8">
+          InTime Company Event
+        </h2>
+        <div class="flex flex-col items-center gap-8">
+          <img src="./Event1.png" alt="Event 1" class="w-full max-w-3xl h-auto rounded-lg shadow-xl" />
+          <img src="./Event2.png" alt="Event 2" class="w-full max-w-3xl h-auto rounded-lg shadow-xl" />
+        </div>
       </div>
     </section>
   </main>
-</section>
 
-<!-- 修改背景圖片位置 -->
-<!-- 移除重複的第二組 Hero 區塊（原本這裡有另一段與上方相同的 section，已刪除） -->
-
-<!-- 在 Key Features 之前插入全螢幕 IoT 圖片 -->
-<!-- 原頂部 IOT.gif 全螢幕區塊已移除：
-<section id="iot-fullscreen" class="relative w-full h-screen">
-  <img src="./IOT.gif" alt="IoT" class="absolute inset-0 w-full h-full object-cover" />
-</section>
--->
-
-<!-- 在 Key Features 前插入「左圖右文」IOT.gif 區塊（保留） -->
-<section id="iot-feature" class="relative w-full py-12 sm:py-16 bg-background-dark/80">
-  <div class="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-4 sm:px-6 lg:px-8">
-    <div class="relative flex justify-center">
-      <img src="./IOT.gif" alt="IoT" class="w-full max-w-[900px] h-auto lg:max-h-[560px] object-contain rounded-lg shadow-xl" />
-    </div>
-    <div class="relative z-10 text-gray-900 dark:text-white">
-      <!-- 將標題改為淡黃色，並加入動畫 -->
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-yellow-200 glow-text fade-in-up"
-          data-translate="iot_title">
-        Lightweight Transformation, Smart Upgrades
-      </h2>
-      <p class="mt-6 text-lg sm:text-xl leading-relaxed"
-         data-translate="iot_desc">
-        Customized IoT integration service requiring no changes to existing operations or equipment replacement. Rapidly connect devices to the cloud for real-time monitoring and operational efficiency optimization.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- 新增：AI 區塊（左側文字、右側 AI.gif） -->
-<section id="ai-feature" class="relative w-full py-12 sm:py-16 bg-[#055563]">  <!-- 背景維持 #055563 -->
-  <div class="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-4 sm:px-6 lg:px-8">
-    <!-- 左側文字 -->
-    <div class="relative z-10 text-white lg:order-1">
-      <!-- 加入 data-translate，供無刷新翻譯使用 -->
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-yellow-200 glow-text fade-in-up"
-          data-translate="ai_title">
-        Enterprise AI Integration, Smarter Decisions Ahead
-      </h2>
-      <p class="mt-6 text-lg sm:text-xl leading-relaxed"
-         data-translate="ai_desc">
-        An all-in-one LLM platform that integrates social media and cross-platform data, leveraging AI for automated processing, analysis, and visualization to drive intelligent, data-driven decision-making.
-      </p>
-    </div>
-    <!-- 右側圖片（去背 + 融入背景：移除圓角與陰影） -->
-    <div class="relative flex justify-center lg:order-2">
-      <svg class="w-full max-w-[900px] h-[280px] sm:h-[360px] lg:h-[560px] shadow-none rounded-none bg-transparent"
-           xmlns="http://www.w3.org/2000/svg" aria-label="AI">
-        <defs>
-          <filter id="removeWhite" color-interpolation-filters="sRGB">
-            <feColorMatrix type="matrix" values="
-              1 0 0 0 0
-              0 1 0 0 0
-              0 0 1 0 0
-             -1 -1 -1 3 0" />
-            <feComponentTransfer>
-              <feFuncA type="table" tableValues="0 0 0.4 1" />
-            </feComponentTransfer>
-          </filter>
-        </defs>
-        <image href="./AI.gif"
-               x="0" y="0" width="100%" height="100%"
-               preserveAspectRatio="xMidYMid meet"
-               filter="url(#removeWhite)" />
-      </svg>
-    </div>
-  </div>
-</section>
-
-<!-- 刪除區塊：Key Features / Use Cases / Client Testimonials / CTA -->
-<!-- 原本的多個 section（Key Features、Use Cases、Testimonials、CTA）已移除 -->
-
-<!-- 直接保留 Footer（聯絡方式與社群 + 版權文字） -->
 <footer class="bg-background-light dark:bg-background-dark/50">
   <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
     <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
