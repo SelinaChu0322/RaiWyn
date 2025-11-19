@@ -7,7 +7,7 @@ function toggleMobileMenu() {
     // 關閉時，重置所有子選單為收起狀態
     if (!willOpen) {
         document.querySelectorAll('#mobileMenu [id$="-submenu"]').forEach(p => {
-            p.classList.add('hidden');
+            p.style.maxHeight = '0px';
             const btn = document.querySelector('[aria-controls="' + p.id + '"]');
             if (btn) {
                 btn.setAttribute('aria-expanded', 'false');
@@ -26,7 +26,11 @@ function toggleMobileDropdown(element) {
     const isExpanded = element.getAttribute('aria-expanded') === 'true';
     element.setAttribute('aria-expanded', String(!isExpanded));
 
-    dropdown.classList.toggle('hidden');
+    if (isExpanded) {
+        dropdown.style.maxHeight = '0px';
+    } else {
+        dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
+    }
 
     const icon = element.querySelector('[data-icon="chevron"]');
     if (icon) {
