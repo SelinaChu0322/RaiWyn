@@ -44,85 +44,91 @@ const translations = {
     'Solutions': 'Giải Pháp',
     'Showcase': 'Trưng Bày',
     'Pricing': 'Báo Giá',
+    'About InTime': 'Về InTime',
+    'about_intime_desc_1': 'Được thành lập vào năm 2024, InTime chuyên về công nghệ AI, IoT và khóa thông minh, cung cấp các giải pháp tích hợp kết hợp phần mềm, phần cứng và hệ thống đám mây. Đội ngũ chuyên gia của chúng tôi mang đến những thiết kế đáng tin cậy và sáng tạo từ phần sụn và giao thức truyền thông đến tích hợp sản phẩm và trải nghiệm người dùng.',
+    'about_intime_desc_2': 'Chúng tôi tập trung phát triển các hệ thống khóa thông minh và nền tảng kết nối giúp nâng cao sự tiện lợi, an toàn và hiệu quả. Hợp tác với các nhà lãnh đạo ngành, InTime tiếp tục tạo ra các giải pháp cạnh tranh, dựa trên dữ liệu nhằm hỗ trợ tự động hóa và chuyển đổi kỹ thuật số cho một tương lai thông minh hơn.',
+    'Company Event': 'Sự kiện công ty',
+    'Contact Us': 'Liên Hệ Với Chúng Tôi',
+    'email_address': 'richard.l.c.yang@gmail.com',
+    'copyright': '© 2025 InTime Co. Bảo lưu mọi quyền.',
 
     // 頁尾
     'Privacy Policy': 'Chính Sách Bảo Mật',
     'Terms of Service': 'Điều Khoản Dịch Vụ',
     '© 2025 InTime Co. All rights reserved.': '© 2025 InTime Co. Bảo lưu mọi quyền.',
-    'TOP': 'LÊN'
+    'TOP': 'LÊN',
+    'FB': 'Facebook',
+    'IG': 'Instagram',
+    'InTime official account': 'Tài khoản chính thức InTime',
+    'InTime Company Event': 'Sự Kiện',
+
+    // Pricing 頁面標題與描述
+    'AI Chatbot Pricing Plans': 'Gói Giá AI Chatbot',
+    'Choose the plan that best suits your business needs and instantly unlock omnichannel AI chatbot capabilities.':
+      'Chọn gói phù hợp nhất với nhu cầu doanh nghiệp của bạn và kích hoạt ngay khả năng chatbot AI đa kênh.',
+
+    // Plans
+    'Basic': 'Cơ Bản',
+    'Ideal for small business launch': 'Phù hợp cho doanh nghiệp nhỏ khởi đầu',
+    'Advanced': 'Nâng Cao',
+    'Suitable for growing small to medium businesses': 'Phù hợp cho doanh nghiệp nhỏ đến vừa đang phát triển',
+    'Premium': 'Cao Cấp',
+    'Most Popular': 'Phổ Biến Nhất',
+    'Designed for businesses requiring advanced integration': 'Dành cho doanh nghiệp cần tích hợp nâng cao',
+    'Enterprise Custom': 'Doanh Nghiệp Tùy Chỉnh',
+    'Tailored solutions for large enterprises': 'Giải pháp tùy chỉnh cho doanh nghiệp lớn',
+    'Custom': 'Tùy chỉnh',
+    ' / quote': ' / báo giá',
+
+    // Features
+    'Key Features': 'Tính Năng Chính',
+    'Supports LINE / FB / IG': 'Hỗ trợ LINE / FB / IG',
+    '1,000 message replies per month': '1.000 phản hồi tin nhắn mỗi tháng',
+    'Includes Zalo': 'Bao gồm Zalo',
+    'Includes all Basic features': 'Bao gồm tất cả tính năng của Cơ Bản',
+    'Data source support: Google Drive': 'Hỗ trợ nguồn dữ liệu: Google Drive',
+    'Database integration': 'Tích hợp cơ sở dữ liệu',
+    'Includes all Advanced features': 'Bao gồm tất cả tính năng của Nâng Cao',
+    'Supports API / WebChat / Teams / Zalo': 'Hỗ trợ API / WebChat / Teams / Zalo',
+    'Data source support: API / AI Database / Data extraction': 'Hỗ trợ nguồn dữ liệu: API / CSDL AI / Trích xuất dữ liệu',
+    'Unlimited monthly conversations': 'Hội thoại hàng tháng không giới hạn',
+    'Includes all Premium features': 'Bao gồm tất cả tính năng của Cao Cấp',
+    'Custom Logo & Domain': 'Logo & tên miền tùy chỉnh',
+    'API / SDK integration': 'Tích hợp API / SDK',
+    'Private cloud deployment': 'Triển khai đám mây riêng',
+    'Internal knowledge document integration': 'Tích hợp tài liệu kiến thức nội bộ',
+    'Model fine-tuning & Customer success consultant': 'Tinh chỉnh mô hình & tư vấn thành công khách hàng',
+    'Supports Home Assistant integration': 'Hỗ trợ tích hợp Home Assistant',
+
+    // Limits
+    'Platform/Data Limits': 'Giới Hạn Nền Tảng/Dữ Liệu',
+    'Platform Parameters:': 'Tham số Nền tảng:',
+    'Response Settings:': 'Thiết lập Phản hồi:',
+    'Data Sources:': 'Nguồn Dữ liệu:',
+    'Total Local File Size:': 'Tổng dung lượng tệp cục bộ:',
+    'Single Local File Upload:': 'Tải lên tệp cục bộ đơn lẻ:',
+    'Unlimited': 'Không giới hạn',
+
+    // Unit
+    ' VND / month': ' VND / tháng',
+
+    // Buttons / CTA
+    'Order Now': 'Đặt Hàng Ngay',
+    'Contact Sales': 'Liên hệ Kinh doanh',
+
+    // Navigation (Pricing 頁面使用)
+    'Home': 'Trang Chủ',
+    'About Us': 'Về Chúng Tôi',
+    'Solutions': 'Giải Pháp',
+    'Showcase': 'Trưng Bày',
+    'Pricing': 'Giá cả', // 確保有這一行
+    'IOT': 'IoT', // 確保有這一行',
+    'AI': 'AI', // 確保有這一行
+
+    // Footer
+    '© 2025 InTime Co. All rights reserved.': '© 2025 InTime Co. Bảo lưu mọi quyền.'
   }
 };
-
-// 將 Pricing 頁面的文案合併到已存在的 translations.vi，避免重複宣告常數
-Object.assign(translations.vi, {
-  // Pricing 頁面標題與描述
-  'AI Chatbot Pricing Plans': 'Gói Giá AI Chatbot',
-  'Choose the plan that best suits your business needs and instantly unlock omnichannel AI chatbot capabilities.':
-    'Chọn gói phù hợp nhất với nhu cầu doanh nghiệp của bạn và kích hoạt ngay khả năng chatbot AI đa kênh.',
-
-  // Plans
-  'Basic': 'Cơ Bản',
-  'Ideal for small business launch': 'Phù hợp cho doanh nghiệp nhỏ khởi đầu',
-  'Advanced': 'Nâng Cao',
-  'Suitable for growing small to medium businesses': 'Phù hợp cho doanh nghiệp nhỏ đến vừa đang phát triển',
-  'Premium': 'Cao Cấp',
-  'Most Popular': 'Phổ Biến Nhất',
-  'Designed for businesses requiring advanced integration': 'Dành cho doanh nghiệp cần tích hợp nâng cao',
-  'Enterprise Custom': 'Doanh Nghiệp Tùy Chỉnh',
-  'Tailored solutions for large enterprises': 'Giải pháp tùy chỉnh cho doanh nghiệp lớn',
-  'Custom': 'Tùy chỉnh',
-  ' / quote': ' / báo giá',
-
-  // Features
-  'Key Features': 'Tính Năng Chính',
-  'Supports LINE / FB / IG': 'Hỗ trợ LINE / FB / IG',
-  '1,000 message replies per month': '1.000 phản hồi tin nhắn mỗi tháng',
-  'Includes Zalo': 'Bao gồm Zalo',
-  'Includes all Basic features': 'Bao gồm tất cả tính năng của Cơ Bản',
-  'Data source support: Google Drive': 'Hỗ trợ nguồn dữ liệu: Google Drive',
-  'Database integration': 'Tích hợp cơ sở dữ liệu',
-  'Includes all Advanced features': 'Bao gồm tất cả tính năng của Nâng Cao',
-  'Supports API / WebChat / Teams / Zalo': 'Hỗ trợ API / WebChat / Teams / Zalo',
-  'Data source support: API / AI Database / Data extraction': 'Hỗ trợ nguồn dữ liệu: API / CSDL AI / Trích xuất dữ liệu',
-  'Unlimited monthly conversations': 'Hội thoại hàng tháng không giới hạn',
-  'Includes all Premium features': 'Bao gồm tất cả tính năng của Cao Cấp',
-  'Custom Logo & Domain': 'Logo & tên miền tùy chỉnh',
-  'API / SDK integration': 'Tích hợp API / SDK',
-  'Private cloud deployment': 'Triển khai đám mây riêng',
-  'Internal knowledge document integration': 'Tích hợp tài liệu kiến thức nội bộ',
-  'Model fine-tuning & Customer success consultant': 'Tinh chỉnh mô hình & tư vấn thành công khách hàng',
-  'Supports Home Assistant integration': 'Hỗ trợ tích hợp Home Assistant',
-
-  // Limits
-  'Platform/Data Limits': 'Giới Hạn Nền Tảng/Dữ Liệu',
-  'Platform Parameters:': 'Tham số Nền tảng:',
-  'Response Settings:': 'Thiết lập Phản hồi:',
-  'Data Sources:': 'Nguồn Dữ liệu:',
-  'Total Local File Size:': 'Tổng dung lượng tệp cục bộ:',
-  'Single Local File Upload:': 'Tải lên tệp cục bộ đơn lẻ:',
-  'Unlimited': 'Không giới hạn',
-
-  // Unit
-  ' VND / month': ' VND / tháng',
-
-  // Buttons / CTA
-  'Order Now': 'Đặt Hàng Ngay',
-  'Contact Sales': 'Liên hệ Kinh doanh',
-
-  // Navigation (Pricing 頁面使用)
-  'Home': 'Trang Chủ',
-  'About Us': 'Về Chúng Tôi',
-  'Solutions': 'Giải Pháp',
-  'Showcase': 'Trưng Bày',
-  'Pricing': 'Giá cả', // 確保有這一行
-  'AI': 'AI', // 確保有這一行
-  'IOT': 'IoT', // 確保有這一行
-
-  // Footer
-  'InTime official account': 'Tài khoản chính thức InTime',
-  '© 2025 InTime Co. All rights reserved.': '© 2025 InTime Co. Bảo lưu mọi quyền.',
-  'TOP': 'LÊN'
-});
 
 Object.assign(translations.vi, {
   // 新 IoT 區塊文案
@@ -161,7 +167,7 @@ function replaceTextNodes(element, dict) {
 }
 
 // 翻譯函數（VN）
-function translateToVietnamese() {
+window.translateToVietnamese = function() {
   const elements = document.querySelectorAll(
     '[data-i18n], h1, h2, h3, p, li, span:not(.material-symbols-outlined), blockquote, .plan-button'
   );
@@ -170,7 +176,7 @@ function translateToVietnamese() {
 }
 
 // 還原英文（EN）
-function translateToEnglish() {
+window.translateToEnglish = function() {
   const elements = document.querySelectorAll(
     '[data-i18n], h1, h2, h3, p, li, span:not(.material-symbols-outlined), blockquote, .plan-button'
   );
@@ -189,61 +195,59 @@ function translateToEnglish() {
 }
 
 // 更新語言按鈕樣式
-function updateLanguageButtonStyles(lang) {
+window.updateLanguageButtonStyles = function(selectedLang) {
   const enBtn = document.getElementById('enBtn');
   const viBtn = document.getElementById('viBtn');
 
   if (enBtn) {
-    if (lang === 'en') {
-      enBtn.classList.add('selected');
-      enBtn.classList.remove('hover:bg-yellow-200/20');
-      enBtn.classList.remove('hover:scale-110');
-      enBtn.classList.add('bg-yellow-200/20');
+    if (selectedLang === 'en') {
+      enBtn.classList.add('bg-yellow-200/50');
+      enBtn.classList.remove('border', 'border-gray-300', 'dark:border-gray-700');
     } else {
-      enBtn.classList.remove('selected');
-      enBtn.classList.add('hover:bg-yellow-200/20');
-      enBtn.classList.add('hover:scale-110');
-      enBtn.classList.remove('bg-yellow-200/20');
+      enBtn.classList.remove('bg-yellow-200/50');
+      enBtn.classList.remove('border', 'border-gray-300', 'dark:border-gray-700');
     }
   }
+
   if (viBtn) {
-    if (lang === 'vi') {
-      viBtn.classList.add('selected');
-      viBtn.classList.remove('hover:bg-yellow-200/20');
-      viBtn.classList.remove('hover:scale-110');
-      viBtn.classList.add('bg-yellow-200/20');
+    if (selectedLang === 'vi') {
+      viBtn.classList.add('bg-yellow-200/50');
+      viBtn.classList.remove('border', 'border-gray-300', 'dark:border-gray-700');
     } else {
-      viBtn.classList.remove('selected');
-      viBtn.classList.add('hover:bg-yellow-200/20');
-      viBtn.classList.add('hover:scale-110');
-      viBtn.classList.remove('bg-yellow-200/20');
+      viBtn.classList.remove('bg-yellow-200/50');
+      viBtn.classList.remove('border', 'border-gray-300', 'dark:border-gray-700');
     }
   }
 }
 
-// 頁面加載時初始化語言和按鈕樣式
-document.addEventListener('DOMContentLoaded', () => {
-  const currentLang = localStorage.getItem('lang') || 'en';
-  if (currentLang === 'vi') {
-    translateToVietnamese();
+// 將函數暴露給全局 window 對象
+// Hero 標題翻譯保險機制
+const viHeroText = '<span class="block">Từ cảm nhận đến ra quyết định</span><span class="block mt-3"><span class="text-yellow-200">InTime</span> đưa tương lai đến ngay hiện tại.</span>';
+const enHeroText = '<span class="block">From sensing to decision-making</span><span class="block mt-3"><span class="text-yellow-200">InTime</span> brings the future into the now.</span>';
+
+function setHero(lang) {
+  const el = document.getElementById('hero-title');
+  if (!el) return;
+  el.innerHTML = lang === 'vi' ? viHeroText : enHeroText;
+}
+
+// 語言切換函數
+window.changeLanguage = function(lang) {
+  if (lang === 'vi') {
+    window.translateToVietnamese();
   } else {
-    translateToEnglish();
+    window.translateToEnglish();
   }
+  localStorage.setItem('selectedLanguage', lang);
+};
 
-  const enBtn = document.getElementById('enBtn');
-  const viBtn = document.getElementById('viBtn');
-
-  if (enBtn) {
-    enBtn.addEventListener('click', () => {
-      localStorage.setItem('lang', 'en');
-      translateToEnglish();
-    });
-  }
-
-  if (viBtn) {
-    viBtn.addEventListener('click', () => {
-      localStorage.setItem('lang', 'vi');
-      translateToVietnamese();
-    });
+// 頁面加載時應用上次選擇的語言或默認語言
+document.addEventListener('DOMContentLoaded', () => {
+  const savedLanguage = localStorage.getItem('selectedLanguage');
+  if (savedLanguage) {
+    window.changeLanguage(savedLanguage);
+  } else {
+    // 默認語言為英文
+    window.changeLanguage('en');
   }
 });

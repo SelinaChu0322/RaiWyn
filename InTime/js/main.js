@@ -7,7 +7,7 @@ function toggleMobileMenu() {
     // 關閉時，重置所有子選單為收起狀態
     if (!willOpen) {
         document.querySelectorAll('#mobileMenu [id$="-submenu"]').forEach(p => {
-            p.style.maxHeight = '0px';
+            p.classList.add('hidden');
             const btn = document.querySelector('[aria-controls="' + p.id + '"]');
             if (btn) {
                 btn.setAttribute('aria-expanded', 'false');
@@ -19,12 +19,19 @@ function toggleMobileMenu() {
 }
 
 function toggleMobileDropdown(element) {
-    const dropdown = element.nextElementSibling;
+    const dropdownId = element.getAttribute('aria-controls');
+    const dropdown = document.getElementById(dropdownId);
+    if (!dropdown) return;
+
     const isExpanded = element.getAttribute('aria-expanded') === 'true';
     element.setAttribute('aria-expanded', String(!isExpanded));
-    dropdown.style.maxHeight = isExpanded ? '0px' : dropdown.scrollHeight + 'px';
+
+    dropdown.classList.toggle('hidden');
+
     const icon = element.querySelector('[data-icon="chevron"]');
-    if (icon) icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+    if (icon) {
+        icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
 }
 
 // TOP 按鈕顯示/隱藏邏輯
@@ -62,3 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         topButton.classList.add('opacity-0', 'invisible');
     }
 });
+
+// 將函數暴露給全局 window 對象
+window.toggleMobileMenu = toggleMobileMenu;
+window.toggleMobileDropdown = toggleMobileDropdown;
