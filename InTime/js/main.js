@@ -77,3 +77,32 @@ document.addEventListener('DOMContentLoaded', function() {
 // 將函數暴露給全局 window 對象
 window.toggleMobileMenu = toggleMobileMenu;
 window.toggleMobileDropdown = toggleMobileDropdown;
+
+
+function changeLanguage(lang) {
+    currentLanguage = lang;
+    applyTranslations();
+    updateLanguageButtonStyles(lang); // 新增：更新按鈕樣式
+}
+
+// 新增：更新語系按鈕樣式的函式
+function updateLanguageButtonStyles(activeLang) {
+    const enBtn = document.getElementById('enBtn');
+    const viBtn = document.getElementById('viBtn');
+
+    if (enBtn) {
+        if (activeLang === 'en') {
+            enBtn.classList.add('bg-yellow-200/30');
+        } else {
+            enBtn.classList.remove('bg-yellow-200/30');
+        }
+    }
+
+    if (viBtn) {
+        if (activeLang === 'vi') {
+            viBtn.classList.add('bg-yellow-200/30');
+        } else {
+            viBtn.classList.remove('bg-yellow-200/30');
+        }
+    }
+}

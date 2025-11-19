@@ -142,6 +142,11 @@ const originalTextMap = new WeakMap();
 
 // 僅替換純文字節點，保留子元素與樣式
 function replaceTextNodes(element, dict) {
+  // 如果元素有 'no-translate' class，則跳過翻譯
+  if (element.classList.contains('no-translate')) {
+    return;
+  }
+
   const i18nKey = element.dataset.i18n;
   if (i18nKey && dict[i18nKey]) {
     if (!originalTextMap.has(element)) {
@@ -165,6 +170,7 @@ function replaceTextNodes(element, dict) {
     });
   }
 }
+}
 
 // 翻譯函數（VN）
 window.translateToVietnamese = function() {
@@ -172,7 +178,6 @@ window.translateToVietnamese = function() {
     '[data-i18n], h1, h2, h3, p, li, span:not(.material-symbols-outlined), blockquote, .plan-button'
   );
   elements.forEach(el => replaceTextNodes(el, translations.vi));
-  updateLanguageButtonStyles('vi');
 }
 
 // 還原英文（EN）
@@ -191,7 +196,6 @@ window.translateToEnglish = function() {
       });
     }
   });
-  updateLanguageButtonStyles('en');
 }
 
 // 更新語言按鈕樣式
@@ -201,21 +205,60 @@ window.updateLanguageButtonStyles = function(selectedLang) {
 
   if (enBtn) {
     if (selectedLang === 'en') {
-      enBtn.classList.add('bg-yellow-200/50');
-      enBtn.classList.remove('border', 'border-gray-300', 'dark:border-gray-700');
+      enBtn.classList.add('selected');
     } else {
-      enBtn.classList.remove('bg-yellow-200/50');
-      enBtn.classList.remove('border', 'border-gray-300', 'dark:border-gray-700');
+      enBtn.classList.remove('selected');
     }
   }
 
   if (viBtn) {
     if (selectedLang === 'vi') {
-      viBtn.classList.add('bg-yellow-200/50');
-      viBtn.classList.remove('border', 'border-gray-300', 'dark:border-gray-700');
+      viBtn.classList.add('selected');
     } else {
-      viBtn.classList.remove('bg-yellow-200/50');
-      viBtn.classList.remove('border', 'border-gray-300', 'dark:border-gray-700');
+      viBtn.classList.remove('selected');
+    }
+  }
+}
+
+// 語言切換主函數
+window.changeLanguage = function(lang) {
+  window.updateLanguageButtonStyles(lang);
+  try { localStorage.setItem('lang', lang); } catch (e) {}
+
+  if (lang === 'vi') {
+    window.translateToVietnamese();
+  } else {
+    window.translateToEnglish();
+  }
+};
+
+
+    }
+  ]
+}
+```
+  viBtn.classList.remove('selected');
+
+  // 為選定的語言按鈕添加樣式
+  if (selectedLang === 'en') {
+    enBtn.classList.add('selected');
+  } else if (selectedLang === 'vi') {
+    viBtn.classList.add('selected');
+  }
+
+  if (enBtn) {
+    if (selectedLang === 'en') {
+      enBtn.classList.add('selected');
+    } else {
+      enBtn.classList.remove('selected');
+    }
+  }
+
+  if (viBtn) {
+    if (selectedLang === 'vi') {
+      viBtn.classList.add('selected');
+    } else {
+      viBtn.classList.remove('selected');
     }
   }
 }
@@ -231,23 +274,7 @@ function setHero(lang) {
   el.innerHTML = lang === 'vi' ? viHeroText : enHeroText;
 }
 
-// 語言切換函數
-window.changeLanguage = function(lang) {
-  if (lang === 'vi') {
-    window.translateToVietnamese();
-  } else {
-    window.translateToEnglish();
-  }
-  localStorage.setItem('selectedLanguage', lang);
-};
 
-// 頁面加載時應用上次選擇的語言或默認語言
-document.addEventListener('DOMContentLoaded', () => {
-  const savedLanguage = localStorage.getItem('selectedLanguage');
-  if (savedLanguage) {
-    window.changeLanguage(savedLanguage);
-  } else {
-    // 默認語言為英文
-    window.changeLanguage('en');
-  }
-});
+    }
+  ]
+}
