@@ -1,3 +1,6 @@
+/**
+ * Mobile Menu Toggle Logic
+ */
 function toggleMobileMenu() {
     const panel = document.getElementById('mobileMenu');
     if (!panel) return;
@@ -18,6 +21,9 @@ function toggleMobileMenu() {
     }
 }
 
+/**
+ * Mobile Dropdown Toggle Logic
+ */
 function toggleMobileDropdown(element) {
     const dropdownId = element.getAttribute('aria-controls');
     const dropdown = document.getElementById(dropdownId);
@@ -38,15 +44,14 @@ function toggleMobileDropdown(element) {
     }
 }
 
-// TOP 按鈕顯示/隱藏邏輯
+/**
+ * Scroll to Top Button Logic
+ */
 document.addEventListener('DOMContentLoaded', function() {
     const topButton = document.getElementById('topButton');
 
     // 檢查按鈕是否存在
-    if (!topButton) {
-        console.warn('TOP button with id "topButton" not found.');
-        return;
-    }
+    if (!topButton) return;
 
     // 滾動事件監聽器
     window.addEventListener('scroll', function() {
@@ -63,46 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
     topButton.addEventListener('click', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-
-    // 初始化時檢查滾動位置，確保頁面加載時按鈕狀態正確
-    if (window.scrollY > 200) {
-        topButton.classList.remove('opacity-0', 'invisible');
-        topButton.classList.add('opacity-100', 'visible');
-    } else {
-        topButton.classList.remove('opacity-100', 'visible');
-        topButton.classList.add('opacity-0', 'invisible');
-    }
 });
 
 // 將函數暴露給全局 window 對象
 window.toggleMobileMenu = toggleMobileMenu;
 window.toggleMobileDropdown = toggleMobileDropdown;
-
-
-function changeLanguage(lang) {
-    currentLanguage = lang;
-    applyTranslations();
-    updateLanguageButtonStyles(lang); // 新增：更新按鈕樣式
-}
-
-// 新增：更新語系按鈕樣式的函式
-function updateLanguageButtonStyles(activeLang) {
-    const enBtn = document.getElementById('enBtn');
-    const viBtn = document.getElementById('viBtn');
-
-    if (enBtn) {
-        if (activeLang === 'en') {
-            enBtn.classList.add('bg-yellow-200/30');
-        } else {
-            enBtn.classList.remove('bg-yellow-200/30');
-        }
-    }
-
-    if (viBtn) {
-        if (activeLang === 'vi') {
-            viBtn.classList.add('bg-yellow-200/30');
-        } else {
-            viBtn.classList.remove('bg-yellow-200/30');
-        }
-    }
-}
