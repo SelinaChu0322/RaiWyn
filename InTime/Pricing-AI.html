@@ -105,7 +105,6 @@
         }
     </style>
 
-    <!-- Scripts -->
     <script src="./js/translations.js"></script>
     <script src="./js/main.js"></script>
 </head>
@@ -137,12 +136,10 @@
 
     <header class="sticky top-0 z-50 w-full bg-background-light/80 backdrop-blur-sm dark:bg-background-dark/80">
         <div class="mx-auto flex max-w-7xl items-center justify-between">
-            <!-- LOGO -->
             <div class="flex items-center justify-end">
                 <img src="./InTime vn Logo.png" alt="InTime Logo" class="h-12 sm:h-16 md:h-20 lg:h-[6rem] transition-all duration-300">
             </div>
 
-            <!-- Nav: 添加 no-translate 類別 -->
             <nav class="hidden md:flex items-center gap-6 mx-auto no-translate">
                 <a href="index.html" class="text-2xl font-bold text-gray-700 dark:text-gray-300 px-3 py-1 rounded transition-all duration-200 hover:text-primary hover:bg-primary/10 hover:ring-2 hover:ring-primary/50 hover:shadow-lg hover:shadow-primary/20">
                     Home
@@ -156,7 +153,7 @@
                     </a>
                     <div class="absolute left-0 top-full w-48 rounded-lg border border-gray-200/50 dark:border-gray-700/50 bg-background-light dark:bg-background-dark shadow-lg z-40 opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
                         <a href="./Pricing-AI.html" class="block px-4 py-2 rounded-md text-base text-gray-700 dark:text-gray-300 transition-all duration-200 hover:bg-primary hover:text-white"><strong>AI</strong></a>
-                        <a href="./Pricing-IOT.html" class="block px-4 py-2 rounded-md text-base text-gray-700 dark:text-gray-300 transition-all duration-200 hover:bg-primary hover:text-white"><strong>IOT</strong></a>
+                        <a href="./Solutions-IOT.html" class="block px-4 py-2 rounded-md text-base text-gray-700 dark:text-gray-300 transition-all duration-200 hover:bg-primary hover:text-white"><strong>IOT</strong></a>
                     </div>
                 </div>
                 <div class="relative group">
@@ -179,12 +176,10 @@
                 </div>
             </nav>
 
-            <!-- Hamburger -->
             <button class="md:hidden p-2 rounded hover:bg-primary/10" onclick="toggleMobileMenu()" aria-label="Open menu">
                 <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
 
-            <!-- Language Buttons -->
             <div class="flex items-center">
                 <div class="flex space-x-4">
                     <button class="flex items-center gap-2 p-1 rounded transition-all duration-300 hover:scale-110 hover:bg-yellow-200/20 plan-button" id="enBtn" onclick="changeLanguage('en')">
@@ -200,7 +195,6 @@
         </div>
     </header>
 
-    <!-- Mobile Menu (no-translate) -->
     <div id="mobileMenu" class="fixed top-0 right-0 h-full w-64 bg-background-light dark:bg-background-dark shadow-xl transform translate-x-full transition-transform duration-300 z-50 md:hidden overflow-y-auto no-translate">
         <div class="flex justify-end p-4">
             <button class="p-2 rounded hover:bg-primary/10" onclick="toggleMobileMenu()">
@@ -211,7 +205,6 @@
             <a class="text-2xl font-bold text-gray-700 dark:text-gray-300 hover:text-primary" href="index.html">Home</a>
             <a class="text-2xl font-bold text-gray-700 dark:text-gray-300 hover:text-primary" href="AboutUs.html">About Us</a>
             
-            <!-- Mobile Solutions (text-xl) -->
             <div class="relative">
                 <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-700 dark:text-gray-300 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" aria-expanded="false" aria-controls="mobile-solutions-submenu">
                     Solutions <svg class="h-6 w-6 transform transition-transform duration-200" data-icon="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -219,12 +212,11 @@
                 <div class="overflow-hidden transition-all duration-300 ease-in-out" id="mobile-solutions-submenu" style="max-height: 0px;">
                     <div class="flex flex-col items-center space-y-4 mt-4">
                         <a href="./Pricing-AI.html" class="text-xl text-gray-700 dark:text-gray-300 hover:text-primary">AI</a>
-                        <a href="./Pricing-IOT.html" class="text-xl text-gray-700 dark:text-gray-300 hover:text-primary">IOT</a>
+                        <a href="./Solutions-IOT.html" class="text-xl text-gray-700 dark:text-gray-300 hover:text-primary">IOT</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Mobile Showcase (text-xl) -->
             <div class="relative">
                 <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-700 dark:text-gray-300 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" aria-expanded="false" aria-controls="mobile-showcase-submenu">
                     Showcase <svg class="h-6 w-6 transform transition-transform duration-200" data-icon="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -237,7 +229,6 @@
                 </div>
             </div>
 
-            <!-- Mobile Pricing (text-xl) -->
             <div class="relative">
                 <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-700 dark:text-gray-300 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" aria-expanded="false" aria-controls="mobile-pricing-submenu">
                     Pricing <svg class="h-6 w-6 transform transition-transform duration-200" data-icon="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -263,9 +254,7 @@
                 </p>
             </header>
     
-            <!-- Pricing Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Plan 1: Basic -->
                 <a href="#" class="gradient-border block transition duration-300 hover:scale-[1.01] hover:shadow-blue-500/50 group">
                     <div class="gradient-border-content p-6 flex flex-col h-full rounded-xl shadow-2xl">
                         <div class="mb-6">
@@ -295,7 +284,6 @@
                     </div>
                 </a>
 
-                <!-- Plan 2: Advanced -->
                 <a href="#" class="gradient-border block transition duration-300 hover:scale-[1.01] hover:shadow-blue-500/50 group">
                     <div class="gradient-border-content p-6 flex flex-col h-full rounded-xl shadow-2xl">
                         <div class="mb-6">
@@ -325,7 +313,6 @@
                     </div>
                 </a>
                 
-                <!-- Plan 3: Premium -->
                 <a href="#" class="gradient-border block transition duration-300 hover:scale-[1.01] hover:shadow-blue-500/50 group">
                     <div class="gradient-border-content p-6 flex flex-col h-full rounded-xl shadow-2xl">
                         <div class="mb-6">
@@ -359,7 +346,6 @@
                     </div>
                 </a>
 
-                <!-- Plan 4: Enterprise -->
                 <a href="#" class="gradient-border block transition duration-300 hover:scale-[1.01] hover:shadow-blue-500/50 group">
                     <div class="gradient-border-content p-6 flex flex-col h-full rounded-xl shadow-2xl">
                         <div class="mb-6">
@@ -399,15 +385,13 @@
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div class="flex justify-center gap-6 md:order-2">
-              <!-- Facebook 圖標與特效修正 -->
               <a class="text-gray-400 hover:text-primary dark:text-gray-500 dark:hover:text-primary flex items-center gap-2" href="#">
                 <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
                 <span>FB</span>
               </a>
-             <!-- Instagram 圖標與特效修正 -->
-          <a class="text-gray-400 hover:text-primary dark:text-gray-500 dark:hover:text-primary flex items-center gap-2" href="#">
+             <a class="text-gray-400 hover:text-primary dark:text-gray-500 dark:hover:text-primary flex items-center gap-2" href="#">
             <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
               <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.4 5.6 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.6 18.4 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8a1.25 1.25 0 0 1-1.25-1.25a1.25 1.25 0 0 1 1.25-1.25a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3"/>
             </svg>

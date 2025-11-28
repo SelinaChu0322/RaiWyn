@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html class="dark" lang="en"><head>
+<html class="dark" lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>InTime</title>
@@ -17,8 +18,7 @@
               primary: "#05c796",
               "background-light": "#f5f8f8",
               "background-dark": "#0f231e",
-              /* 新增：AI 區塊淡藍綠背景色 */
-              "feature-ai": "#225b65"  <!-- 修改：由 #0097b2 改為 #225b65 -->
+              "feature-ai": "#225b65"
             },
             fontFamily: {
               display: ["Space Grotesk"],
@@ -34,10 +34,9 @@
       };
     </script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-<!-- 新增：標題動畫樣式 -->
 <style>
   .glow-text {
-    color: #fef08a; /* Tailwind 的 yellow-200 對應色 */
+    color: #fef08a;
     animation: glow 3s ease-in-out infinite;
   }
   @keyframes glow {
@@ -57,7 +56,6 @@
   }
 </style>
 
-<!-- 引入 JS -->
 <script src="./js/translations.js"></script>
 <script src="./js/main.js"></script>
 </head>
@@ -65,7 +63,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // 預設載入英文
+        // 1. 預設語系為 EN
         if (typeof window.changeLanguage === 'function') {
             window.changeLanguage('en');
         }
@@ -73,31 +71,25 @@
 </script>
 
 <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
-<!-- 修改 header 部分的導航和語言選單 -->
 <header class="sticky top-0 z-50 w-full bg-background-light/80 backdrop-blur-sm dark:bg-background-dark/80">
   <div class="mx-auto flex max-w-7xl items-center justify-between">
-    <!-- LOGO 靠右，移除特效只保留響應式設計 -->
     <div class="flex items-center justify-end">
       <img src="./InTime vn Logo.png" alt="InTime Logo" 
            class="h-12 sm:h-16 md:h-20 lg:h-[6rem] transition-all duration-300">
     </div>
 
-    <!-- 新增：導覽欄（含下拉選單） - 加上 no-translate -->
     <nav class="hidden md:flex items-center gap-6 mx-auto no-translate">
-      <!-- Home：保留文字顏色，移除背景與圓角框 -->
       <a href="#" onclick="return false;"
          class="text-2xl font-bold text-primary cursor-default">
         Home
       </a>
 
-      <!-- About Us：移入有變色與懸浮框 -->
       <a href="AboutUs.html"
          class="text-2xl font-bold text-gray-700 dark:text-gray-300 px-3 py-1 rounded transition-all duration-200
-                          hover:text-primary hover:bg-primary/10 hover:ring-2 hover:ring-primary/50 hover:shadow-lg hover:shadow-primary/20">
+                hover:text-primary hover:bg-primary/10 hover:ring-2 hover:ring-primary/50 hover:shadow-lg hover:shadow-primary/20">
         About Us
       </a>
 
-      <!-- Solutions -->
       <div class="relative group">
         <a href="#" aria-disabled="true" onclick="return false;"
            class="text-2xl font-bold text-gray-700 dark:text-gray-300 px-3 py-1 rounded cursor-default
@@ -112,13 +104,12 @@
           <a href="./Pricing-AI.html" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300 font-bold text-base transition-all duration-200 hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 active:scale-[0.98]">
             <strong>AI</strong>
           </a>
-          <a href="./Pricing-IOT.html" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300 font-bold text-base transition-all duration-200 hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 active:scale-[0.98]">
+          <a href="./Solutions-IOT.html" class="block px-4 py-2 rounded-md text-gray-700 dark:text-gray-300 font-bold text-base transition-all duration-200 hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 active:scale-[0.98]">
             <strong>IOT</strong>
           </a>
         </div>
       </div>
 
-      <!-- Showcase -->
       <div class="relative group">
         <a href="#" aria-disabled="true" onclick="return false;"
            class="text-2xl font-bold text-gray-700 dark:text-gray-300 px-3 py-1 rounded cursor-default
@@ -139,7 +130,6 @@
         </div>
       </div>
 
-      <!-- Pricing -->
       <div class="relative group">
         <a href="#" aria-disabled="true" onclick="return false;"
            class="text-2xl font-bold text-gray-700 dark:text-gray-300 px-3 py-1 rounded cursor-default
@@ -161,14 +151,12 @@
       </div>
     </nav>
 
-    <!-- 漢堡選單：小螢幕顯示 -->
     <button class="md:hidden p-2 rounded hover:bg-primary/10" onclick="toggleMobileMenu()" aria-label="Open menu">
       <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
       </svg>
     </button>
 
-    <!-- 語言切換按鈕 -->
     <div class="flex items-center">
       <div class="flex space-x-4">
         <button onclick="changeLanguage('en')" class="flex items-center gap-2 p-1 rounded transition-all duration-300 hover:scale-110" id="enBtn">
@@ -189,7 +177,6 @@
       <div class="absolute inset-0 bg-cover bg-center" style='background-image: url("./robot.png");'></div>
       <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-background-dark/30 to-transparent"></div>
       <div class="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-center justify-center px-4 text-white sm:px-6 lg:px-8">
-        <!-- 將 Hero 標題加上 data-i18n -->
         <h1 class="mb-4 text-4xl font-bold text-center md:text-5xl lg:text-6xl">
           <span class="block" data-i18n="From sensing to decision-making">From sensing to decision-making</span>
           <span class="block mt-3">
@@ -200,7 +187,6 @@
       </div>
     </section>
 
-    <!-- IOT Feature -->
     <section id="iot-feature" class="relative w-full py-12 sm:py-16 bg-background-dark/80">
       <div class="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-4 sm:px-6 lg:px-8">
         <div class="relative flex justify-center">
@@ -219,7 +205,6 @@
       </div>
     </section>
 
-    <!-- AI Feature -->
     <section id="ai-feature" class="relative w-full py-12 sm:py-16 bg-[#055563]">
       <div class="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-4 sm:px-6 lg:px-8">
         <div class="relative z-10 text-white lg:order-1">
@@ -261,14 +246,12 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
         <div class="flex justify-center gap-6 md:order-2">
-          <!-- Facebook 圖標 -->
           <a class="text-gray-400 hover:text-primary dark:text-gray-500 dark:hover:text-primary flex items-center gap-2" href="#">
             <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
               <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
             </svg>
             <span>FB</span>
           </a>
-          <!-- Instagram 圖標 -->
           <a class="text-gray-400 hover:text-primary dark:text-gray-500 dark:hover:text-primary flex items-center gap-2" href="#">
             <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
               <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.4 5.6 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.6 18.4 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8a1.25 1.25 0 0 1-1.25-1.25a1.25 1.25 0 0 1 1.25-1.25a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3"/>
@@ -300,7 +283,6 @@
     </footer>
     </div>
     
-    <!-- TOP 按鈕 -->
     <button id="topButton" 
             class="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 
                    bg-primary text-white 
@@ -313,7 +295,6 @@
       <span class="text-sm sm:text-base font-semibold" data-i18n="TOP">TOP</span>
     </button>
     
-    <!-- Mobile Menu (no-translate) -->
     <div id="mobileMenu" class="fixed top-0 right-0 h-full w-64 bg-background-light dark:bg-background-dark shadow-xl transform translate-x-full transition-transform duration-300 z-50 md:hidden overflow-y-auto no-translate">
         <div class="flex justify-end p-4">
             <button class="p-2 rounded hover:bg-primary/10" onclick="toggleMobileMenu()" aria-label="Close menu">
@@ -326,7 +307,6 @@
             <a class="text-2xl font-bold text-primary cursor-default" href="#" onclick="return false;" aria-disabled="true">Home</a>
             <a class="text-2xl font-bold text-gray-700 dark:text-gray-300 hover:text-primary" href="AboutUs.html">About Us</a>
             
-            <!-- Solutions Dropdown for Mobile (Font Size Fixed to text-xl) -->
             <div class="relative">
                 <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-700 dark:text-gray-300 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" aria-expanded="false" aria-controls="mobile-solutions-submenu">
                     Solutions
@@ -335,12 +315,11 @@
                 <div class="overflow-hidden transition-all duration-300 ease-in-out" id="mobile-solutions-submenu" style="max-height: 0px;">
                     <div class="flex flex-col items-center space-y-4 mt-4">
                         <a href="./Pricing-AI.html" class="text-xl text-gray-700 dark:text-gray-300 hover:text-primary">AI</a>
-                        <a href="./Pricing-IOT.html" class="text-xl text-gray-700 dark:text-gray-300 hover:text-primary">IOT</a>
+                        <a href="./Solutions-IOT.html" class="text-xl text-gray-700 dark:text-gray-300 hover:text-primary">IOT</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Showcase Dropdown for Mobile (Font Size Fixed to text-xl) -->
             <div class="relative">
                 <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-700 dark:text-gray-300 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" aria-expanded="false" aria-controls="mobile-showcase-submenu">
                     Showcase
@@ -354,7 +333,6 @@
                 </div>
             </div>
 
-            <!-- Pricing Dropdown for Mobile (Font Size Fixed to text-xl) -->
             <div class="relative">
                 <a class="flex items-center justify-between w-full text-2xl font-bold text-gray-700 dark:text-gray-300 hover:text-primary cursor-pointer" onclick="toggleMobileDropdown(this)" aria-expanded="false" aria-controls="mobile-pricing-submenu">
                     Pricing
